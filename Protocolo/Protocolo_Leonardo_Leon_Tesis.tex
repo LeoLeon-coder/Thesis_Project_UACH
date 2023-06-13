@@ -1,0 +1,588 @@
+% !TeX spellcheck = Spanish_Download
+\documentclass[12pt]{report}
+\usepackage[a4paper, total={7in, 9in}]{geometry}
+\usepackage{setspace} %Line spacing
+\onehalfspacing
+
+\usepackage{pdfpages}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% For the chapters not to modify the page style
+\usepackage{titlesec}
+\titleformat{\chapter}{\bfseries}{\huge\arabic{chapter}.}{10pt}{\huge}
+\titleclass{\chapter}{straight}
+
+%REFERENCES
+\usepackage{siunitx, multirow, booktabs}
+\usepackage{blindtext,alltt}
+\usepackage[backend=bibtex, style=numeric, sorting=none, locallabelwidth]{biblatex}
+\addbibresource{/home/leonidas/Documents/References.bib}
+
+\usepackage{listings}
+
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{url}
+\usepackage[nottoc]{tocbibind} %Add references to index.
+\usepackage{amsmath, amssymb}
+\usepackage{upgreek, dsfont, mathrsfs}
+\usepackage{stmaryrd}
+
+
+\usepackage[breakable]{tcolorbox}
+\usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+\usepackage{caption}
+
+%Footnoe symbol instead of numbers
+%1   asterisk        *   2   dagger      †   3   double dagger       ‡
+%4   section symbol  §   5   paragraph   ¶   6   parallel lines      ‖
+%7   two asterisks   **  8   two daggers ††  9   two double daggers  ‡‡
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage{float}
+\floatplacement{figure}{H} % forces figures to be placed at the correct location
+
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+	\def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+
+\usepackage{iftex}
+\ifPDFTeX
+\IfFileExists{alphabeta.sty}{
+	\usepackage{alphabeta}
+}{
+	\usepackage[mathletters]{ucs}
+	\usepackage[utf8x]{inputenc}
+}
+\else
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\fi
+
+
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+% The default LaTeX title has an obnoxious amount of whitespace. By default,
+% titling removes some of it. It also provides customization options.
+\usepackage{titling}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage{array}     % table support for pandoc >= 2.11.3
+\usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+% normalem makes italics be italics, not underlines
+\usepackage{mathrsfs}
+
+
+
+% Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+\definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+\definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+% common color for the border for error outputs.
+\definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy 
+% Setup hyperref package
+\hypersetup{
+	breaklinks=true,  % so long urls are correctly broken across lines
+	colorlinks=true,
+	urlcolor=urlcolor,
+	linkcolor=linkcolor,
+	citecolor=citecolor,
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{PROYECTO DE TESIS $|$ \textcolor{red}{COLMENAS MONITOREADAS PARA ABEJAS}}
+\lfoot{Universidad Autónoma de Chihuahua}
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
+
+
+\begin{document}
+	
+	\begin{titlepage}
+		\begin{center}
+			\vspace*{1cm}
+			
+			
+			\begin{center}
+				\begin{tabular}{ c c c }
+					\includegraphics[scale=0.5]{UACH.png} & 
+					\begin{tabular}{c}
+						{\Large Universidad Autónoma de Chihuahua} \\[0.5cm]
+						{\Large Facultad de Ingeniería}\\[2cm]
+					\end{tabular}
+					& \includegraphics[scale=0.16]{fing.png}
+				\end{tabular}
+			\end{center}
+			
+			\vfill
+			
+			\Huge
+			\textbf{PROPOSAL DELIVERY REPORT: Monitored Hives for Honey Bees}
+			
+			
+			\vspace{3.5cm}
+			
+			{\small León Mora Leonardo Rafael${^1}$; Luna Gutiérrez Juan Antonio$^{2}$; Soto Chavarría Jesús Alberto$^{3}$.}\\
+			{\small a335821@uach.mx${^1}$; a329500@uach.mx$^{2}$; a329651@uach.mx$^{3}$.}
+			
+			{\normalsize Dr. Espinobarro Velazquez Daniel}
+			
+			\vfill
+			\vspace{0.8cm}
+			
+			\small
+			Chihuahua, Chih., \today
+			
+		\end{center}
+	\end{titlepage}
+	
+	\pagenumbering{Roman}
+	\setcounter{page}{1}
+	
+	\thispagestyle{empty}
+	\begin{center}
+		\Large
+		\textbf{Monitored Hives for Honey Bees}
+		
+		\vspace{0.05cm}
+		\textbf{\footnotesize León Mora Leonardo Rafael; Luna Gutiérrez Juan Antonio; Soto Chavarría Jesús Alberto.}
+		
+		\vspace{0.2cm}
+		\addcontentsline{toc}{chapter}{ABSTRACT}
+		\textbf{Abstract}
+	\end{center}
+	
+	In the following document, we present the proposal for the development of a device that can measure the temperature, humidity, and weight of a beehive. This idea arose after an interview with Raul and Laura from the store ``Apiarios del Cielo'' located in Chihuahua, Mexico. They helped us by providing the right direction for our project, they also gave us a hive for testing our device. We then presented the proposal to Doctor Daniel Espinobarro, and once he approved the project, we constructed a diagram outlining what we wanted to make and how we were going to develop the device. After a few days, we created a draft of an application and the circuit we were going to use. We also spoke to more beekeepers to gain insight into the work required for the production, maintenance, and extraction of honey. We focused on the time beekeepers spent checking the hives and how they noticed if something was wrong with one or more hives in the farm. After weeks of research for the project, we found a company from the Netherlands called ``BEEP base'' \cite{BEEP_base_website}, whose device was similar to the one we wanted to develop, but of course, their product and database were bigger than ours. BEEP base gave us hope because of their pictures showcasing the evolution of their device. After approximately four months of work, we successfully developed a base that can accurately measure the weight, humidity, and temperature of a beehive.
+	
+	
+	\pagebreak
+	
+	\tableofcontents
+	\thispagestyle{empty}
+	\pagebreak
+	
+	\listoffigures
+	\thispagestyle{empty}
+	\pagebreak
+	
+	\listoftables
+	\thispagestyle{empty}
+	\pagebreak
+	
+	
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	
+	
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 1
+	%----------------------------------------------------------------------------------------------------
+	\chapter{BACKGROUND AND MOTIVATION}
+	In the beekeeping industry, several issues are related to the health and care of bees. According to Raul and Laura, a couple of beekeepers located in Chihuahua, Mexico at the store ``Apiarios del Cielo'', the work that beekeepers do related to honey production includes checking the color and appearance of each layer of the hive, the distribution of the bees inside the hive, the weight of the hive, and other factors. They also mentioned that animals and even people who threaten to steal the hives are big problems for beekeepers when taking care of a beehive in Chihuahua. Focusing on one hive, a problem that we can start with is related to the fact that beekeepers may not know the state of the beehive accurately, and therefore may be unable to anticipate problems inside the colony. As a result, many bees can get sick or be attacked by other insects or animals. If beekeepers do not check the hive in time, the colony can die, and they may end up losing the entire hive.
+	
+	To address this problem, we are developing a system that can monitor the temperature, humidity, and weight of beehives. With this information, beekeepers can gain insight into the condition of their hives without the need to open them. By taking precautions and anticipating any issues related to changes in the beehive state, beekeepers can prevent diseases and other problems inside the hive.
+	
+	\section{Biological Approach}
+	
+	Our ecosystem needs constant maintenance in order to provide vitamins, nutrients and a healthy environment for the different species that rely on the supplies coming from that ecosystem (humans included). Pollinators perform the majority of that services and not only wild plants but also crops are maintained by them. ``\textit{Many pollinator-dependent crops, (e.g., many of our nuts, fruits and vegetables) are packed full of vitamins and minerals, which are essential for healthy human diets}''\cite{kumar2022bees_and_pollinators}.
+	
+	Ashwani K., \textit{et al} (2022) states that at least three quarters of the world’s crops benefit from animal pollination, and they believe that effective monitoring of wild pollinator populations is urgently needed to execute management strategies for the future.
+	
+	``If the bee disappeared off the surface of the globe, then man would only have four years of life left. No more pollination, no more plants, no more animals, no more man''- Albert Einstein.
+	
+	\section{Causes of Declining Bee Populations and Production}
+	
+	\begin{itemize}
+		\item Pesticide exposure.
+		\item Lack of floral resources.
+		\item Parasites and pathogens.
+		\item Agricultural practices (beekeepers included).
+	\end{itemize}
+	
+	
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 2
+	%----------------------------------------------------------------------------------------------------
+	\chapter{PROJECT GOALS}
+	Our goal is to create a prototype of a monitored beehive, where we implement a circuit capable of measuring temperature, humidity, and weight through sensors so that the values can be displayed on a screen attached to our device or through a mobile app. The system should be able to link the sensor readings with the beekeeper, allowing them to monitor the beehive's status within the environment.
+	
+	
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 3
+	%----------------------------------------------------------------------------------------------------
+	\chapter{METHODS AND PROPOSAL OF PRODUCTS TO BE DELIVERED}
+	The product to be shown is a prototype of a beehive that includes monitoring technologies at an accessible price for local beekeepers. If the beekeeper knows the state of the bee colony, they will be able to make better decisions when taking care of the hive.
+	\begin{center}
+		\begin{figure}[h!]
+			\includegraphics[scale = 0.8]{i1.png}
+		\end{figure}
+	\end{center}
+	To monitor the temperature and humidity inside the beehive, two sensors from the DTH22 family were implemented and to measure the weight we used the sensor HX711. These sensors will be strategically placed throughout the hive. They will convert the signals into electrical current, which will then be translated into digital signals by a converter. A micro-controller will interpret the information and send the signal to a mobile device via Bluetooth.
+	
+	\par Through Javascript or the app ``Inventor'', we created a friendly user interface so that beekeepers can access the information of their hives in a simple way, making it possible to watch anomalies in the hives and also, they can record information about their daily development.
+	
+	\par With the weight sensor, we aimed to identify the state of the hive (amount of honey produced), so that the beekeeper can easily access this information and make decisions based on it.
+	
+	\par Due to the weather conditions and lack of time, it was not possible to conduct tests with real bees. On the day when the beekeepers offered to take the prototype to their farm, it started raining, and the trip was canceled. By the second day when they offered to transport the prototype, it was already too late to generate and analyze results before the presentation. It should be noted that both the beekeepers and our team had busy schedules, and therefore, the time available for both parties was limited. Instead, simulations were carried out to test the functionality of the device.
+	
+	\par For the tests, the hive was used with completely empty frames (Figure \ref{fig:alzas}). A lamp was also introduced as a source of heat, with 900 lumens, 120 volts, and 60Hz (Figure \ref{fig:lamp}), and even a candle was used as shown in Figure \ref{fig:candle}. The candle had to be small to avoid burning the hive material.
+	
+	\begin{figure}[htbp]
+		\begin{minipage}{0.4\textwidth}
+			\centering
+			\includegraphics[scale=0.05]{lamp.jpg}
+			\caption{Lámpara de 900 lúmenes, 120 Volts y 60Hz.}
+			\label{fig:lamp}
+		\end{minipage}\hfill
+		\begin{minipage}{0.4\textwidth}
+			\centering
+			\includegraphics[scale=0.08]{alzas.jpg}
+			\caption{Bastidores vacíos dentro de la colmena.}
+			\label{fig:alzas}
+		\end{minipage}\hfill
+		\begin{minipage}{0.4\textwidth}
+			\centering
+			\includegraphics[scale=0.05]{candle.jpg}
+			\caption{Un cuarto de vela comparado con el tamaño de una taza de cocina.}
+			\label{fig:candle}
+		\end{minipage}
+	\end{figure}
+	
+	The collected data is shown in the Appendix A (\ref{fig:simulations_table}).
+	
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 4
+	%----------------------------------------------------------------------------------------------------
+	\pagebreak
+	\chapter{RESPONSIBILITIES AND TEAM CONTACT}
+	
+	\begin{table}[h!]
+		\centering
+		\caption[Responsibilities and Team Contact]{}
+		\begin{tabular}{||c|m{4cm}|m{6cm}||}
+			\hline
+			&&\\ [-1.8ex]
+			\textbf{Members} & \textbf{Contact} & \textbf{Responsibilities} \\ [0.5ex] \hline
+			&&\\ [-1.8ex]
+			Jesús Alberto Soto Chavarría & \begin{minipage}{4cm} Cel. 614 314 3732.\\ Mail: a329651@uach.mx \\ \end{minipage}  & \textbf{Product developer}. Will perform tasks in the field of circuit design, application programming and work plan. \\ \hline &&\\ [-1.8ex]
+			Juan Antonio Luna Gutiérrez & \begin{minipage}{4cm} Cel. 648 108 4492.\\ Mail: a329500@uach.mx \\ \end{minipage}  & \textbf{Technical director}. It will carry out functions of assembly, implementation, monitoring of the circuits. \\ \hline &&\\ [-1.8ex]
+			Leonardo Rafael León Mora & \begin{minipage}{4cm} Cel. 55 1502 3864.\\ Mail: a335821@uach.mx \\ \end{minipage}  & \textbf{General director}. He will be the consultant on beekeeping and will also be in charge of writing the major part of the document. \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	
+	\pagebreak
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 5
+	%----------------------------------------------------------------------------------------------------
+	\chapter{WORK PLAN AND SCHEDULE}
+	%================================================================================================
+	% SECTION 5.1
+	%================================================================================================
+	\section{Homework and Project Chronology}
+	
+	\begin{table}[h!]
+		\centering
+		\caption[Homework and Project Chronology]{}
+		\begin{tabular}{||c|m{4cm}|m{7cm}||}
+			\hline
+			&&\\ [-1.8ex]
+			\textbf{Week} & \textbf{Activities} & \textbf{Description} \\ [0.5ex] \hline
+			&&\\ [-1.8ex]
+			\textbf{1}. (02/06/23 - 02/12/2023) & Presentation and approach of the proposal & We will consult experts on the subject. We should talk about topics related to beekeeping focused on the honeycomb. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{2}. (02/13/23 - 02/19/2023) & Planning and delimitation of the project & The planning, modeling, choice of materials and design will be carried out. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{3-4}. (02/20/23 - 03/05/2023) & Circuit design & The Proteus and Multisim software will be used, as well as an interface (VSPE) that generates digital ports to simulate data transport. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{5-6}. (03/06/23 - 03/19/2023) & Mobile app design & Creation of the application by using the App ``\textbf{Inventor}'' and Javascript to generate a friendly user interface. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{7}. (03/20/23 - 03/26/2023) & Purchase of electronic material & Making the order for electronic materials that are necessary to monitor the hive (motors, batteries, IC, bakelites, etc.). \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{8}. (03/27/23 - 04/02/2023) & Assembling the circuit physically & Using breadboards the physical operation of circuits will be studied, then we will assemble the circuit for the device. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{9-11}. (04/03/23 - 04/24/2023) & Purchase and assemble of the honeycomb. & We may construct the drawers for the hive from scratch. We must buy all the materials and work along with a carpenter to construct the honeycomb. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{12}. (04/25/23 - 05/03/2023) & Honeycomb test. & We may test the circuit in a honeycomb and we should get a report with respect to the data recorded by our device. \\ [0.5ex] \hline 
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[h!]
+		\centering
+		\caption[Homework and Project Chronology]{}
+		\begin{tabular}{||c|m{4cm}|m{7cm}||}
+			\hline
+			&&\\ [-1.8ex]
+			\textbf{13}. (05/04/23 - 05/12/2023) & Inspection of the work. & Based on the analysis of the 10th week, we should make the corresponding changes (if necessary) then we might install the circuit again in the honeycomb. \\ [0.5ex] \hline &&\\ [-1.8ex]
+			\textbf{14}. (05/13/23 - 05/20/2023) & Prepare the presentation. & This week we must make a presentation where the project information is shown, a compilation of the work invested will be made, evaluating the pros and cons. \\ [0.5ex] \hline
+		\end{tabular}
+	\end{table}
+	
+	\section{Communication Plan}
+	The team reached out to a couple of beekeepers who provided specific information on the issues that the beekeeping community faces every day. They also served as advisors to the project, not only providing us with materials but also connecting us to other beekeepers who could give important data and guidance regarding the project.
+	
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 6
+	%----------------------------------------------------------------------------------------------------
+	
+	\chapter{MILESTONES} %Action or event that marks a significant change or stage in your project.
+	\begin{itemize}
+		\item Gathering of all electronic components.
+		\item Circuit implementation and verification of its right functioning.
+		\item Device adaptation to the beehive.
+		\item Prototype testing with bees (if possible).
+		\item Selling the project.
+	\end{itemize}
+	
+	
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 7
+	%----------------------------------------------------------------------------------------------------
+	\chapter{PROJECT CONCLUSION}
+	In conclusion, the development of a project that allows the measurement of temperature, humidity, and weight of a beehive is a complex process that requires careful planning, extensive research, and a solid understanding of the beekeeping industry. It is essential to consider the potential challenges and obstacles that may arise during the project's development and to have contingency plans in place to address them. With proper funding, resources, and a disciplined approach, such a project can be successfully developed and can have a positive impact on the beekeeping industry, as well as the environment and ecosystem as a whole.
+	
+	\par In this project, it was necessary to interview multiple beekeepers, and based on the obtained responses, the development of a prototype was possible. However, as a team, we realized that although we had a functional prototype, moving from it to a product that can be sold in the market, at least for a project like the one we offer, requires more investment and modifications that facilitate the consumer's handling of both the base and the system used in it. Having a device that works is not everything. In our case, the cables we had were installed in the hive with plastic handles and nails. Then, these cables were connected directly to the base. But if we intend for the user to handle multiple bases and be able to change the hive as needed, this would not be the best method. If we intend to sell the product, this would be one of the first details to consider when improving the device. These changes could be the ones ultimately leading to the creation of a functional and marketable product.
+	
+	\par For the development of a project in which we intend to create a company to sell a product, the first factor to consider should be the budget, but it is not necessary to have the final sum of the estimated expenses. Time is another factor that defines the course to follow during the project's development. It should be taken into account that, regardless of the amount of economic and temporal investment, the project's success is not guaranteed.
+	
+	\pagebreak
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 8
+	%----------------------------------------------------------------------------------------------------
+	\chapter{TECHNICAL RESOURCES AND BUDGET}
+	
+	\begin{table}[h!]
+		\centering
+		\caption[Technical Resources and Budget]{}
+		\begin{tabular}{||m{10cm}| c | l ||}
+			\hline
+			\textbf{Technical resources}    & \textbf{Quantity} & \textbf{Price per unit [pesos]} \\ [0.5ex] \hline
+			LCD screen                      & 1     & \$ 132.20 \\ [.5ex] \hline
+			20 MHz quartz crystal           & 1     & \$ 24 \\ [.5ex] \hline
+			Pic compiler                    & 1     & \$ 200 \\ [0.5ex] \hline
+			DHT22 sensor                    & 2     & \$ 190 \\ [0.5ex] \hline
+			Medium push button              & 4     & \$ 15 \\ [0.5ex] \hline
+			Small push button               & 1     & \$ 5 \\ [0.5ex] \hline
+			Capacitors 22pf                 & 2     & \$ 1.74 \\ [0.5ex] \hline
+			HX711 sensor                    & 1     & \$ 100 \\ [0.5ex] \hline
+			Bluetooth module                & 1     & \$ 217.45 \\ [0.5ex] \hline
+			Battery connector               & 1     & \$ 8 \\ [0.5ex] \hline
+			Battery                         & 2     & \$ 140 \\ [0.5ex] \hline
+			Soldering iron                  & 1     & \$ 15 \\ [0.5ex] \hline
+			Desoldering wire                & 1     & \$ 40 \\ [0.5ex] \hline
+			Circuit board                   & 2     & \$ 124 \\ [0.5ex] \hline
+			Wood and building materials     & Nan   & \$ 660 \\ [0.5ex] \hline
+			Wood base                       & Nan   & \$ 135 \\ [0.5ex] \hline
+			Software Proteus.               & Nan   & \$ 10,000 \\ [0.5ex] \hline
+		\end{tabular}
+	\end{table}
+	
+	\pagebreak
+	%----------------------------------------------------------------------------------------------------
+	% CHAPTER 9
+	%----------------------------------------------------------------------------------------------------
+	\chapter{ANTICIPATED RISKS AND CONTINGENCY PLAN}
+	\begin{itemize}
+		\item Errors in data collection.
+		\subitem Contingency plan: It is intended to carry out a selection of high-quality sensors. We should also have an advisor for guidance on this topic.
+		\item Difficulties in putting the prototype into practice.
+		\subitem Contingency plan: If it is not possible to carry out field tests (mainly due to the time we have), a group of local beekeepers will be contacted to estimate the values of the project.
+		\item Costs.
+		\subitem Contingency plan: The facilitation of the faculty team (compilers, power supplies, oscilloscopes, multimeters, soldering iron, etc.) will be sought in advance in such a way that prototype costs can be reduced.
+	\end{itemize}
+	
+	\section{Planning and delimitation of the project}
+	Image (\ref{fig:9.1}) shows the design of the expected beehive, and the way the circuit will be merged to it, so the sensors can be adequately distributed.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale = 0.3]{colmena.png}
+		\caption{Beehive structure.}
+		\label{fig:9.1}
+	\end{figure}
+	
+	We expect to use sensors DHT22 Am2302 that are for both temperature and humidity. This sensor is shown in figure (\ref{fig:9.2}).
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale = 0.35]{sensor.jpeg}
+		\caption{Sensor for temperature and humidity.}
+		\label{fig:9.2}
+	\end{figure}
+	
+	We expect to use the HX711 sensor to monitor the beehive weight. This sensor is shown in figure (\ref{fig:9.3}).
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale = 0.35]{sensor1.jpeg}
+		\caption{Sensor for weight.}
+		\label{fig:9.3}
+	\end{figure}
+	
+	
+	
+	%---------------------------------------------------------------------------------------------------
+	% CHAPTER 10
+	%---------------------------------------------------------------------------------------------------
+	\chapter{VALUE OF RESULT}
+	With the results of the simulations, it was verified that the sensors were correctly programmed, so that they not only detected temperature and humidity but also changes in these parameters. On the other hand, the controller's task was to display and send information, so the simulations were measured both in the mobile application and on the controller's screen.
+	
+	\par Upon obtaining the results and comparing them with the weather information provided by Google, it was confirmed that when the hive was empty, the sensors captured temperature changes at the moment Google reported changes outside. When the lamp was introduced, we made sure it was closer to one sensor than the other, so the bulb simulated bees placing their comb in that area of the hive. When this was done, the corresponding sensor began to detect higher temperatures, and the humidity decreased in that area (according to readings from the same sensor). However, the temperature and weather outside still affected the lower temperature, meaning that when the temperature outside the hive varied and the weather changed from rainy to cloudy or clear, the interior temperature of the hive also varied.
+	
+	\par This confirmed that the sensors and the controller were performing their tasks correctly. As for the calibration of the scale, it was measured with two weights: a water bottle previously weighed on a scale (1.001 kg). Then the same hive was placed, which reported a weight of 9.56 kg according to the controller and the app, considering that the hive weighed 10 kg. The obtained measurement is an acceptable value for practical use of the base.
+	
+	%---------------------------------------------------------------------------------------------------
+	% APPENDIX A
+	%---------------------------------------------------------------------------------------------------
+	\pagebreak
+	\chapter*{Appendix A}
+	\begin{figure}
+		\centering
+		\includegraphics[scale = 0.55]{table_simulation.png}
+		\label{fig:simulations_table}
+	\end{figure}
+	
+	%---------------------------------------------------------------------------------------------------
+	% APPENDIX B
+	%---------------------------------------------------------------------------------------------------
+	\pagebreak
+	\chapter*{Appendix B}
+	
+	\begin{multicols}{2}
+		
+		%1
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.55]{Ev_1.png}
+			\caption{Evidence 1}
+			\label{fig:ev_1}
+		\end{figure}
+		
+		%2
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.05]{Ev_2.jpg}
+			\caption{Evidence 2}
+			\label{fig:ev_2}
+		\end{figure}
+		
+		%3
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.05]{Ev_3.jpg}
+			\caption{Evidence 3}
+			\label{fig:ev_3}
+		\end{figure}
+		
+		%4
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.55]{Ev_4.png}
+			\caption{Evidence 4}
+			\label{fig:ev_4}
+		\end{figure}
+		
+		%5
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.05]{Ev_5.jpg}
+			\caption{Evidence 5}
+			\label{fig:ev_5}
+		\end{figure}
+		
+		%6
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.05]{Ev_6.jpg}
+			\caption{Evidence 6}
+			\label{fig:ev_6}
+		\end{figure}
+		
+		%7
+		\begin{figure}
+			\centering
+			\includegraphics[scale = 0.5]{Ev_7.png}
+			\caption{Evidence 7}
+			\label{fig:ev_7}
+		\end{figure}
+	\end{multicols}
+	
+	
+	
+	%---------------------------------------------------------------------------------------------------
+	% BIBLIOGRAPHY
+	%---------------------------------------------------------------------------------------------------
+	\pagebreak
+	\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+	\printbibliography
+	\thispagestyle{empty}
+	
+\end{document}
