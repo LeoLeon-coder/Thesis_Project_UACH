@@ -1,7 +1,6 @@
-% !TeX spellcheck = Spanish_Download
+% !TeX spellcheck = en_US
 \documentclass[12pt]{report}
 \usepackage[a4paper, total={7in, 9in}]{geometry}
-\usepackage[spanish]{babel}
 \usepackage{setspace} %Line spacing
 \onehalfspacing
 
@@ -165,7 +164,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{}
-\lhead{PROYECTO DE TESIS $|$ \textcolor{red}{MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS}}
+\lhead{THESIS PROJECT $|$ \textcolor{red}{MONITORED HIVES FOR HONEYBEES}}
 \lfoot{Universidad Autónoma de Chihuahua}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
@@ -174,38 +173,73 @@
 
 \begin{document}
 	
-	\thispagestyle{empty}
-	\begin{center}
-		\begin{tabular}{c}
-			\includegraphics[scale=0.2]{BN_uach.png}\\[3.5ex]
-			\textbf{\LARGE Universidad Autónoma de Chihuahua}\\[3.5ex]
-			\textbf{\Large Facultad de Ingeniería}\\[3.5ex]
-			\hline\\[3ex]
-			\begin{minipage}{17cm}
-				\centering
-				\begin{doublespace}
-					\textbf{\LARGE MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS: Implementando un Micrófono en el Dispositivo de Monitoreo}
-				\end{doublespace}
-			\end{minipage}\\[3.5ex]
-			\hline
-		\end{tabular}\vfill
-		{\large Protocolo de Tesis.}\\\vfill
-		{\large \textbf{Alumno:} Leonardo Rafael León Mora.}\\\vfill
-		{\large \textbf{Director de tesis:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
-		{\large \textbf{Revisores sugeridos:}}\\[3.5ex]
-		\begin{itemize}
-			\item {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
-			\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
-		\end{itemize}
-		\vfill
-		{\large \textbf{Chihuahua, Chih.,} \today.}\\[3.5ex]
-	\end{center}
+	%\thispagestyle{empty}
+	\begin{titlepage}
+		\begin{center}
+			\begin{tabular}{c}
+				\includegraphics[scale=0.2]{BN_uach.png}\\[3.5ex]
+				\textbf{\LARGE Universidad Autónoma de Chihuahua}\\[3.5ex]
+				\textbf{\Large Facultad de Ingeniería}\\[3.5ex]
+				\hline\\[3ex]
+				\begin{minipage}{17cm}
+					\centering
+					\begin{doublespace}
+						\textbf{\LARGE MONITORED HIVES FOR HONEYBEES: Implementing a Microphone on the Monitoring Device}
+					\end{doublespace}
+				\end{minipage}\\[3.5ex]
+				\hline
+			\end{tabular}\vfill
+			{\large Thesis Protocol.}\\\vfill
+			{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
+			{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
+			{\large \textbf{Suggested advisors:}}\\[3.5ex]
+			\begin{itemize}
+				\item {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
+				\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
+			\end{itemize}
+			\vfill
+			{\large \textbf{Chihuahua, Chih.,} \today.}\\[3.5ex]
+		\end{center}
+	\end{titlepage}
+	
 	
 	%------------------------------------------------------------------------------------------
 	% 1. ANTECEDENTES.
 	%------------------------------------------------------------------------------------------
 	
-	\chapter{ANTECEDENTES}
+	\chapter{BACKGROUND}
+	
+	Cada vez que se revisa la colmena de forma manual existe la posiblidad de matar a la reina al extraer uno de los bastidores de la colmena, lo que puede llevar a la perdida total de la misma.
+	
+	\section{Dániel Tamás Várkonyi - Dynamic noise filtering for multi-class classification of beehive audio data}
+	
+	In the majority of apiaries, identification of the health condition of a bee colony is done manually by opening and inspecting the hive. Opening the hive, however, introduces certain stress to the colony while changing the micro-climate within the hive. Afterward, bees have to expend considerable energy to re-establish the equilibrium within the beehive. Consequently, \textbf{frequent manual inspection of a hive reduces the amount of honey the given bee colony produces}.
+	
+	\par Analyzing the colony's sound might reveal certain anomalous events within the hive, like the presence of an intruder or \textbf{the preparation of the colony for swarming}. The first technological approaches used for monitoring bees' condition via audio analysis were conducted in the late 20th century using spectral analysis in the range of $0-3$ kHz \cite{dietlein1985spectral_analysis}.
+	
+	\par Applying machine learning ({\tt ML}) to audio analysis for bee queen presence detection and swarming prediction leads to a basic binary classification task, i. e. predicting if the queen is present or not and if the colony is swarming or not. Moreover, \textbf{the sound of a bee colony in a ``queenless'' or swarming state is well distinguishable from its sounds when a queen is present or the colony is not swarming} \cite{allen1956behaviourbeeswarming, hord2013behavioraudioanalysis}. \textbf{The stress level of the colony exposed to an ``anomaly'' likely implies a substantially different sound from the one when being in a normal state}.\\
+	An important issue, contravening the approaches found in the literature, is that \textbf{these problems might not necessarily correspond to binary classification tasks}. For example, identification of various (more than two) types of diseases, intrusion detection by different pests, or estimation of exposure of bees to diverse palettes of chemicals, naturally, calls for multi-label or even multi-class approaches. An assumption here, posing possible difficulties for application of ML techniques, is that \textbf{bee sounds corresponding to various classes (labels) might not be so easily distinguishable from each other} as they usually are in the before mentioned binary cases where ``anomalous'' and ``normal'' states are well-detectable even for humans.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale = 0.25]{beeaudioworkflow.png}
+		\caption{A general audio data analytics workflow used in our experiments.}
+		\label{fig:audioworkflow}
+	\end{figure}
+	
+	\par There is a huge gap int he literature considering multi-label or multi-class classification of bee audio data. According to our knowledge. The only work related to multi-label bee sound classification \cite{gradivsek2017predictingbumblebees}, is focused on identifying 12 bumblebee species from their buzzing sounds (from a small-scale dataset using traditional {\tt ML} techniques, such that naïve Bayes decision trees, support vector machines, and random forests).
+	
+	\begin{itemize}
+		\item \textbf{Problem \# 1}. The classification accuracy of the audio data analytics work flow, shown in figure \ref{fig:audioworkflow}, does not only depend on the discriminative power of the used {\tt ML} techniques, but also, on the used pre-processing steps. One of the basics problems of audio signals is that, even after filtering out irrelevant information, the resulting data represented as time-series have very high dimensionality. Feature extraction ({\tt FE}) methods are utilized to extract and represent the most important features within the audio signal in a compact form (time-series or spectrograms), preserving a significant portion of its original information content. After {\tt FE}, {\tt ML} techniques can be applied on the data (depending on the amount, dimensionality and the task intended to be solved).
+		
+		\item \textbf{Problem \# 2}. According to our knowledge, there is no reference in the literature to a survey comparing various combinations of audio {\tt FE} (image or time-series), noise filtering ({\tt NF}) and {\tt ML} (image or time-series classification) techniques for bee sound analytics. including thorough hyper-parameter ({\tt HP}) tuning and validation procedures as well as utilizing large datasets.
+		
+		\item \textbf{Problem \# 3}. According to our knowledge, there is no large-scale publicly available bee sound benchmark data suitable for research on multi-label or multi-class bee sound classification approaches.\\
+		Several {\tt ML} developments, e.g. various deep learning ({\tt DL}) models, have been developed working efficiently on specific problems related to audio processing like, for example, human speech recognition. However, our experiments showed that \textbf{these methods are not performing well in case of a multi-label bee sound classification problem} in which the difference between various classes is inconspicuous.
+		
+		\item \textbf{Problem \# 4}. The main reason for the poor performance of state-of-the-art {\tt ML} models for multi-label bee sound classification lies in the poor performance of the used {\tt NF} methods, which seems to be not suitable for bee sound data.
+	\end{itemize}
+	
 	
 	
 	

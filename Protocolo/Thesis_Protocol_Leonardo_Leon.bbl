@@ -1,0 +1,149 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{none/global//global/global}
+  \entry{dietlein1985spectral_analysis}{article}{}
+    \name{author}{1}{}{%
+      {{hash=DDG}{%
+         family={Dietlein},
+         familyi={D\bibinitperiod},
+         given={David\bibnamedelima G},
+         giveni={D\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{DDG1}
+    \strng{fullhash}{DDG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{176\bibrangedash 183}
+    \field{title}{A method for remote monitoring of activity of honeybee
+  colonies by sound analysis}
+    \field{volume}{24}
+    \field{journaltitle}{Journal of Apicultural Research}
+    \field{year}{1985}
+  \endentry
+
+  \entry{allen1956behaviourbeeswarming}{article}{}
+    \name{author}{1}{}{%
+      {{hash=AMD}{%
+         family={Allen},
+         familyi={A\bibinitperiod},
+         given={M\bibnamedelima Delia},
+         giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{AMD1}
+    \strng{fullhash}{AMD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{14\bibrangedash 22}
+    \field{title}{The behaviour of honeybees preparing to swarm}
+    \field{volume}{4}
+    \field{journaltitle}{The British Journal of Animal Behaviour}
+    \field{year}{1956}
+  \endentry
+
+  \entry{hord2013behavioraudioanalysis}{article}{}
+    \name{author}{2}{}{%
+      {{hash=HL}{%
+         family={Hord},
+         familyi={H\bibinitperiod},
+         given={Loren},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=SE}{%
+         family={Shook},
+         familyi={S\bibinitperiod},
+         given={Errol},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HLSE1}
+    \strng{fullhash}{HLSE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Determining honey bee behaviors from audio analysis}
+    \field{journaltitle}{National Science Foundation Research Experience for
+  Teachers. Appalachian State Univ}
+    \field{year}{2013}
+  \endentry
+
+  \entry{gradivsek2017predictingbumblebees}{article}{}
+    \name{author}{6}{}{%
+      {{hash=GA}{%
+         family={Gradi{\v{s}}ek},
+         familyi={G\bibinitperiod},
+         given={Anton},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SG}{%
+         family={Slapni{\v{c}}ar},
+         familyi={S\bibinitperiod},
+         given={Ga{\v{s}}per},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={{\v{S}}orn},
+         familyi={{\v{S}}\bibinitperiod},
+         given={Jure},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LM}{%
+         family={Lu{\v{s}}trek},
+         familyi={L\bibinitperiod},
+         given={Mitja},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GM}{%
+         family={Gams},
+         familyi={G\bibinitperiod},
+         given={Matja{\v{z}}},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Grad},
+         familyi={G\bibinitperiod},
+         given={Janez},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{GA+1}
+    \strng{fullhash}{GASGSJLMGMGJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{63\bibrangedash 76}
+    \field{title}{Predicting species identity of bumblebees through analysis of
+  flight buzzing sounds}
+    \field{volume}{26}
+    \field{journaltitle}{Bioacoustics}
+    \field{year}{2017}
+  \endentry
+\enddatalist
+\endinput
