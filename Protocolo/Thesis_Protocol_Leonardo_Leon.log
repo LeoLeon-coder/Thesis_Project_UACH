@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.6.13)  19 JUN 2023 12:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.6.13)  1 JUL 2023 11:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1845,7 +1845,7 @@ LaTeX Font Info:    Trying to load font information for U+stmry on input line 1
 79.
 
 (/home/leonidas/.miktex/texmfs/install/tex/latex/stmaryrd/Ustmry.fd)
-<BN_uach.png, id=45, 602.25pt x 649.42625pt>
+<BN_uach.png, id=97, 602.25pt x 649.42625pt>
 File: BN_uach.png Graphic file (type png)
 <use BN_uach.png>
 Package pdftex.def Info: BN_uach.png  used on input line 180.
@@ -1855,11 +1855,12 @@ Package pdftex.def Info: BN_uach.png  used on input line 180.
 {/home/leonidas/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map} <./BN_uach.png
 >]
 Chapter 1.
-<beeaudioworkflow.png, id=59, 1809.76125pt x 589.20125pt>
-File: beeaudioworkflow.png Graphic file (type png)
-<use beeaudioworkflow.png>
-Package pdftex.def Info: beeaudioworkflow.png  used on input line 225.
-(pdftex.def)             Requested size: 452.43921pt x 147.29994pt.
+Chapter 2.
+
+Underfull \hbox (badness 2302) in paragraph at lines 214--214
+|[]\OT1/cmr/bx/n/24.88 D^^Saniel Tam^^Sas V^^Sarkonyi, Jos^^Se Luis
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1873,8 +1874,14 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.229 	
+l.224 	
         [1]
+<beeaudioworkflow.png, id=121, 1809.76125pt x 589.20125pt>
+File: beeaudioworkflow.png Graphic file (type png)
+<use beeaudioworkflow.png>
+Package pdftex.def Info: beeaudioworkflow.png  used on input line 227.
+(pdftex.def)             Requested size: 452.43921pt x 147.29994pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1884,23 +1891,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [2 <./beeaudioworkflow.png>]
-Chapter 2.
-Chapter 3.
+Underfull \hbox (badness 10000) in paragraph at lines 256--257
 
-Underfull \hbox (badness 3396) in paragraph at lines 255--255
-|[]\OT1/cmr/bx/n/24.88 RELACI[]ON DE LA PROPUESTA
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 255--255
-\OT1/cmr/bx/n/24.88 CON LAS MATERIAS DE LA
- []
-
-Chapter 4.
-Chapter 5.
-Chapter 6.
-Chapter 7.
-Chapter 8.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1918,7 +1912,96 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[4] [5] 
+[4]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[5]
+Chapter 3.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[6]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[7]
+Chapter 4.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[8]
+Chapter 5.
+
+Underfull \hbox (badness 1117) in paragraph at lines 401--401
+|[]\OT1/cmr/bx/n/24.88 Stefania Cecchi, Susanna Spinsante,
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[9]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10]
+Chapter 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 439--439
+|[]\OT1/cmr/bx/n/24.88 Gordon Hunter, Donald Howard,
+ []
+
+Chapter 7.
+Chapter 8.
+Chapter 9.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12] [13] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (Thesis_Protocol_Leonardo_Leon.aux)
 
@@ -1926,7 +2009,7 @@ LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Thesis_Protocol_Leonardo_Leon.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: F4FBB3AE7C76D150BBC4FC94F7C9B814;1806.
+(rerunfilecheck)             Checksum: 5A235E139D3151770EC9AC8E36079D75;4944.
 
 Package biblatex Warning: Please (re)run BibTeX on the file(s):
 (biblatex)                Thesis_Protocol_Leonardo_Leon
@@ -1938,23 +2021,31 @@ Package logreq Info: Writing requests to 'Thesis_Protocol_Leonardo_Leon.run.xml
 
  ) 
 Here is how much of TeX's memory you used:
- 39696 strings out of 478346
- 794210 string characters out of 5840634
- 1860851 words of memory out of 5000000
- 59198 multiletter control sequences out of 15000+600000
- 521978 words of font info for 70 fonts, out of 8000000 for 9000
+ 39770 strings out of 478346
+ 795409 string characters out of 5840634
+ 1864851 words of memory out of 5000000
+ 59235 multiletter control sequences out of 15000+600000
+ 522865 words of font info for 73 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 83i,12n,80p,1933b,1227s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,16n,80p,1933b,1227s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/leonidas/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1
 200.pk></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cm
 bx12.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/
-cmr12.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfonts/
-cm/cmti12.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfont
-s/cm/cmtt12.pfb>
-Output written on Thesis_Protocol_Leonardo_Leon.pdf (6 pages, 661536 bytes).
+cmbxti10.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfonts
+/cm/cmex10.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsfon
+ts/cm/cmmi12.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/amsf
+onts/cm/cmmi6.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/ams
+fonts/cm/cmmi8.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/am
+sfonts/cm/cmr12.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/a
+msfonts/cm/cmr6.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/a
+msfonts/cm/cmr8.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/public
+/amsfonts/cm/cmsy8.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/publi
+c/amsfonts/cm/cmti12.pfb></home/leonidas/.miktex/texmfs/install/fonts/type1/pub
+lic/amsfonts/cm/cmtt12.pfb>
+Output written on Thesis_Protocol_Leonardo_Leon.pdf (14 pages, 791704 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 20 named destinations out of 1000 (max. 500000)
- 103 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 287 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 207 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -145,5 +145,65 @@
     \field{journaltitle}{Bioacoustics}
     \field{year}{2017}
   \endentry
+
+  \entry{wenner1964sound}{article}{}
+    \name{author}{1}{}{%
+      {{hash=WAM}{%
+         family={Wenner},
+         familyi={W\bibinitperiod},
+         given={Adrian\bibnamedelima M},
+         giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {JSTOR}%
+    }
+    \strng{namehash}{WAM1}
+    \strng{fullhash}{WAM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{116\bibrangedash 125}
+    \field{title}{Sound communication in honeybees}
+    \field{volume}{210}
+    \field{journaltitle}{Scientific American}
+    \field{year}{1964}
+  \endentry
+
+  \entry{michelsen1986sound}{article}{}
+    \name{author}{3}{}{%
+      {{hash=MA}{%
+         family={Michelsen},
+         familyi={M\bibinitperiod},
+         given={Axel},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KWH}{%
+         family={Kirchner},
+         familyi={K\bibinitperiod},
+         given={Wolfgang\bibnamedelima H},
+         giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=LM}{%
+         family={Lindauer},
+         familyi={L\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{MAKWHLM1}
+    \strng{fullhash}{MAKWHLM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{207\bibrangedash 212}
+    \field{title}{Sound and vibrational signals in the dance language of the
+  honeybee, Apis mellifera}
+    \field{volume}{18}
+    \field{journaltitle}{Behavioral ecology and sociobiology}
+    \field{year}{1986}
+  \endentry
 \enddatalist
 \endinput

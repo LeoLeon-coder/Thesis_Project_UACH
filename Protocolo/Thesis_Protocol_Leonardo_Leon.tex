@@ -204,14 +204,16 @@
 	
 	
 	%------------------------------------------------------------------------------------------
-	% 1. ANTECEDENTES.
+	% 1. Dynamic Noise Filtering for Multi-Class Classification of Beehive Audio Data.
 	%------------------------------------------------------------------------------------------
 	
-	\chapter{BACKGROUND}
+	\chapter{READINGS}
 	
 	Cada vez que se revisa la colmena de forma manual existe la posiblidad de matar a la reina al extraer uno de los bastidores de la colmena, lo que puede llevar a la perdida total de la misma.
 	
-	\section{Dániel Tamás Várkonyi - Dynamic noise filtering for multi-class classification of beehive audio data}
+	\chapter{Dániel Tamás Várkonyi, José Luis Seixas Junior, Tomáš Horváth.}
+	
+	\section{Introduction}
 	
 	In the majority of apiaries, identification of the health condition of a bee colony is done manually by opening and inspecting the hive. Opening the hive, however, introduces certain stress to the colony while changing the micro-climate within the hive. Afterward, bees have to expend considerable energy to re-establish the equilibrium within the beehive. Consequently, \textbf{frequent manual inspection of a hive reduces the amount of honey the given bee colony produces}.
 	
@@ -240,35 +242,205 @@
 		\item \textbf{Problem \# 4}. The main reason for the poor performance of state-of-the-art {\tt ML} models for multi-label bee sound classification lies in the poor performance of the used {\tt NF} methods, which seems to be not suitable for bee sound data.
 	\end{itemize}
 	
+	\section{Beehive Sound Analytics}
 	
+	In the explained experiments of this paper, despite the suggested frequency range of 0-4 kHz by Hord and Shook (2013) and Qandour et al. (2014), for	the sake of investigation, the frequency range of 0-8 KHz has been	considered. Thus, before the {\tt FE} step, frequencies beyond this range are filtered out.
 	
+	\subsection{\textit{Audio feature extraction} ({\tt FE})}
+	
+	The input of {\tt FE} is an audio file in the form of a real-valued time-series data
+	\begin{equation*}
+		x(t) = \{ x_t \; | \; 0 \le t < N \} = \{ x_0 \, , \; x_1 \, , \; ... \, , \; x_{N - 1} \} \; ,
+	\end{equation*}
+	
+	of length $N$, where $x$ represents the amplitude of the signal in time $t$.\\
+	
+	The goal of {\tt FE} is to transform or represent $x(t)$ via features carrying important information (preferably, the whole time interval of the recording).
+	
+	\begin{itemize}
+		\item \textbf{\textit{Short-Time Fourier Transform} ({\tt STFT})}
+		\par Discrete-Time Fourier Transformation ({\tt DTFT}) transforms $x_n$ into another complex series $y(k) = \{ y_k \; | \; 1 \le k \le K \} = \{ y_1 \, , \; y_2 \, , \; ... \, , \; y_k \}$
+		\begin{equation}\label{eq:1}
+			y_k = \sum_{n = 0}^{N - 1} x_n \cdot e^{-i \, \frac{2 \pi}{N}kn} = \sum_{n = 0}^{N-1} x_n \left[ \cos{\left( \frac{2 \pi}{N} kn \right)} - i \cdot \sin{\left( \frac{2 \pi}{N} kn \right)} \right] \; ,
+		\end{equation}
+		which represents the audio data $x(n)$ in the frequency domain instead of the time domain. In case of {\tt STFT}, $x(n)$ is broken into windows $w(n - m)$ with a window size $m$, which might overlap. {\tt DTFT} is applied to each window, recording the magnitude (and phase) of $x(n)$ for each frequency and time. {\tt STFT} can be expressed as {\tt DTFT} on $x(n)w(n - m)$, such that
+		\begin{equation}\label{eq:2}
+			y_k = \sum_{n = 0}^{N - 1} x_n w(n - m) \cdot e^{-i \, \frac{2 \pi}{N} kn} \; .
+		\end{equation}
+		The information of the signal's magnitude can be represented in a 2D ``time-frequency'' matrix called \textbf{spectrogram}.
+		
+		\item \textbf{\textit{Chroma}}
+		\par Chroma features represent he tonal content of an audio signal $x(n)$. The extraction process includes the following steps:
+		\begin{enumerate}
+			\item Providing {\tt STFT} for frequency analysis.
+			\item Filtering frequency.
+			\item Peak detection.
+			\item Reference frequency computation.
+			\item Pitch class mapping.
+			\item Normalizing the feature.
+		\end{enumerate}
+	
+		\item \textbf{\textit{Mel-frequency Cepstral coefficients} ({\tt MFCC})}.
+		\par Extracting {\tt MFCC} starts by computing {\tt DTFT} of the signal $x(n)$, resulting in $y(k)$, as introduce in Eq.(\ref{eq:1}). Then the Mel spectrum of the magnitude spectrum is computed as
+		\begin{equation}\label{eq:3}
+% I do not know if the paper was right in here but I think it might be "M - 1" as the top of the sum
+			s(m) = \sum_{n = 0}^{N - 1} \left[ {|y(k) |}^2 h_m(k) \right] \; ; \quad 0 \le m \le M - 1 \; ,
+		\end{equation}
+		where $M$ is the total number of triangular Mel weighting filters and $h_m(k)$ is the weight given to the $k$th energy spectrum bin, contributing to the $m$th output band, expressed as
+		\begin{align*}
+			h_m(k) =
+			\begin{cases}
+				\frac{2 (k - f (m - 1))}{f(m) - f(m - 1)} \; , &\text{ if } f(m - 1) \le k < f(m) \; , \\
+				\frac{2(f (m + 1) - k)}{f(m + 1) - f(m)} \; , &\text{ if } f(m) \le k < f(m + 1) \; , \\
+				0 \; , &\text{ otherwise.}
+			\end{cases}
+		\end{align*}
+		Finally, Discrete Cosine Transformation is applied such as
+		\begin{equation*}
+			c(n) = \sum_{n = 0}^{M - 1} \log{(s(m))} \cdot \cos{\left( \frac{\pi n (m - 0.5)}{M} \right)} \; , \text{ where } 0 \le n \le C - 1 \; ,
+		\end{equation*}
+		$c(n)$ are the Cepstral coefficients and $C$ is the number of {\tt MFCC}s.
+		
+		\item \textbf{{\tt MFCC} \textit{differential coefficients} ({\tt MFCC} delta)}
+		\par The first order derivative of {\tt MFCC} (differential) coefficients are defined as
+		\begin{equation}\label{eq:4}
+			d_t = \frac{\sum_{n = 1}^{N} n \left( c_{t + n} - c_{t - n} \right)}{2 \sum_{n = 1}^{N} n^2} \; ,
+		\end{equation}
+		where $d_t$ is the delta coefficient of the frame $t$ in terms of {\tt MFCC}s from $c_{t + n}$ to $c_{t - n}$.
+		
+		\item \textbf{\textit{Spectral centroid} ({\tt SC})}
+		\par A measure is used to characterize the spectrum, is defined as
+		\begin{equation}\label{eq:5}
+			SC(n) = \frac{\sum_{m = 0}^{N - 1} m \cdot {|X[n, \, m]|}^2}{\sum_{m = 0}^{N - 1} {|X[n, \, m]|}^2} \; .
+		\end{equation}
+		{\tt SC} indicates the center of frequency (``gravity centrum'') of the $n$th frame.
+		
+		\item \textbf{\textit{Zero-crossing rate} ({\tt ZCR})}
+		\par {\tt ZCR} indicates the number of sign changes in the $n$th frame, defined by
+		\begin{equation}\label{eq:6}
+			ZCR(n) = \frac{1}{2N} \sum_{m = 1}^{N} |sgn(x[n + m]) - sgn(x[n + m - 1])| \; .
+		\end{equation}
+		{\tt ZCR} can be interpreted as a measurement of noisiness. The higher the {\tt ZCR} in a frame, the noisier the signal.
+		\par The {\tt SC} and {\tt ZCR} {\tt FE} result in a time-series type output, and not in a spectrogram as in case of the other {\tt FE} methods introduced above.
+	\end{itemize}
+	
+	\subsection{Multi-label audio data classification using machine learning ({\tt ML})}
+	
+	Depending on which method is being used, {\tt FE} might result in two different types of output, time-series data or a spectrogram (2D feature matrix), which can be seen as an image.
+	
+	\begin{itemize}
+		\item \textbf{\textit{Time-series classification}}.
+		
+		\item \textbf{\textit{Image classification}}.
+		
+		\item \textbf{\textit{Noise filtering} ({\tt NF})}.
+		
+		\item \textbf{\textit{Laplacian filter}}.
+		
+		\item \textbf{\textit{Gaussian filter}}.
+		
+		\item \textbf{\textit{Laplacian of Gaussian filter}}.
+		
+		\item \textbf{\textit{Median filter}}.
+		
+		\item \textbf{\textit{High pass filter}}.
+	\end{itemize}
 	
 	%------------------------------------------------------------------------------------------
-	% 2. JUSTIFICACIÓN.
+	% 2. On the Importance of the Sound Emitted by Honey Bee Hives.
 	%------------------------------------------------------------------------------------------
 	
-	\chapter{JUSTIFICACIÓN}
+	\chapter{Alessandro Terenzi, Stefania Cecchi, and Susanna Spinsante}
 	
+    \section{Introduction}
+    
+    Honey bees not only produce honey, beeswax, royal jelly, and propolis, but they are at the basis of the plants pollination, playing a key role in the proliferation of both spontaneous and cultivated flora.\\
+    One of the most recent and dangerous syndromes affecting honey bee colonies is the Colony Collapse Disorder (CCD), which is characterized by a sudden disappearance of honey bees from the hive.
+    
+    \par Large bee mortality can result in a loss of pollination services with negative ecological and economic impacts that could significantly affect the maintenance of wild plant diversity, wider ecosystem stability and crop production. In this context, the necessity of a continuous and intensive monitoring of bee hives' status emerges clearly.
+    
+    \par In recent years, a great improvement has come from the integration of web technologies and smart sensors. But, despite this approaches having shown good results, they still require remarkable computational power, several different types of sensors, and sometimes they impose some modifications to the hive physical structure.
+    
+    \par Modalities of vibroacoustic signal production include gross body movements, wing movements, high-frequency muscle contractions without wing movements, and pressing the thorax against the substrates or with another bee. Vibroacoustic signals modulate behaviors that affect swarming, and the queen's behavior during swarming. The sound can be recorded by means of microphones or accelerometers placed in specific spots inside or outside the hives, and then it can be analyzed to detect the colony health status.
+    
+    \section{Literature Review}
+	
+	\par Aristotle in one of his writings observed that, when a swarming is imminent, a particular sound is produced continuously by the bees, several days before the swarming event. A century later, Francis Huber discovered that the first young queens born emit a sound called tooting, and that other young queens, who are still sitting in their cells, respond with another sound called quacking. In 1964, Wenner et al. \cite{wenner1964sound} performed one of the first spectral analyses on the honey bee's sound. They discovered that the waggle dance is used by bees to communicate within the colony the information about the distance and position of flowers. During the dance, \textbf{bees emit a specific pulsed sound, in which the number of pulses is proportional to the distance between the colony and the flowers}. Wenner also deepened the study about tooting, showing that this sound is composed of two different pulses, the first is a long pulse of $1s$ duration followed by shorter pulses, with a fundamental frequency of 500 Hz and some overtones. The quacking has a lower fundamental frequency and starts with shorter pulses.
+	
+	\par In 1985, Dietlein et al. \cite{dietlein1985spectral_analysis} performed a longer study acquiring and analyzing the sound from three different colonies for over a year, showing that there are some significant variations in the amplitude and frequencies of the sound produced in different seasons. Moreover, a frequency analysis has also shown that the spectral content of the signal changes with the seasons and the hour of the day. Then, in 1986, Michelsen et al. \cite{michelsen1986sound} performed a study more focused on the sound emitted during the waggle dance, analyzing both the vibration and the airborne sound produced. Since it is performed inside the hive in the dark, bees cannot rely on their sight to see the dance, and they must use other communication means, such as vibration, airborne sound, and chemical transmission. Michelsen discovered that no vibration is produced during the dance, and that all of the information is passed through the airborne sounds. The waggle sound is a pulsed sound, with 20 ms-long pulses at the frequency of 250-300 Hz.\\
+	The second part of Michelsen's work is more focused on the mechanical aspects of the propagation of sound and vibration inside the colony. \textbf{Bees seem to freeze at specific frequencies}, and this led Michelsen to speculate that these particular signals are used by bees to quiet the colony, in order to allow a better transmission of important messages.
+	
+	\subsection{The 21st Century and the Technological Advancement}
+	
+	Within the last twenty years, technological progress has allowed the application of new solutions such as digital signal processing, ML, and low cost smart sensors, enabling new discoveries. Sound spectrograms have shown that there is a quick change in the frequency content during swarming. Before the swarming, most of the energy content of the signal is around 150 Hz, while, during swarming, it jumps to 500 Hz. Moreover, \textbf{the joint analysis of sound, temperature, and humidity} has shown that during swarming, \textbf{there is an increase in sound amplitude, and, meanwhile, temperature and humidity decrease}.
 	
 	%------------------------------------------------------------------------------------------
-	% 3. LA PROPUESTA Y LA CARRERA.
+	% 3. Honeybees Swarming Detection Approach by Sound Signal Processing.
 	%------------------------------------------------------------------------------------------
 	
-	\chapter{RELACIÓN DE LA PROPUESTA CON LAS MATERIAS DE LA CARRERA}
+	\chapter{Aleksandra Zlatkova, Zivko Kokolanski and Dimitar Tashkovski}
 	
+	Swarming of honeybees is one of the biggest problems for the hobbyist-beekeepers.
+	
+	\section{Introduction}
+	
+	Honey bee or Apis mellifera is one of several types of bees, their role in pollination is estimated to be around 90\%. Bees are organized in colonies of 50,000 bees on average. The colony include queen bee, workers and drones. Once inside the hive, bees communicate through pheromones, sound and vibrations. Swarming is a natural process that means part of honeybees runaway from the beehive and stablish a new colony. 
+	
+	\par Usually, beekeepers are hobbyist whose hives are located in rural environments, long from their homes. \textit{They do not see the hive too often, and there is the possibility that swarming occurs between those days}. \textbf{This reason imposes the need of a monitoring system}. In the recent years, few studies related swarming with sound, temperature and humidity inside \textit{within the colony} and weight of the hive.
+	
+	\section{Method}
+	
+	The dataset contains audio samples recorded before and after swarming. Despite the processing, recordings were visual observed to verify if there are some disorders. For example, the bees become upset and change their behavior during every human activity in the beehive. Those audio files that had similar disorders were excluded from further analyses. Afterwards, data samples were normalized in range [-1, 1].
+	
+	\par The frequencies in a signal change over time, so in most cases it does not make sense to implement Fourier Transform across the entire signal.
 	
 	%------------------------------------------------------------------------------------------
-	% 4. OBJETIVOS.
+	% 4. A Smart Sensor-Based Measurement System for Advanced Bee Hive Monitoring.
 	%------------------------------------------------------------------------------------------
 	
-	\chapter{OBJETIVOS}
+	\chapter{Stefania Cecchi, Susanna Spinsante, Alessandro Terenzi and Simone Orcioni}
 	
+	\section{Introduction}
+	
+	These industrious insects do not only produce honey, beeswax, royal jelly, and propolis, but they are at the basis of the plants' pollination process, playing a key role in the proliferation of both spontaneous and cultivated flora. For these reasons, it is of utmost importance to design solutions aimed at preserving and supporting the honey bees' healthy existence.\\
+	Colony collapse disorder (CCD) is a recent, pervasive syndrome affecting honey bee colonies, which is characterized by a sudden disappearance of honey bees from the hive. CDD has emphasized the importance of enabling a continuous, multi-parametric, and extensive monitoring of the beehives, to investigate factors that may negatively affect the life cycle of bees. A continuous monitoring and an automatic analysis of the beehives' status can help to safeguard and to protect their life, by early detection of potential threats.
+	
+	\par There are several approaches focused in many areas with respect to the analysis of beehives like:
+	\begin{itemize}
+		\item General monitoring system. In particular, temperature, humidity, air quality sensors, and an \textbf{accelerometer} compass are installed within the hive.
+		\item Adoption of wireless technologies. Another way to apply the monitoring of the hive is by creating a wireless sensor network system to check the hive status far from the place where it is placed.
+		\item Systems exploiting computer vision-based approaches. To analyze the behavior of honey bees and their flight activities outside the hive.
+	\end{itemize}
+	
+	Starting from the state of art related to monitoring systems and technological developments, this work aims at developing a complete, multi-parametric smart sensor-based measurement system capable of monitoring in real-time a colony of beehives, and discriminating several events, such as swarming event, beehive theft, honey gathering, reserve food lack, decrease of bees' number due to illness.
+	
+	\section{State of Art of Measurement Systems for Beehives}
+	
+	\subsection{Sound measurement}
+	
+	The sound analysis of the beehives is a useful technique applied to determine the bees' state in a noninvasive manner.
+	
+	\par The bees communicate each other using vibration and sound signals such as gross body movements, wing movements, high-frequency muscle contractions without wing movements, and pressing the thorax against the substrates or another bee. These signals are also strictly related to particular events, such as swarming and queen behavior during swarming as we will see in what follows.
+	
+	\par As an alternative to the use of microphones, accelerometers sensors could also be used to sample the hive vibrations. The sound have been analyzed in the frequency domain by means of the Fourier transform before and after the swarming event and changes in terms of frequencies and amplitudes have been found. During the swarming event, it is also possible to retrieve from the audio analysis the presence of the queen bee. As a matter of fact, young queens emit piping sounds during the swarming process. These sounds can be identified through a frequency analysis and since they are characterized by a specific frequency, the allows to detect the presence of young queen inside the hive. Moreover, during the year, also the worker bees produce different piping sounds with relation to the presence or absence of the queen in the colony.
+	
+	\par The use of microphones or accelerometers allows getting more detailed information on the general state of the hive.
+	
+	\subsubsection{Presence of Airborne Toxics in the Hive}
+	
+	This system is based on a profiling of the acoustic signatures of free-flying honey bee colonies, analyzing the resulting acoustic sounds to identify anomalies with relation to the specific properties of those acoustic sounds.
+	
+	\par Recently, the use of Deep Learning and Machine Learning has been introduced to classify the recorded audio samples and to define an objective status of the analyzed beehives.
 	
 	%------------------------------------------------------------------------------------------
-	% 5. HIPÓTESIS.
+	% 5. Processing of Multi-Modal Environmental Signals Recorded from a ‘Smart’ Beehive.
 	%------------------------------------------------------------------------------------------
 	
-	\chapter{HIPÓTESIS}
+	\chapter{Gordon Hunter, Donald Howard, Sylvain Gauvreau, Olga Duran, Rosa Busquets}
+	
+	\section{Introduction}
+	
+	The population of bees has experienced a marked decline in many countries, which is likely to have very serious consequences for agriculture and other plant life.
 	
 	
 	

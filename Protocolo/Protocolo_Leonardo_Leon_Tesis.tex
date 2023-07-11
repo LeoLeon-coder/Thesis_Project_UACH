@@ -6,6 +6,7 @@
 \onehalfspacing
 
 \usepackage{pdfpages}
+\usepackage{pgfgantt}
 
 \usepackage{fancyhdr}
 \usepackage{lastpage}
@@ -165,7 +166,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{}
-\lhead{PROYECTO DE TESIS $|$ \textcolor{red}{MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS}}
+\lhead{PROTOCOLO DE TESIS $|$ \textcolor{red}{MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS}}
 \lfoot{Universidad Autónoma de Chihuahua}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
@@ -184,7 +185,7 @@
 			\begin{minipage}{17cm}
 				\centering
 				\begin{doublespace}
-					\textbf{\LARGE MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS: Implementando un Micrófono en el Dispositivo de Monitoreo}
+					\textbf{\LARGE MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS: Implementación de un Micrófono en el Dispositivo de Monitoreo}
 				\end{doublespace}
 			\end{minipage}\\[3.5ex]
 			\hline
@@ -207,6 +208,45 @@
 	
 	\chapter{ANTECEDENTES}
 	
+	Los estudios referentes al cuidado de abejas melíferas (Apis Mellifera), enfocados en el monitoreo de las mismas; se desenvuelven entre el análisis de diversos parámetros como la temperatura, humedad, dióxido de carbono, peso, sonido e incluso análisis visuales tanto de los gráficos que se producen con base en la información obtenida, como de grabaciones, todos estos parámetros se toman de una colmena. Los resultados obtenidos a partir de la información que proporcionan los instrumentos pertinentes, son interpretados por apicultores e investigadores para determinar lo que sucede dentro de una colmena, sin necesidad de abrir la misma.
+	
+	\par En \cite{cecchi2020smart}, se cree que un monitoreo continuo y un análisis automático del estado de las colmenas, puede ayudar a resguardar y proteger la vida de las abejas a través de la detección temprana de amenazas potenciales, pues bien; a partir de los parámetros anteriormente mencionados es posible detectar enfermedades, infecciones o parásitos, carencia de recursos dentro del panal, producción no solo de miel, sino también de crías, propóleo y hasta la detección del comportamiento de enjambre en las abejas.
+	
+	\par En lo referente al sonido, dentro de la colmena no existe una fuente de luz lo suficientemente fuerte como para alumbrar el interior de la misma, por lo que se puede creer que las abejas se comunican a través de otros canales, como bien lo pueden señales vibro-acústicas, que bien; según múltiples estudios, entre ellos un propuesto por Terenzi et al. \cite{terenzi2020importance}, estas incluyen movimientos corporales amplios, movimiento de las alas, contracciones musculares de alta frecuencia sin movimiento de las alas y presionar el tórax contra los sustratos o contra otra abeja. El sonido se puede grabar por medio de micrófonos o acelerómetros colocados en puntos específicos dentro o fuera de las colmenas, y luego se puede analizar para detectar el estado de salud de la colonia.
+	
+	\par Analizar el sonido de la colonia podría revelar ciertos eventos anómalos dentro de la misma, como la presencia de un intruso o la preparación de la colonia para formar un enjambre \cite{varkonyi2023dynamic}. Para la interpretación de los audios grabados se pueden hacer estudios que involucran la extracción de características y Machine Learning (específicamente el área del aprendizaje profundo), en donde; por medio de redes neuronales se pueden clasificar de forma multi-paramétrica aquellos audios. Dependiendo del método que se esté utilizando, la extracción de características puede dar como resultado dos tipos diferentes de salida: 
+	
+	\begin{enumerate}
+		\item Datos de series temporales.
+		\item Una matriz de características 2D, un espectrograma, que puede verse como una imagen.
+	\end{enumerate}
+	
+	 Las redes neuronales que han sido aplicadas poseen arquitecturas tanto de red neuronal recurrente (RNN) como de red neuronal convolucional (CNN).
+	
+	\begin{itemize}
+		\item \textbf{RNN}: se pueden utilizar al obtener datos en forma de una serie de tiempo, que en este caso son analizados a partir de una red LSTM (long-short term memory).
+		\item \textbf{CNN}: aplicadas en los espectrogramas obtenidos, de modo que reconozca los patrones que se forman en estas imágenes bidimensionales.
+	\end{itemize}
+	
+	Pero, antes de aplicar las redes neuronales sobre los datos obtenidos, diversos artículos suelen aplicar técnicas de normalización, específicamente un procedimiento conocido como extracción de características (feature extraction; FE) \cite{cecchi2020smart, terenzi2020importance, varkonyi2023dynamic, zlatkova2020honeybees, hunter2019processing} esto con el fin de extraer aquellos datos innecesarios, es decir; eliminar el ruido, para así trabajar con la información relevante referente al estudio. 
+	
+	\par Una FE recibe como entrada un archivo de audio en términos de datos en una serie temporal de valores reales. Entonces, se tiene que
+	\begin{equation*}
+		x(t) = \{ x_t \; | \; 0 \le t < N \} = \{ x_0 \, , \; x_1 \, , \; ... \, , \; x_{N - 1} \} \; ,
+	\end{equation*}
+	de longitud $N$, donde $x$ representa la amplitud de la señal en el tiempo $t$.
+	
+	\par El objetivo de la FE es transformar o representar $x(t)$ mediante características que contengan información importante (preferiblemente, en lo que a todo el intervalo de tiempo de la grabación se refiere)\cite{varkonyi2023dynamic}. El \textbf{análisis de Fourier} es presentado por los diversos artículos referidos anteriormente.
+	
+	\par A partir de la ecuación (\ref{eq:1}) se pretende transformar $x_n$ en otra serie compleja de la forma $y(k) = \{ y_k \; | \; 1 \le k \le K \} = \{ y_1 \, , \; y_2 \, , \; ... \, , \; y_k \}$,
+	
+	\begin{equation}\label{eq:1}
+		y_k = \sum_{n = 0}^{N - 1} x_n \cdot e^{-i \, \frac{2 \pi}{N}kn} = \sum_{n = 0}^{N-1} x_n \left[ \cos{\left( \frac{2 \pi}{N} kn \right)} - i \cdot \sin{\left( \frac{2 \pi}{N} kn \right)} \right] \; ;
+	\end{equation}
+	
+	que representa los datos de audio $x(n)$ en el \textbf{dominio de frecuencia} en lugar del \textbf{dominio temporal}. La información de la magnitud de la señal se puede representar en una matriz 2D de ``tiempo-frecuencia'' llamada \textbf{espectrograma}. Una vez hecha la FE se puede clasificar el sonido por medio de ML y seguidamente se analizan los resultados.
+	
+	
 	
 	
 	%------------------------------------------------------------------------------------------
@@ -215,6 +255,14 @@
 	
 	\chapter{JUSTIFICACIÓN}
 	
+	Al trabajar con abejas melíferas se debe invertir tiempo en la inspección de cada colmena, actividad que los apicultores llevan a cabo de forma manual. Además de verificar que se esté produciendo miel, los apicultores deben revisar el interior de la colmena para así corroborar que el panal está en buen estado. Por consiguiente, las abejas deben hacer un esfuerzo extra para restablecer las condiciones de la colmena. En el artículo \cite{varkonyi2023dynamic} Várkonyi et al. se expone que ``la frecuente inspección manual de una colmena reduce la cantidad de miel que produce la misma''. También se debe considerar que al momento de revisar la colmena, específicamente al extraer los bastidores; existe la posibilidad de matar a la abeja reina, lo que conlleva a la pérdida total de la colmena.
+	
+	\par Por su parte, cuando el apicultor trabaja con la colmena, el sonido emitido por la misma lo ayuda a determinar si hay un problema, sin embargo; el apicultor no suele estar presente por horas e incluso días, en estos momentos se puede perder de sucesos que proveen información importante respecto a lo que sucede con las abejas y la colmena. Ante este motivo, se propone la necesidad de un sistema de monitoreo \cite{zlatkova2020honeybees}, a partir del cual se pueda tener un control de la actividad que transcurre en la colmena, además de tratar sucesos que están ocurriendo o podrían ocurrir.
+	
+	\par A su vez, un dispositivo de monitoreo con la capacidad de analizar el comportamiento de las abejas y además, que presente las funciones que en este trabajo de investigación se pretenden desarrollar, podría presentarse como un gran avance tecnológico para la industria agricultora. A nivel mundial existe muy poca información sobre la apicultura, los productos que se forman a partir de las abejas y el trabajo que estas realizan \cite{cecchi2020smart}; tomando en cuenta que los estudios referidos son desarrollados en inglés, se puede especular que en el lenguaje hispano, existen incluso menos estudios que se relacionen con este análisis y monitoreo de las abejas, entonces; siendo hoy en día un tema particularmente importante para el mantenimiento del ecosistema, este estudio propone brindar un épsilon a los trabajos que se llevan a cabo en Latinoamérica, tales como \cite{echavarria2022sistema, galvani2022monitoreo}. Otro factor importante a tomar en cuenta es que, con esta investigación también se pretende brindar información para el desarrollo de un conjunto de datos (dataset), con el cual puedan llevarse a cabo otros proyectos de investigación con un enfoque similar y que también estudie otras áreas relacionadas con la apicultura.
+	
+	\par Un dispositivo que se distribuye de forma comercial hoy en día y que además, cubre con funciones de monitoreo similares a las mencionadas en este trabajo; es proporcionado por una compañía holandesa conocida como ``BEEP'' \cite{beep_company}, quienes presentan un producto denominado ``BEEP base'' con el cual monitorean temperatura, humedad, sonido y peso de la colmena, sin embargo; para los latinoamericanos este es un producto muy caro, por lo que con este trabajo se pretende presentar una alternativa semejante y más económica.
+	
 	
 	%------------------------------------------------------------------------------------------
 	% 3. LA PROPUESTA Y LA CARRERA.
@@ -222,6 +270,7 @@
 	
 	\chapter{RELACIÓN DE LA PROPUESTA CON LAS MATERIAS DE LA CARRERA}
 	
+	El estudio aquí presentado se compone de transformadas a las que se hace referencia en el temario del curso \textit{Matemática de la Física}; específicamente la transformada de Fourier, a partír de la cual se pretende procesar los archivos de audio obtenidos en el experimento o a partir de una base de datos. También requiere de conocimientos impartidos en \textit{Lógica Matemática}, \textit{Programación}, \textit{Geometría Moderna}, \textit{algoritmos}, \textit{Reconocimiento de Patrones} y \textit{Redes Neuronales}, pues bien, todas estas materias constituyen al desarrollo del algoritmo que se empleará en este trabajo. Inclusive, cursos como \textit{Física I} y \textit{Física General III}, ya que se requiere del conocimiento de la fuerza de fricción y el sonido (por las señales vibro-acústicas emitidas por las abejas), electricidad y magnetismo (para el desarrollo del circuito empleado).
 	
 	%------------------------------------------------------------------------------------------
 	% 4. OBJETIVOS.
@@ -229,21 +278,48 @@
 	
 	\chapter{OBJETIVOS}
 	
+	\section{Generales}
 	
+	Identificar los sonidos que emiten las abejas de una colmena con grabaciones realizadas por medio de un micrófono, para determinar y predecir su comportamiento mientras ellas llevan a cabo su trabajo.
+	
+	\section{Específicos}
+	
+	\begin{itemize}
+		\item Determinar cuando una colmena va a formar un enjambre.
+		\item Identificar si las abejas de una colmena están enfermas.
+		\item Determinar si la abeja reina está presente en el panal.
+		\item Clasificar los patrones de comportamiento de las abejas según las frecuencias que ellas emiten durante el día y la noche.
+		\item Diseñar un dispositivo que proporcione las herramientas para recaudar información proveniente de la colmena.
+	\end{itemize}
+
+
 	%------------------------------------------------------------------------------------------
 	% 5. HIPÓTESIS.
 	%------------------------------------------------------------------------------------------
 	
 	\chapter{HIPÓTESIS}
 	
-	
+	El sonido que emiten las abejas dentro de un panal permite identificar el estado de salud de la colmena, saber si las abejas están bajo amenaza y determinar la presencia de la abeja reina o de algún intruso en la colmena.
 	
 	%------------------------------------------------------------------------------------------
 	% 6. METODOLOGÍA.
 	%------------------------------------------------------------------------------------------
-	
+	\pagebreak
 	\chapter{METODOLOGÍA}
 	
+	Inicialmente se debe hacer una investigación enfocada en el diseño del circuito, utilizando el software	PROTEUS, en donde se creará una adaptación a la base anteriormente creada para el curso \textit{Proyecto de Física y Matemáticas}. Una vez que se lleven a cabo las pruebas pertinentes se deben comprar los materiales necesarios par el desarrollo del circuito así como el micrófono que se va a utilizar. Consecuentemente, se utilizará la base creada en el mismo curso para recaudar por lo menos 50 grabaciones diarias, trabajo que se llevará a cabo por al menos dos meses, de modo que se cuente con información suficiente para hacer el estudio.
+	
+	\par El algoritmo se desarrollará a partir de los audios obtenidos, a los cuales se les realizará una FE para remover el ruido innecesario, seguidamente se aplicarán dos redes neuronales, una recurrente y otra convolucional. La RNN se aplicará a los datos obtenidos en forma de una serie de tiempo, por su parte, la CNN se utilizará para los datos en forma de un espectrograma. Ambas redes neuronales estarán enfocadas en la clasificación de los comportamientos en la colmena, tales como la formación de un enjambre, ausencia de la reina y la presencia de un intruso en la colmena. Para analizar la precisión del algoritmo se utilizará la matriz de confusión, de modo que sea posible ver cómo la red está reconociendo los sonidos en las grabaciones.
+	
+	\par En el dispositivo se implementará la red neuronal desarrollada, de modo que este sea capaz de identificar el sonido que emiten las abejas y notificar al apicultor de lo que sucede en la colmena a través de la aplicación, la misma que fue creada para el curso de proyecto de física y matemáticas.
+	
+	\par Los experimentos se llevarán a cabo en colmenas de abejas proporcionadas por los apicultores de \textit{Apiarios del Cielo}, en cuya granja se tomarán las grabaciones necesarias para el desarrollo de las redes neuronales y el estudio de lo que sucede en la colmena según las frecuencias emitidas. Finalmente se presentará un trabajo de investigación en donde se expongan tanto el desarrollo del proyecto para el monitoreo de las abejas, así como los resultados de aquellos experimentos realizados.
+	
+	\section{Plan de Contingencia}
+	
+	En caso de no ser posible coincidir con los apicultores de \textit{Apiarios del Cielo}, será necesario criar una colmena propia, de modo que el proyecto tenga continuidad. Para criar una colmena se puede colocar un cajón con ceras de abejas que funcionan como un cebo, así pues, estas pueden oler la cera e identificar el lugar como una posible estancia. Por su parte, si se desea fabricar una colmena, se deben conseguir los cuadros con abejas y una abeja reina, esto lo puede proporcionar algún apicultor de la zona.
+	
+	\par De no ser posible conseguir las grabaciones directamente de una colmena, se tomarán de la base de datos \cite{bee2022datasetsound}. Este es el conjunto de datos de audio de abejas más grande, junto con datos multidimensionales, y todo fue recopilado con un dispositivo personalizado de IoT (Internet of Things) que combina un módulo Wi-Fi ESP32, un módulo de micrófono INMP441 y un sensor de temperatura/humedad BME280. Todos los datos son originales de colmenas de abejas europeas en California y se dividen en fragmentos de 60 segundos. En total hay 7100 muestras.
 	
 	%------------------------------------------------------------------------------------------
 	% 7. PLAN DE TRABAJO.
@@ -251,15 +327,75 @@
 	
 	\chapter{PLAN DE TRABAJO}
 	
-	
-	
+	\begin{enumerate}
+		\item Aprobación del protocolo de tesis.
+		\item Presentación del proyecto a los apicultores de \textit{Apiarios del Cielo}. \\[0.5ex]
+		2.1. \textbf{\textit{Hito}}: llevar a cabo la investigacion con los apicultores de \textit{Apiarios del Cielo}.
+		\item Diseño digital del circuito a través del software \textit{Proteus}.
+		\item Compra de los materiales necesarios para la construcción del circuito.
+		\item Ensamblado del circuito.
+		\item Pruebas de funcionamiento del dispositivo.
+		\item Revisión de los resultados obtenidos en las pruebas para corroborar el buen funcionamiento del circuito. 
+		\item Incorporación del micrófono y el circuito desarrollado al dispositivo de monitoreo. \\[0.5ex]
+		8.1. \textbf{\textit{Hito}}: Los aparatos del dispositivo funcionan correctamente.
+		\item Adaptación del dispositivo a una colmena con abejas para el comienzo de los experimentos.
+		\item Recaudación de los archivos de audio y formación del conjunto de datos.
+		\item Diseño del algoritmo para clasificar el sonido que producen las abejas.
+		\item Evaluación de los resultados obtenidos al momento de analizar los datos a partir de las redes neuronales creadas en el algoritmo.
+		\item Redacción del proyecto de investigación (tesis).
+		\item Revisión de las secciones escritas en la tesis.
+		\item Presentación de la tesis.
+	\end{enumerate}
+
+	\begin{table}[h!]
+		\centering
+		\caption[Diagrama de Gantt para el desarrollo del proyecto]{}
+		\begin{ganttchart}[hgrid, vgrid={{red, dotted}}]{1}{26}
+			\gantttitle{\textbf{Semanas}}{26} \\
+			\gantttitlelist{1,...,26}{1} \\
+			\ganttgroup{\textbf{\textbf{Actividad}} }{1}{26} \\
+			\ganttbar{\textbf{1.-} }{1}{1} \\
+			\ganttbar{\textbf{2.-} }{2}{2} \\
+			\ganttmilestone{\textbf{2.1.-}}{2} \ganttnewline
+			\ganttbar{\textbf{3.-} }{3}{5} \\
+			\ganttbar{\textbf{4.-} }{5}{6} \\
+			\ganttbar{\textbf{5.-} }{7}{10} \\
+			\ganttbar{\textbf{6.-} }{10}{11} \\
+			\ganttbar{\textbf{7.-} }{11}{11} \\
+			\ganttbar{\textbf{8.-} }{12}{12} \\
+			\ganttmilestone{\textbf{8.1.-}}{12} \ganttnewline
+			\ganttbar{\textbf{9.-} }{13}{13} \\
+			\ganttbar{\textbf{10.-} }{13}{20}
+		\end{ganttchart}
+	\end{table}
+
+	\begin{table}[h!]
+		\centering
+		\caption[Continuación del diagrama de Gantt para el desarrollo del proyecto]{}
+		\begin{ganttchart}[hgrid, vgrid={{red, dotted}}]{1}{26}
+			\gantttitle{\textbf{Semanas}}{26} \\
+			\gantttitlelist{1,...,26}{1} \\
+			\ganttgroup{\textbf{\textbf{Actividad}} }{1}{26} \\
+			\ganttbar{\textbf{11.-} }{16}{21} \\
+			\ganttbar{\textbf{12.-} }{22}{22} \\
+			\ganttbar{\textbf{13.-} }{23}{24} \\
+			\ganttbar{\textbf{14.-} }{24}{24} \\
+			\ganttbar{\textbf{15.-} }{25}{26}\\
+			\ganttmilestone{\textbf{Entregado}}{26}
+		\end{ganttchart}
+	\end{table}
 	%------------------------------------------------------------------------------------------
 	% 8. LUGAR DE DESARROLLO.
 	%------------------------------------------------------------------------------------------
 	
 	\chapter{LUGAR DE DESARROLLO}
 	
+	Este trabajo se llevara a cabo en Chihuahua, México, específicamente en:
 	
+	\begin{enumerate}
+		\item La Facultad de Ingeniería de la UACH, Circuito Universitario, Nuevo Campus Universitario, Nte. 2, 31125, Chihuahua.
+	\end{enumerate}
+	 
 	
 	%------------------------------------------------------------------------------------------
 	% 9. BIBLIOGRAFÍA.

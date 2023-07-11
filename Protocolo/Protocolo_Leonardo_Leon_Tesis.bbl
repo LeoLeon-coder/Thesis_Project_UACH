@@ -16,5 +16,354 @@
   {}
 \endgroup
 
-\datalist[entry]{none/global//global/global}\enddatalist
+\datalist[entry]{none/global//global/global}
+  \entry{cecchi2020smart}{article}{}
+    \name{author}{4}{}{%
+      {{hash=CS}{%
+         family={Cecchi},
+         familyi={C\bibinitperiod},
+         given={Stefania},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Spinsante},
+         familyi={S\bibinitperiod},
+         given={Susanna},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=TA}{%
+         family={Terenzi},
+         familyi={T\bibinitperiod},
+         given={Alessandro},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=OS}{%
+         family={Orcioni},
+         familyi={O\bibinitperiod},
+         given={Simone},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MDPI}%
+    }
+    \strng{namehash}{CS+1}
+    \strng{fullhash}{CSSSTAOS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{9}
+    \field{pages}{2726}
+    \field{title}{A smart sensor-based measurement system for advanced bee hive
+  monitoring}
+    \field{volume}{20}
+    \field{journaltitle}{Sensors}
+    \field{year}{2020}
+  \endentry
+
+  \entry{terenzi2020importance}{article}{}
+    \name{author}{3}{}{%
+      {{hash=TA}{%
+         family={Terenzi},
+         familyi={T\bibinitperiod},
+         given={Alessandro},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CS}{%
+         family={Cecchi},
+         familyi={C\bibinitperiod},
+         given={Stefania},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Spinsante},
+         familyi={S\bibinitperiod},
+         given={Susanna},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MDPI}%
+    }
+    \strng{namehash}{TACSSS1}
+    \strng{fullhash}{TACSSS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{4}
+    \field{pages}{168}
+    \field{title}{On the importance of the sound emitted by honey bee hives}
+    \field{volume}{7}
+    \field{journaltitle}{Veterinary Sciences}
+    \field{year}{2020}
+  \endentry
+
+  \entry{varkonyi2023dynamic}{article}{}
+    \name{author}{3}{}{%
+      {{hash=VDT}{%
+         family={V{\'a}rkonyi},
+         familyi={V\bibinitperiod},
+         given={D{\'a}niel\bibnamedelima Tam{\'a}s},
+         giveni={D\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+      {{hash=JJLS}{%
+         family={Junior},
+         familyi={J\bibinitperiod},
+         given={Jos{\'e} Luis\bibnamedelima Seixas},
+         giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim
+  S\bibinitperiod},
+      }}%
+      {{hash=HT}{%
+         family={Horv{\'a}th},
+         familyi={H\bibinitperiod},
+         given={Tom{\'a}{\v{s}}},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{VDTJJLSHT1}
+    \strng{fullhash}{VDTJJLSHT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{118850}
+    \field{title}{Dynamic noise filtering for multi-class classification of
+  beehive audio data}
+    \field{volume}{213}
+    \field{journaltitle}{Expert Systems with Applications}
+    \field{year}{2023}
+  \endentry
+
+  \entry{zlatkova2020honeybees}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=ZA}{%
+         family={Zlatkova},
+         familyi={Z\bibinitperiod},
+         given={Aleksandra},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KZ}{%
+         family={Kokolanski},
+         familyi={K\bibinitperiod},
+         given={Zivko},
+         giveni={Z\bibinitperiod},
+      }}%
+      {{hash=TD}{%
+         family={Tashkovski},
+         familyi={T\bibinitperiod},
+         given={Dimitar},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{ZAKZTD1}
+    \strng{fullhash}{ZAKZTD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2020 XXIX International Scientific Conference Electronics
+  (ET)}
+    \field{pages}{1\bibrangedash 3}
+    \field{title}{Honeybees swarming detection approach by sound signal
+  processing}
+    \field{year}{2020}
+  \endentry
+
+  \entry{hunter2019processing}{article}{}
+    \name{author}{5}{}{%
+      {{hash=HG}{%
+         family={Hunter},
+         familyi={H\bibinitperiod},
+         given={Gordon},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=HD}{%
+         family={Howard},
+         familyi={H\bibinitperiod},
+         given={Donald},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Gauvreau},
+         familyi={G\bibinitperiod},
+         given={Sylvain},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=DO}{%
+         family={Duran},
+         familyi={D\bibinitperiod},
+         given={Olga},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=BR}{%
+         family={Busquets},
+         familyi={B\bibinitperiod},
+         given={Rosa},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Institute of Acoustics, UK}%
+    }
+    \strng{namehash}{HG+1}
+    \strng{fullhash}{HGHDGSDOBR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{1}
+    \field{pages}{339\bibrangedash 348}
+    \field{title}{Processing of multi-modal environmental signals recorded from
+  a" smart" beehive}
+    \field{volume}{41}
+    \field{journaltitle}{Proceedings of the Institute of Acoustics}
+    \field{year}{2019}
+  \endentry
+
+  \entry{echavarria2022sistema}{article}{}
+    \name{author}{4}{}{%
+      {{hash=EJPM}{%
+         family={Echavarr{\'\i}a},
+         familyi={E\bibinitperiod},
+         given={Juan Pablo\bibnamedelima M{\'a}rquez},
+         giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim
+  M\bibinitperiod},
+      }}%
+      {{hash=RJL}{%
+         family={Rodr{\'\i}guez},
+         familyi={R\bibinitperiod},
+         given={Jeferson\bibnamedelima Loaiza},
+         giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=CMG}{%
+         family={Cano},
+         familyi={C\bibinitperiod},
+         given={Marisol\bibnamedelima G{\'o}mez},
+         giveni={M\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=GCAA}{%
+         family={Gaspar},
+         familyi={G\bibinitperiod},
+         given={C{\'e}sar Augusto\bibnamedelima {\'A}lvarez},
+         giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim
+  {\'A}\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{EJPM+1}
+    \strng{fullhash}{EJPMRJLCMGGCAA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Sistema de monitoreo de un apiario basado en el internet de
+  las cosas}
+    \field{journaltitle}{Encuentro Internacional de Educaci{\'o}n en
+  Ingenier{\'\i}a}
+    \field{year}{2022}
+  \endentry
+
+  \entry{galvani2022monitoreo}{article}{}
+    \name{author}{1}{}{%
+      {{hash=GG}{%
+         family={Galvani},
+         familyi={G\bibinitperiod},
+         given={Ger{\'o}nimo},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GG1}
+    \strng{fullhash}{GG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Monitoreo continuo de las condiciones internas en la colmena
+  de Apis mellifera y su relaci{\'o}n con la presencia de Varroa}
+    \field{year}{2022}
+  \endentry
+
+  \entry{beep_company}{online}{}
+    \name{author}{7}{}{%
+      {{hash=MS}{%
+         family={Marten},
+         familyi={M\bibinitperiod},
+         given={Schoonman},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=PvG}{%
+         family={Pim\bibnamedelima van},
+         familyi={P\bibinitperiod\bibinitdelim v\bibinitperiod},
+         given={Gennip},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=AvD}{%
+         family={April\bibnamedelima van},
+         familyi={A\bibinitperiod\bibinitdelim v\bibinitperiod},
+         given={Delden},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=JDB}{%
+         family={Julia},
+         familyi={J\bibinitperiod},
+         suffix={Buysing},
+         suffixi={B\bibinitperiod},
+         given={Damst{\'e}},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=GvV}{%
+         family={George\bibnamedelima van},
+         familyi={G\bibinitperiod\bibinitdelim v\bibinitperiod},
+         given={Vliet},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=EJ}{%
+         family={Ezra},
+         familyi={E\bibinitperiod},
+         given={Jacobs},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Stephan},
+         familyi={S\bibinitperiod},
+         given={Peterse},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {BEEP - bee monitoring}%
+    }
+    \strng{namehash}{MS+1}
+    \strng{fullhash}{MSPvGAvDJBDGvVEJSP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{BEEP}
+    \verb{url}
+    \verb https://beep.nl/index.php/home-english
+    \endverb
+    \field{year}{2017}
+    \field{urlday}{07}
+    \field{urlmonth}{04}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{bee2022datasetsound}{online}{}
+    \name{author}{1}{}{%
+      {{hash=YA}{%
+         family={Yang},
+         familyi={Y\bibinitperiod},
+         given={Anna},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Kaggle}%
+    }
+    \strng{namehash}{YA1}
+    \strng{fullhash}{YA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Smart Bee Colony Monitor: Clips of Beehive Sounds}
+    \verb{url}
+    \verb https://www.kaggle.com/datasets/annajyang/beehive-sounds
+    \endverb
+    \field{year}{2022}
+    \field{urlday}{07}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+\enddatalist
 \endinput

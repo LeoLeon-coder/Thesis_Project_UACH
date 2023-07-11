@@ -22,52 +22,52 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: Protocolo_Leonardo_Leon_Tesis-blx.bib
 Database file #2: /home/leonidas/Documents/References.bib
-I was expecting a `,' or a `}'---line 131 of file /home/leonidas/Documents/References.bib
+I was expecting a `,' or a `}'---line 425 of file /home/leonidas/Documents/References.bib
  : @article{OPIM04_2019integrated 
  :                                _gradients_explanation,
 I'm skipping whatever remains of this entry
 Biblatex version: 3.19
 Reallocating 'wiz_functions' (item size: 4) to 9000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
-You've used 1 entry,
+You've used 10 entries,
             6399 wiz_defined-function locations,
-            1203 strings with 9071 characters,
-and the built_in function-call counts, 1534 in all, are:
-= -- 73
-> -- 70
-< -- 1
-+ -- 49
-- -- 28
-* -- 32
-:= -- 370
+            1259 strings with 11013 characters,
+and the built_in function-call counts, 99883 in all, are:
+= -- 8604
+> -- 1618
+< -- 280
++ -- 3300
+- -- 867
+* -- 7092
+:= -- 12330
 add.period$ -- 0
-call.type$ -- 1
-change.case$ -- 0
-chr.to.int$ -- 42
-cite$ -- 0
-duplicate$ -- 11
-empty$ -- 104
-format.name$ -- 0
-if$ -- 325
+call.type$ -- 10
+change.case$ -- 142
+chr.to.int$ -- 90
+cite$ -- 18
+duplicate$ -- 9431
+empty$ -- 8451
+format.name$ -- 694
+if$ -- 19569
 int.to.chr$ -- 0
-int.to.str$ -- 0
+int.to.str$ -- 25
 missing$ -- 0
-newline$ -- 20
-num.names$ -- 0
-pop$ -- 47
+newline$ -- 358
+num.names$ -- 435
+pop$ -- 3496
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 219
 quote$ -- 0
-skip$ -- 78
+skip$ -- 1787
 stack$ -- 0
-substring$ -- 154
-swap$ -- 1
-text.length$ -- 20
+substring$ -- 17309
+swap$ -- 1455
+text.length$ -- 248
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 22
+type$ -- 328
 warning$ -- 0
-while$ -- 64
+while$ -- 1376
 width$ -- 0
-write$ -- 20
+write$ -- 349
 (There was 1 error message)
