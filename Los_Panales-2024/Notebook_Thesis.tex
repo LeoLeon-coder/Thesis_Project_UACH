@@ -1,4 +1,3 @@
-% !TeX spellcheck = en_US
 \documentclass[12pt]{report}
 \usepackage[a4paper, total={7in, 9in}]{geometry}
 \usepackage{setspace} %Line spacing
@@ -7,6 +6,7 @@
 \usepackage{pdfpages}
 
 \usepackage{fancyhdr}
+\setlength{\headheight}{14.5pt}
 \usepackage{lastpage}
 
 % For the chapters not to modify the page style
@@ -17,7 +17,7 @@
 %REFERENCES
 \usepackage{siunitx, multirow, booktabs}
 \usepackage{blindtext,alltt}
-\usepackage[backend=bibtex, style=numeric, sorting=none, locallabelwidth]{biblatex}
+\usepackage[backend=biber, style=numeric, sorting=none, locallabelwidth]{biblatex}
 \addbibresource{ThesisReferences.bib}
 
 \usepackage{listings}
@@ -53,9 +53,6 @@
 
 \usepackage{xcolor} % Allow colors to be defined
 \usepackage{enumerate} % Needed for markdown enumerations to work
-\usepackage{geometry} % Used to adjust the document margins
-\usepackage{amsmath} % Equations
-\usepackage{amssymb} % Equations
 \usepackage{textcomp} % defines textquotesingle
 % Hack from http://tex.stackexchange.com/a/47451/13684:
 \AtBeginDocument{%
@@ -86,8 +83,6 @@
 % titling removes some of it. It also provides customization options.
 \usepackage{titling}
 \usepackage{longtable} % longtable support required by pandoc >1.10
-\usepackage{booktabs}  % table support for pandoc > 1.12.2
-\usepackage{array}     % table support for pandoc >= 2.11.3
 \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
 \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
 \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
@@ -169,7 +164,6 @@
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
 \renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
-
 
 \begin{document}
 	
@@ -260,7 +254,8 @@
 	
 	\chapter{INFINITE SERIES, POWER SERIES}
 	
-	\section{The Geometric Series\cite{MaryBoas-MathofPhysics-2006}}
+	\section{The Geometric Series}
+	\cite{MaryBoas-MathofPhysics-2006}
 	
 	\par \textbf{Geometric Progression}, is a sequence of numbers where each term after the first is found by multiplying the previous term by a fixed, non-zero number called the common ratio. The \textbf{general form} of a geometric progression is:
 	\begin{equation}\label{eq:GP_general-form-1}
@@ -319,6 +314,34 @@
 
         \section{Fast Fourier Transform}
  
+%-------------------------------------------------------------------------------------
+% THESIS ACTUAL CONTENT
+%-------------------------------------------------------------------------------------
+
+\chapter{THESIS ACTUAL CONTENT}
+
+\section{DATASETS}
+
+\par The dataset\cite{AnnaYang-Dataset} was recorded by Anna Yang, it contains original data from European honeybee hives in California divided into 60-second segments and recorded approximately 23 to 24 samples per day, collected with a custom IoT device that combined an ESP32 Wi-Fi module, an INMP441 microphone module, and a BME280 temperature/humidity sensor. There are 7100 samples in total.
+        
+    \begin{itemize}
+        \item First recording: 08 - June - 2022 at 14:52:28.
+        \item Last recording: 15 - July - 2022 at 15:28:21.
+        \item The ``{\tt queen acceptance}" values indicate whether the queen is accepted by the hive (0 - no queen present, 1 - not accepted/rejected, 2 - accepted).
+        \item ``{\tt queen status}" is a combined value for ``{\tt queen presence}" and ``{\tt queen acceptance}" (0, queenright/original queen, 1 - not present, 2 - present and rejected, 3 - present and newly accepted).
+        \item  The ``{\tt target}" feature was another proposed way to combine ``{\tt queen presence}" and ``{\tt queen acceptance}", but the ``{\tt queen status}" feature was a better way to do it. "Time" is the time of day (24 hours) scaled to values between 0 and 1.
+    \end{itemize}
+
+\par\textbf{Notes of the dataset creator}: \textit{``{\tt queen status}" would be the indicator of the queen situation. The sensor was placed in the telescoping cover of the hive, which is below the outer cover but above the frames. The telescoping cover was sealed with wire mesh so bees could not get to the sensors, which decreased bee interference with the microphone as well.}
+
+\par\textit{To confirm whether the queen was accepted or rejected, I conducted a daily hive inspection. I observed the bees’ reaction towards the queen in the cage: Are they attempting to sting or ball (suffocate) her? Are they calm or excited? If there are 2+ layers of bees around the cage, it is an indication that they are aggressive and hostile towards the queen. In the 24-hour period that the queen’s status changes from rejected to accepted (between hive inspections), there was ambiguity around the exact time that the queen became accepted. As a result, I discarded the data from this uncertain period.}
+
+\par\textit{I do not believe I ever noted that the dataset related to colony collapse disorder. However, I can describe how it could be indirectly related. Colony collapse disorder, a phenomenon that occurs when the majority of bees in a colony mysteriously disappear, has been on the decline in recent years. Initially, it was very concerning for scientists and beekeepers because bees were dying, seemingly without reason. Despite it being not as severe now, overall colony loss is still a major concern to beekeepers, and it has been reported that queen failure -- when a colony is headed by a queen bee that is infertile or weak -- has been consistently identified as one of the top four causes of colony mortality, annually, since 2009 (from the annual study conducted by the Canadian Association of Professional Apiculturists). This dataset records the difference in sound between queen states, addressing the widespread issue of queen failure.}
+
+\par\textit{I did not collect data on varroa mites or pesticide exposure for this dataset. In fact, pesticide exposure is quite difficult to track, especially since the data was mostly collected on suburban backyard beehives. It is near impossible to know whether nearby residences treat their gardens with chemical or organic pesticides, and even where the bees were visiting, since they can fly 3-4 miles just to collect pollen and nectar.}
+
+
+
 	%-------------------------------------------------------------------------------------
 	% BIBLIOGRAFÍA.
 	%-------------------------------------------------------------------------------------

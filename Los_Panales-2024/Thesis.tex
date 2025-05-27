@@ -168,7 +168,6 @@
 
 \begin{document}
 	
-	%\thispagestyle{empty}
 	\begin{titlepage}
 		\begin{center}
 			\begin{tabular}{c}
@@ -179,12 +178,12 @@
 				\begin{minipage}{17cm}
 					\centering
 					\begin{doublespace}
-						\textbf{\LARGE NOTEBOOK: Development of Topics Related to the Project}
+						\textbf{\LARGE Detección de la Abeja Reina en una Colmena por Medio del Aprendizaje Profundo}\\[3.5ex]
 					\end{doublespace}
 				\end{minipage}\\[3.5ex]
 				\hline
 			\end{tabular}\vfill
-			{\large Notes Before Start Working on the Thesis}\\\vfill
+			{\large Análisis de Frecuencias Emitidas por el Panal}\\\vfill
 			{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
 			{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
 			{\large \textbf{Advisors:}}\\[3.5ex]
@@ -193,43 +192,120 @@
 				\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
 			\end{itemize}
 			\vfill
-			{\large \textbf{Chihuahua, Chih.,} April 14, 2024.}\\[3.5ex]
+			{\large \textbf{Chihuahua, Chih.,} \today.}\\[3.5ex]
 		\end{center}
 	\end{titlepage}
 
-\part*{START}
 %-------------------------------------------------------------------------------------
-% THESIS ACTUAL CONTENT
+% 1. ÍNDICE
+%-------------------------------------------------------------------------------------
+\tableofcontents
+\thispagestyle{empty} % No header/footer on the table of contents page
+
+
+%-------------------------------------------------------------------------------------
+% 2. RESUMEN/ABSTRACT
 %-------------------------------------------------------------------------------------
 
-\chapter{THESIS ACTUAL CONTENT}
+%-------------------------------------------------------------------------------------
+% 3. INTRODUCCIÓN
+%-------------------------------------------------------------------------------------
+\chapter*{INTRODUCCIÓN}
+\addcontentsline{toc}{chapter}{INTRODUCCIÓN}
 
-\section{DATASETS}
 
-\par The dataset\cite{AnnaYang-Dataset} was recorded by Anna Yang, it contains original data from European honeybee hives in California divided into 60-second segments and recorded approximately 23 to 24 samples per day, collected with a custom IoT device that combined an ESP32 Wi-Fi module, an INMP441 microphone module, and a BME280 temperature/humidity sensor. There are 7100 samples in total.
-        
-    \begin{itemize}
-        \item First recording: 08 - June - 2022 at 14:52:28.
-        \item Last recording: 15 - July - 2022 at 15:28:21.
-        \item The ``{\tt queen acceptance}" values indicate whether the queen is accepted by the hive (0 - no queen present, 1 - not accepted/rejected, 2 - accepted).
-        \item ``{\tt queen status}" is a combined value for ``{\tt queen presence}" and ``{\tt queen acceptance}" (0, queenright/original queen, 1 - not present, 2 - present and rejected, 3 - present and newly accepted).
-        \item  The ``{\tt target}" feature was another proposed way to combine ``{\tt queen presence}" and ``{\tt queen acceptance}", but the ``{\tt queen status}" feature was a better way to do it. "Time" is the time of day (24 hours) scaled to values between 0 and 1.
-    \end{itemize}
 
-\par\textbf{Notes of the dataset creator}: \textit{``{\tt queen status}" would be the indicator of the queen situation. The sensor was placed in the telescoping cover of the hive, which is below the outer cover but above the frames. The telescoping cover was sealed with wire mesh so bees could not get to the sensors, which decreased bee interference with the microphone as well.}
+%-------------------------------------------------------------------------------------
+% 3.1. Planteamiento del problema
+%-------------------------------------------------------------------------------------
 
-\par\textit{To confirm whether the queen was accepted or rejected, I conducted a daily hive inspection. I observed the bees’ reaction towards the queen in the cage: Are they attempting to sting or ball (suffocate) her? Are they calm or excited? If there are 2+ layers of bees around the cage, it is an indication that they are aggressive and hostile towards the queen. In the 24-hour period that the queen’s status changes from rejected to accepted (between hive inspections), there was ambiguity around the exact time that the queen became accepted. As a result, I discarded the data from this uncertain period.}
+%-------------------------------------------------------------------------------------
+% 3.2. Justificación
+%-------------------------------------------------------------------------------------
 
-\par\textit{I do not believe I ever noted that the dataset related to colony collapse disorder. However, I can describe how it could be indirectly related. Colony collapse disorder, a phenomenon that occurs when the majority of bees in a colony mysteriously disappear, has been on the decline in recent years. Initially, it was very concerning for scientists and beekeepers because bees were dying, seemingly without reason. Despite it being not as severe now, overall colony loss is still a major concern to beekeepers, and it has been reported that queen failure -- when a colony is headed by a queen bee that is infertile or weak -- has been consistently identified as one of the top four causes of colony mortality, annually, since 2009 (from the annual study conducted by the Canadian Association of Professional Apiculturists). This dataset records the difference in sound between queen states, addressing the widespread issue of queen failure.}
+%-------------------------------------------------------------------------------------
+% 3.3. Objetivos
+%-------------------------------------------------------------------------------------
 
-\par\textit{I did not collect data on varroa mites or pesticide exposure for this dataset. In fact, pesticide exposure is quite difficult to track, especially since the data was mostly collected on suburban backyard beehives. It is near impossible to know whether nearby residences treat their gardens with chemical or organic pesticides, and even where the bees were visiting, since they can fly 3-4 miles just to collect pollen and nectar.}
+%-------------------------------------------------------------------------------------
+% 4. MARCO TEÓRICO
+%-------------------------------------------------------------------------------------
 
-	%-------------------------------------------------------------------------------------
-	% BIBLIOGRAFÍA.
-	%-------------------------------------------------------------------------------------
-	\pagebreak
-	\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
-	\printbibliography
-	\thispagestyle{empty}
-	
+%-------------------------------------------------------------------------------------
+% 4.1. Definición de conceptos clave
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% Revisión de literatura
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% Fundamentos teóricos
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 5. METODOLOGÍA
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 5.1. Diseño de investigación
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 5.2. Instrumentos y técnicas
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 5.3. Población y muestra (si aplica)
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 6. RESULTADOS
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 6.1. Análisis de datos
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 6.2. Presentación de resultados
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 7. DISCUSIÓN
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 7.1. Interpretación de resultados
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 7.2. Comparación con la literatura
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 8. CONCLUSIONES Y RECOMENDACIONES
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 8.1. Conclusiones
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 8.2. Recomendaciones
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 9. REFERENCIAS BIBLIOGRÁFICAS
+%-------------------------------------------------------------------------------------
+
+\pagebreak
+\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\printbibliography
+\thispagestyle{empty}
+
+%-------------------------------------------------------------------------------------
+% 10. ANEXOS (opcional)
+%-------------------------------------------------------------------------------------
+
 \end{document}

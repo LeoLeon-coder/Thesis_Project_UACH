@@ -41,11 +41,10 @@
   >
 ]>
 <requests version="1.0">
-  <internal package="biblatex" priority="9" active="1">
+  <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>Notebook_Thesis.aux</file>
-      <file>Notebook_Thesis-blx.bib</file>
+      <file>Notebook_Thesis.bcf</file>
     </provides>
     <requires type="dynamic">
       <file>Notebook_Thesis.bbl</file>
@@ -53,7 +52,6 @@
     <requires type="static">
       <file>blx-dm.def</file>
       <file>blx-compat.def</file>
-      <file>blx-bibtex.def</file>
       <file>biblatex.def</file>
       <file>standard.bbx</file>
       <file>numeric.bbx</file>
@@ -62,15 +60,14 @@
       <file>english.lbx</file>
     </requires>
   </internal>
-  <external package="biblatex" priority="5" active="1">
-    <generic>bibtex</generic>
+  <external package="biblatex" priority="5" active="0">
+    <generic>biber</generic>
     <cmdline>
-      <binary>bibtex</binary>
-      <option>-min-crossrefs 2</option>
+      <binary>biber</binary>
       <infile>Notebook_Thesis</infile>
     </cmdline>
     <input>
-      <file>Notebook_Thesis.aux</file>
+      <file>Notebook_Thesis.bcf</file>
     </input>
     <output>
       <file>Notebook_Thesis.bbl</file>
@@ -79,14 +76,10 @@
       <file>Notebook_Thesis.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>Notebook_Thesis.aux</file>
-      <file>Notebook_Thesis-blx.bib</file>
+      <file>Notebook_Thesis.bcf</file>
     </requires>
     <requires type="editable">
       <file>ThesisReferences.bib</file>
-    </requires>
-    <requires type="static">
-      <file>biblatex.bst</file>
     </requires>
   </external>
 </requests>
