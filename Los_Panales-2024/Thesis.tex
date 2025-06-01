@@ -1,4 +1,5 @@
 \documentclass[12pt]{report}
+\usepackage[spanish]{babel}
 \usepackage[a4paper, total={7in, 9in}]{geometry}
 \usepackage{setspace} %Line spacing
 \onehalfspacing
@@ -89,7 +90,8 @@
 % normalem makes italics be italics, not underlines
 \usepackage{mathrsfs}
 
-
+% More styles for bullets
+\usepackage{pifont}
 
 % Colors for the hyperref package
 \definecolor{urlcolor}{rgb}{0,.145,.698}
@@ -159,12 +161,11 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{}
-\lhead{NOTES $|$ \textcolor{red}{THESIS RELATED TOPICS}}
+\lhead{APRENDIZAJE PROFUNDO $|$ \textcolor{orange}{DETECCIÓN DE LA ABEJA REINA EN LA COLMENA}}
 \lfoot{Universidad Autónoma de Chihuahua}
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
 \renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
-
 
 \begin{document}
 	
@@ -188,8 +189,8 @@
 			{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
 			{\large \textbf{Advisors:}}\\[3.5ex]
 			\begin{itemize}
-				\item {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
-				\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
+				\item[\ding{226}] {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
+				\item[\ding{226}] {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
 			\end{itemize}
 			\vfill
 			{\large \textbf{Chihuahua, Chih.,} \today.}\\[3.5ex]
@@ -206,26 +207,63 @@
 %-------------------------------------------------------------------------------------
 % 2. RESUMEN/ABSTRACT
 %-------------------------------------------------------------------------------------
+\pagebreak
+\chapter*{RESUMEN}
+\addcontentsline{toc}{chapter}{RESUMEN}
 
 %-------------------------------------------------------------------------------------
 % 3. INTRODUCCIÓN
 %-------------------------------------------------------------------------------------
-\chapter*{INTRODUCCIÓN}
-\addcontentsline{toc}{chapter}{INTRODUCCIÓN}
+\pagebreak
+\chapter{INTRODUCCIÓN}
 
+Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mariposas, colibríes y murciélagos, desempeñan un papel fundamental en los ecosistemas, ya que contribuyen a la fertilización de plantas y cultivos. Las abejas melíferas, en particular, han sido ampliamente estudiadas por su destacada participación en la polinización de cultivos que forman parte de nuestra alimentación.
 
+\par Durante las temporadas de mayor producción de miel como primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km \cite{Beekman2000}, viajando 3 km de ida y vuelta entre la colmena y fuentes de alimento como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación para las abejas en cuanto a regresar a la colmena y surtir la misma?
+
+\par Según Ruvinga \cite{ruvinga2021use}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas \cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear \cite{ruvinga2021use}.
 
 %-------------------------------------------------------------------------------------
 % 3.1. Planteamiento del problema
 %-------------------------------------------------------------------------------------
 
+\section{Planteamiento del Problema}
+
+La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar \cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena \cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
+
+\par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas y hasta errores humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia (que debe reconstruir el sello), sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna del panal. Esta situación puede conducir al colapso de toda la colonia.
+
 %-------------------------------------------------------------------------------------
 % 3.2. Justificación
 %-------------------------------------------------------------------------------------
 
+\section{Justificación}
+
+Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta fundamental para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina \cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
+
 %-------------------------------------------------------------------------------------
 % 3.3. Objetivos
 %-------------------------------------------------------------------------------------
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Desarrollar un programa de monitoreo de frecuencias con el que se pueda determinar si una abeja reina se encuentra en la colmena, mediante el análisis de grabaciones de audio y técnicas de aprendizaje automático, a partir del cual se pueda proponer un sistema no invasivo de seguimiento para determinar el estado de la colmena.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+    \item[\ding{43}] Realizar una revisión bibliográfica sobre la estructura de las colonias de abejas melíferas y los efectos de la ausencia de la reina.
+    \item[\ding{43}] Procesar y organizar un conjunto de datos de audio de colmenas etiquetado con el estado de la reina.
+    \item[\ding{43}] Extraer características acústicas relevantes, como los coeficientes cepstrales en la escala Mel (MFCC), a partir de las grabaciones.
+    \item[\ding{43}] Entrenar y evaluar modelos de aprendizaje automático para clasificar el estado de la reina basado en características extraídas.
+    \item[\ding{43}] Validar la efectividad del sistema en términos de precisión, sensibilidad y especificidad.
+\end{itemize}
+
+\section{Hipótesis de Trabajo}
+
+Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión, si la reina está presente, ausente, rechazada o recién aceptada en la colonia.
 
 %-------------------------------------------------------------------------------------
 % 4. MARCO TEÓRICO
@@ -286,10 +324,16 @@
 %-------------------------------------------------------------------------------------
 % 8. CONCLUSIONES Y RECOMENDACIONES
 %-------------------------------------------------------------------------------------
+\pagebreak
+\chapter{CONCLUSIONES Y RECOMENDACIONES}
 
 %-------------------------------------------------------------------------------------
 % 8.1. Conclusiones
 %-------------------------------------------------------------------------------------
+
+\section{Conclusiones}
+
+
 
 %-------------------------------------------------------------------------------------
 % 8.2. Recomendaciones
@@ -300,7 +344,7 @@
 %-------------------------------------------------------------------------------------
 
 \pagebreak
-\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\addcontentsline{toc}{chapter}{BIBLIOGRAFÍA}
 \printbibliography
 \thispagestyle{empty}
 
