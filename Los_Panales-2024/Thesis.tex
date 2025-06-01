@@ -7,7 +7,8 @@
 \usepackage{pdfpages}
 
 \usepackage{fancyhdr}
-\setlength{\headheight}{14.5pt}
+\setlength{\headheight}{15.71667pt} % Increased as recommended by fancyhdr
+\addtolength{\topmargin}{-1.21667pt} % Optional: adjust topmargin as suggested
 \usepackage{lastpage}
 
 % For the chapters not to modify the page style
@@ -15,10 +16,11 @@
 \titleformat{\chapter}{\bfseries}{\huge\arabic{chapter}.}{10pt}{\huge}
 \titleclass{\chapter}{straight}
 
-%REFERENCES
 \usepackage{siunitx, multirow, booktabs}
 \usepackage{blindtext,alltt}
+\usepackage{csquotes} % Recommended for biblatex with babel/polyglossia
 \usepackage[backend=biber, style=numeric, sorting=none, locallabelwidth]{biblatex}
+\addbibresource{ThesisReferences.bib}
 \addbibresource{ThesisReferences.bib}
 
 \usepackage{listings}
