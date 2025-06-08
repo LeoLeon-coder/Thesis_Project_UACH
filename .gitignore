@@ -9,6 +9,7 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.bbl-SAVE-ERROR
 
 # ignore ALL files in ANY directory named Temp
 Temp/

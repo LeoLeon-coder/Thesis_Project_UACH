@@ -6,7 +6,8 @@
 \usepackage{pdfpages}
 
 \usepackage{fancyhdr}
-\setlength{\headheight}{14.5pt}
+\setlength{\headheight}{15.71667pt} % Increased as recommended by fancyhdr
+\addtolength{\topmargin}{-1.21667pt} % Optional: adjust topmargin as suggested
 \usepackage{lastpage}
 
 % For the chapters not to modify the page style
@@ -14,9 +15,9 @@
 \titleformat{\chapter}{\bfseries}{\huge\arabic{chapter}.}{10pt}{\huge}
 \titleclass{\chapter}{straight}
 
-%REFERENCES
 \usepackage{siunitx, multirow, booktabs}
 \usepackage{blindtext,alltt}
+\usepackage{csquotes} % Recommended for biblatex with babel/polyglossia
 \usepackage[backend=biber, style=numeric, sorting=none, locallabelwidth]{biblatex}
 \addbibresource{ThesisReferences.bib}
 
@@ -24,13 +25,32 @@
 
 \usepackage{wrapfig}
 \usepackage{array}
-\usepackage{multicol}
 \usepackage{url}
 \usepackage[nottoc]{tocbibind} %Add references to index.
 \usepackage{amsmath, amssymb}
 \usepackage{upgreek, dsfont, mathrsfs}
 \usepackage{stmaryrd}
 
+\usepackage{multicol}
+
+% Estilo compacto para secciones en columnas
+\titlespacing{\section}{0pt}{1ex plus 0.6ex minus 0.2ex}{0.8ex}
+\titlespacing{\subsection}{0pt}{0.8ex plus 0.4ex minus 0.2ex}{0.5ex}
+\titlespacing{\subsubsection}{0pt}{0.6ex plus 0.3ex minus 0.1ex}{0.4ex}
+
+% Configuración de columnas tipo revista
+\setlength{\columnsep}{25pt}           % separación entre columnas (default ~35pt)
+\setlength{\columnseprule}{0pt}      % línea entre columnas (0pt = sin línea)
+
+% Compactar el interlineado en columnas (opcional)
+\newenvironment{tightmulticols}{%
+  \begin{multicols}{2}
+  \setlength{\parskip}{0pt}
+  \setlength{\parindent}{1em}
+  \linespread{1}\selectfont
+}{%
+  \end{multicols}
+}
 
 \usepackage[breakable]{tcolorbox}
 \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
@@ -89,7 +109,8 @@
 % normalem makes italics be italics, not underlines
 \usepackage{mathrsfs}
 
-
+% More styles for bullets
+\usepackage{pifont}
 
 % Colors for the hyperref package
 \definecolor{urlcolor}{rgb}{0,.145,.698}
@@ -165,172 +186,191 @@
 
 \renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
 
+
 \begin{document}
-	
-	%\thispagestyle{empty}
-	\begin{titlepage}
-		\begin{center}
-			\begin{tabular}{c}
-				\includegraphics[scale=0.2]{BN_uach.png}\\[3.5ex]
-				\textbf{\LARGE Universidad Autónoma de Chihuahua}\\[3.5ex]
-				\textbf{\Large Facultad de Ingeniería}\\[3.5ex]
-				\hline\\[3ex]
-				\begin{minipage}{17cm}
-					\centering
-					\begin{doublespace}
-						\textbf{\LARGE NOTEBOOK: Development of Topics Related to the Project}
-					\end{doublespace}
-				\end{minipage}\\[3.5ex]
-				\hline
-			\end{tabular}\vfill
-			{\large Notes Before Start Working on the Thesis}\\\vfill
-			{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
-			{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
-			{\large \textbf{Advisors:}}\\[3.5ex]
-			\begin{itemize}
-				\item {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
-				\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
-			\end{itemize}
-			\vfill
-			{\large \textbf{Chihuahua, Chih.,} April 14, 2024.}\\[3.5ex]
-		\end{center}
-	\end{titlepage}
 
-	\part*{BASIC RECAP}
-	
-	\chapter*{DEFINITIONS}
+\begin{titlepage}
+	\begin{center}
+		\begin{tabular}{c}
+			\includegraphics[scale=0.2]{BN_uach.png}\\[3.5ex]
+			\textbf{\LARGE Universidad Autónoma de Chihuahua}\\[3.5ex]
+			\textbf{\Large Facultad de Ingeniería}\\[3.5ex]
+			\hline\\[3ex]
+			\begin{minipage}{17cm}
+				\centering
+				\begin{doublespace}
+					\textbf{\LARGE NOTEBOOK: Development of Topics Related to the Project}
+				\end{doublespace}
+			\end{minipage}\\[3.5ex]
+			\hline
+		\end{tabular}\vfill
+		{\large Notes Before Start Working on the Thesis}\\\vfill
+		{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
+		{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
+		{\large \textbf{Advisors:}}\\[3.5ex]
+		\begin{itemize}
+			\item {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
+			\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
+		\end{itemize}
+		\vfill
+		{\large \textbf{Chihuahua, Chih.,} April 14, 2024.}\\[3.5ex]
+	\end{center}
+\end{titlepage}
 
+\part*{DIFFERENTIAL EQUATIONS}
 
-        %-------------------------------------------------------------------------------------
-	% 1. Differential Equations - Notes
-	%-------------------------------------------------------------------------------------
-	
-	\chapter{DIFFERENTIAL EQUATIONS}
-
-        \par \textbf{DEFINITION 1.1.1 - Differential Equation}
-
-        \par An equation containing the derivatives of one or more unknown functions (or dependent variables), with respect to one or more independent variables, is said to be a \textbf{differential equation (DE)}.
-
-        \section{Notation}
-        \begin{itemize}
-            \item \textbf{Leibinz notation}:
-            \begin{align*}
-                \frac{dy}{dx}, \; \frac{d^{2}y}{dx^{2}}, \; \frac{d^{3}y}{dx^{3}}, \; ...
-            \end{align*}
-            \item \textbf{Prime notation}:
-            \begin{align*}
-                y', \; y'', \; y''', \; y^{(4)}, \; ...
-            \end{align*}
-        \end{itemize}
-            In general, the $n$th derivative of y is written as $\frac{d^{n}y}{dx^{n}}$ or $y^{(n)}$.
-        \begin{itemize}
-            \item \textbf{Newton's dot notation}: used in physical science and engineering, to denote derivatives with respect to time $t$,
-            \begin{align*}
-                \frac{d^{2}s}{dt^{2}} = -32 \; \rightarrow \; \text{becomes} \; \rightarrow \; \ddot{s} = -32.
-            \end{align*}
-            \item \textbf{Subscript notation}: often used in partial derivatives indicating the independent variables.
-            \begin{align*}
-                \frac{\partial^{2} u}{\partial x^{2}} = \frac{\partial^{2} u}{\partial t^{2}} - 2 \frac{\partial u}{\partial t}\; \rightarrow \; \text{becomes} \; \rightarrow \; u_{xx} = u_{tt} - 2 u_{t}.
-            \end{align*}
-        \end{itemize}
-
-        \section{Classification By Type}
-
-        \par If a differential equation contains only ordinary derivatives of one or more unknown functions with respect to a single independent variable, it is said to be an \textbf{ordinary differential equation (ODE)}. An equation involving partial derivatives of one or more unknown functions of two or more independent variables is called a \textbf{partial differential equation (PDE)}.
-
-        \section{Classification By Order}
-
-        \par The order of a differential equation (either ODE or PDE) is the order of the highest derivative in the equation. For example,
-        \begin{align*}
-            \frac{d^{2}y}{dx^{2}} + 5 \left( \frac{dy}{dx} \right)^3 - 4y = e^{x} \; ,
-        \end{align*}
-        \par is a second-order differential equation.
-    
-	%-------------------------------------------------------------------------------------
-	% 2. Maths of Physics - Notes
-	%-------------------------------------------------------------------------------------
-	
-	\part{MATHEMATICS OF PHYSICS}
-	
-	\chapter{INFINITE SERIES, POWER SERIES}
-	
-	\section{The Geometric Series}
-	\cite{MaryBoas-MathofPhysics-2006}
-	
-	\par \textbf{Geometric Progression}, is a sequence of numbers where each term after the first is found by multiplying the previous term by a fixed, non-zero number called the common ratio. The \textbf{general form} of a geometric progression is:
-	\begin{equation}\label{eq:GP_general-form-1}
-		a, \, ar, \, ar^{2}, \, ar^{3}, \, ...
-	\end{equation}
-	where $a$ is the \textit{first term} and $r$ is the \textit{common ratio}. Geometric Progressions have some interesting properties:
-	\begin{itemize}
-		\item If $r > 1$, the terms will increase.
-		\item If $0 < r < 1$, the terms will decrease.
-		\item If $r = 1$ the sequence becomes constant (where each term is the same).
-		\item If $r < 0$, the terms will alternate between positive and negative values.
-	\end{itemize} 
-	i.e., Suppose a bouncing ball rises each time to $\frac{2}{3}$ of the height of the previous bounce. Then	
-	\begin{equation}\label{BounceBall-ie1}
-		1, \, \frac{2}{3}, \, \frac{4}{9}, \, \frac{8}{27}, \, \frac{16}{81}, \, ... \, ,
-	\end{equation}
-	
-	%-------------------------------------------------------------------------------------
-	% 3. Numerical Methods - Notes
-	%-------------------------------------------------------------------------------------
-	
-	\part{NUMERICAL METHODS}
-	
-	\chapter{INTRODUCTION}
-
-        \par The term \textbf{Numerical Methods} refers to those techniques used to approximate the solution to a mathematical problem, these methods are used for mathematical processes such as integrals, differential equations, nonlinear equations in which the solution is close to the exact one and the error of that result can also be quantified by an approximation.
-
-        \section{Steps for solving an Engineering Problem}
-
-        \begin{itemize}
-        \item \textbf{Description}: present the problem exposing every single need related to it, write the background of it and the need for its solution.
-        \item \textbf{Mathematical Model}: present an equation that best describes the situation when fitting the given data.
-        \item \textbf{Solution of the Mathematical Model}: find the solution to the proposed equation.
-        \item \textbf{Using the Solution}: propose a solution to the real problem based on the obtained result from the mathematical model.
-        \end{itemize}
-	
-	\chapter{MATHEMATICAL PROCESSES}
-
-        \section{Roots of Nonlinear Equations}
-
-        \section{Simultaneous Linear Equations}
-
-        \section{Curve Fitting by Interpolation}
-
-        \section{Differentiation}
-
-        \section{Curve Fitting by Regression}
-
-        \section{Numerical Integration}
-
-        \section{Ordinary Differential Equations}
-
-        \section{Partial Differential Equations}
-
-        \section{Optimization}
-
-        \section{Fast Fourier Transform}
- 
 %-------------------------------------------------------------------------------------
-% THESIS ACTUAL CONTENT
+% 1. Differential Equations - Notes
 %-------------------------------------------------------------------------------------
 
+	\chapter{INTRODUCTION TO DIFFERENTIAL EQUATIONS}
+
+	\par \textbf{DEFINITION 1.1.1 - Differential Equation}
+
+	\par An equation containing the derivatives of one or more unknown functions (or dependent variables), with respect to one or more independent variables, is said to be a \textbf{differential equation (DE)}.
+
+		\section{NOTATION}
+
+		\begin{itemize}
+			\item \textbf{Leibinz notation}:
+			\begin{align*}
+				\frac{dy}{dx}, \; \frac{d^{2}y}{dx^{2}}, \; \frac{d^{3}y}{dx^{3}}, \; ...
+			\end{align*}
+			\item \textbf{Prime notation}:
+			\begin{align*}
+				y', \; y'', \; y''', \; y^{(4)}, \; ...
+			\end{align*}
+		\end{itemize}
+		In general, the $n$th derivative of y is written as $\frac{d^{n}y}{dx^{n}}$ or $y^{(n)}$.
+		\begin{itemize}
+			\item \textbf{Newton's dot notation}: used in physical science and engineering, to denote derivatives with respect to time $t$,
+			\begin{align*}
+				\frac{d^{2}s}{dt^{2}} = -32 \; \rightarrow \; \text{becomes} \; \rightarrow \; \ddot{s} = -32.
+			\end{align*}
+			\item \textbf{Subscript notation}: often used in partial derivatives indicating the independent variables.
+			\begin{align*}
+				\frac{\partial^{2} u}{\partial x^{2}} = \frac{\partial^{2} u}{\partial t^{2}} - 2 \frac{\partial u}{\partial t}\; \rightarrow \; \text{becomes} \; \rightarrow \; u_{xx} = u_{tt} - 2 u_{t}.
+			\end{align*}
+		\end{itemize}
+
+		\section{CLASSIFICATION BY TYPE}
+
+		\par If a differential equation contains only ordinary derivatives of one or more unknown functions with respect to a single independent variable, it is said to be an \textbf{ordinary differential equation (ODE)}. An equation involving partial derivatives of one or more unknown functions of two or more independent variables is called a \textbf{partial differential equation (PDE)}.
+
+		\section{CLASSIFICATION BY ORDER}
+
+		\par The order of a differential equation (either ODE or PDE) is the order of the highest derivative in the equation. For example,
+		\begin{align*}
+			\frac{d^{2}y}{dx^{2}} + 5 \left( \frac{dy}{dx} \right)^3 - 4y = e^{x} \; ,
+		\end{align*}
+		\par is a second-order differential equation.
+
+		\section{DIFFERENTIAL EQUATIONS AS MATHEMATICAL MODELS}
+
+		If the rate at which the population grows is defined as $\frac{dP}{dt} = kP$ where $P(t)$ is the total population at a time $t$, then if we consider death and birth rate at which the population changes and taking them as a net rate - that is, the difference between the rate of birth and the rate of death in the community. The model for the population $P(t)$ if both (birth and death), are proportional to the population present at a time $t > 0$ is presented as
+
+		\begin{equation}
+			\frac{dP}{dt} = k_1P - k_2P,
+		\end{equation}
+
+		where $k_1$ and $k_2$ are the the constants of proportionality. Then, to determine a model for a population $P(t)$ if the birth rate is proportional to the population present at time $t$ but the death rate is proportional to the square of the population present at time $t$, we see that the birth rate is described as $k_1 P$ (does not change). Then, the rate of death is given by $k_2 P^2$ and,
+
+		\begin{equation}
+			\frac{dP}{dt} = k_1P - k_2P^2.
+		\end{equation}
+
+		\par \textbf{Newton’s Law of Cooling/Warming}. According to Newton’s empirical law of cooling/warming, the rate at which the temperature of a body changes is proportional to the difference between the temperature of the body and the temperature of the surrounding medium, the so-called ambient temperature. If $T(t)$ represents the temperature of a body at time $t$, $T_m$ the temperature of the surrounding medium, and $\frac{dT}{dt}$ the rate at which the temperature of the body changes, then Newton’s law of cooling/warming translates into the mathematical statement
+
+		\begin{equation}\label{eq:CoolWarm}
+			\frac{dT}{dt} \quad\alpha\quad T - T_m \quad\text{ or }\quad \frac{dT}{dt} = k (T- T_m),
+		\end{equation}
+
+		where $k$ is a constant of proportionality. In either case, cooling or warming, if $T_m$ is a constant, it stands to reason that $k < 0$.
+
+%-------------------------------------------------------------------------------------
+% 2. Maths of Physics - Notes
+%-------------------------------------------------------------------------------------
+
+\part{MATHEMATICS OF PHYSICS}
+
+\chapter{INFINITE SERIES, POWER SERIES}
+
+\section{The Geometric Serie}
+
+\par \textbf{Geometric Progression}, is a sequence of numbers where each term after the first is found by multiplying the previous term by a fixed, non-zero number called the common ratio. The \textbf{general form} of a geometric progression is:
+\begin{equation}\label{eq:GP_general-form-1}
+a, \, ar, \, ar^{2}, \, ar^{3}, \, ...
+\end{equation}
+where $a$ is the \textit{first term} and $r$ is the \textit{common ratio}. Geometric Progressions have some interesting properties:
+\begin{itemize}
+\item If $r > 1$, the terms will increase.
+\item If $0 < r < 1$, the terms will decrease.
+\item If $r = 1$ the sequence becomes constant (where each term is the same).
+\item If $r < 0$, the terms will alternate between positive and negative values.
+\end{itemize} 
+i.e., Suppose a bouncing ball rises each time to $\frac{2}{3}$ of the height of the previous bounce. Then	
+\begin{equation}\label{BounceBall-ie1}
+1, \, \frac{2}{3}, \, \frac{4}{9}, \, \frac{8}{27}, \, \frac{16}{81}, \, ... \, ,
+\end{equation}
+
+%-------------------------------------------------------------------------------------
+% 3. Numerical Methods - Notes
+%-------------------------------------------------------------------------------------
+
+\part{NUMERICAL METHODS}
+
+\chapter{INTRODUCTION}
+
+\par The term \textbf{Numerical Methods} refers to those techniques used to approximate the solution to a mathematical problem, these methods are used for mathematical processes such as integrals, differential equations, nonlinear equations in which the solution is close to the exact one and the error of that result can also be quantified by an approximation.
+
+\section{Steps for solving an Engineering Problem}
+
+\begin{itemize}
+\item \textbf{Description}: present the problem exposing every single need related to it, write the background of it and the need for its solution.
+\item \textbf{Mathematical Model}: present an equation that best describes the situation when fitting the given data.
+\item \textbf{Solution of the Mathematical Model}: find the solution to the proposed equation.
+\item \textbf{Using the Solution}: propose a solution to the real problem based on the obtained result from the mathematical model.
+\end{itemize}
+
+\chapter{MATHEMATICAL PROCESSES}
+
+\section{Roots of Nonlinear Equations}
+
+\section{Simultaneous Linear Equations}
+
+\section{Curve Fitting by Interpolation}
+
+\section{Differentiation}
+
+\section{Curve Fitting by Regression}
+
+\section{Numerical Integration}
+
+\section{Ordinary Differential Equations}
+
+\section{Partial Differential Equations}
+
+\section{Optimization}
+
+\section{Fast Fourier Transform}
+
+%-------------------------------------------------------------------------------------
+% RELEVANT NOTES
+%-------------------------------------------------------------------------------------
+\newpage
 \chapter{THESIS ACTUAL CONTENT}
 
 \section{DATASETS}
 
 \par The dataset\cite{AnnaYang-Dataset} was recorded by Anna Yang, it contains original data from European honeybee hives in California divided into 60-second segments and recorded approximately 23 to 24 samples per day, collected with a custom IoT device that combined an ESP32 Wi-Fi module, an INMP441 microphone module, and a BME280 temperature/humidity sensor. There are 7100 samples in total.
-        
-    \begin{itemize}
-        \item First recording: 08 - June - 2022 at 14:52:28.
-        \item Last recording: 15 - July - 2022 at 15:28:21.
-        \item The ``{\tt queen acceptance}" values indicate whether the queen is accepted by the hive (0 - no queen present, 1 - not accepted/rejected, 2 - accepted).
-        \item ``{\tt queen status}" is a combined value for ``{\tt queen presence}" and ``{\tt queen acceptance}" (0, queenright/original queen, 1 - not present, 2 - present and rejected, 3 - present and newly accepted).
-        \item  The ``{\tt target}" feature was another proposed way to combine ``{\tt queen presence}" and ``{\tt queen acceptance}", but the ``{\tt queen status}" feature was a better way to do it. "Time" is the time of day (24 hours) scaled to values between 0 and 1.
-    \end{itemize}
+
+\begin{itemize}
+\item First recording: 08 - June - 2022 at 14:52:28.
+\item Last recording: 15 - July - 2022 at 15:28:21.
+\item The ``{\tt queen acceptance}" values indicate whether the queen is accepted by the hive (0 - no queen present, 1 - not accepted/rejected, 2 - accepted).
+\item ``{\tt queen status}" is a combined value for ``{\tt queen presence}" and ``{\tt queen acceptance}" (0, queenright/original queen, 1 - not present, 2 - present and rejected, 3 - present and newly accepted).
+\item  The ``{\tt target}" feature was another proposed way to combine ``{\tt queen presence}" and ``{\tt queen acceptance}", but the ``{\tt queen status}" feature was a better way to do it. "Time" is the time of day (24 hours) scaled to values between 0 and 1.
+\end{itemize}
 
 \par\textbf{Notes of the dataset creator}: \textit{``{\tt queen status}" would be the indicator of the queen situation. The sensor was placed in the telescoping cover of the hive, which is below the outer cover but above the frames. The telescoping cover was sealed with wire mesh so bees could not get to the sensors, which decreased bee interference with the microphone as well.}
 
@@ -340,14 +380,12 @@
 
 \par\textit{I did not collect data on varroa mites or pesticide exposure for this dataset. In fact, pesticide exposure is quite difficult to track, especially since the data was mostly collected on suburban backyard beehives. It is near impossible to know whether nearby residences treat their gardens with chemical or organic pesticides, and even where the bees were visiting, since they can fly 3-4 miles just to collect pollen and nectar.}
 
+%-------------------------------------------------------------------------------------
+% BIBLIOGRAFÍA.
+%-------------------------------------------------------------------------------------
+\pagebreak
+\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\printbibliography
+\thispagestyle{empty}
 
-
-	%-------------------------------------------------------------------------------------
-	% BIBLIOGRAFÍA.
-	%-------------------------------------------------------------------------------------
-	\pagebreak
-	\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
-	\printbibliography
-	\thispagestyle{empty}
-	
 \end{document}

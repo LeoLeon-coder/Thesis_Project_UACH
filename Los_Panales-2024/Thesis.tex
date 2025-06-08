@@ -21,19 +21,37 @@
 \usepackage{csquotes} % Recommended for biblatex with babel/polyglossia
 \usepackage[backend=biber, style=numeric, sorting=none, locallabelwidth]{biblatex}
 \addbibresource{ThesisReferences.bib}
-\addbibresource{ThesisReferences.bib}
 
 \usepackage{listings}
 
 \usepackage{wrapfig}
 \usepackage{array}
-\usepackage{multicol}
 \usepackage{url}
 \usepackage[nottoc]{tocbibind} %Add references to index.
 \usepackage{amsmath, amssymb}
 \usepackage{upgreek, dsfont, mathrsfs}
 \usepackage{stmaryrd}
 
+\usepackage{multicol}
+
+% Estilo compacto para secciones en columnas
+\titlespacing{\section}{0pt}{1ex plus 0.6ex minus 0.2ex}{0.8ex}
+\titlespacing{\subsection}{0pt}{0.8ex plus 0.4ex minus 0.2ex}{0.5ex}
+\titlespacing{\subsubsection}{0pt}{0.6ex plus 0.3ex minus 0.1ex}{0.4ex}
+
+% Configuración de columnas tipo revista
+\setlength{\columnsep}{25pt}           % separación entre columnas (default ~35pt)
+\setlength{\columnseprule}{0pt}      % línea entre columnas (0pt = sin línea)
+
+% Compactar el interlineado en columnas (opcional)
+\newenvironment{tightmulticols}{%
+  \begin{multicols}{2}
+  \setlength{\parskip}{0pt}
+  \setlength{\parindent}{1em}
+  \linespread{1}\selectfont
+}{%
+  \end{multicols}
+}
 
 \usepackage[breakable]{tcolorbox}
 \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
@@ -218,10 +236,12 @@
 %-------------------------------------------------------------------------------------
 \pagebreak
 \chapter{INTRODUCCIÓN}
+\vspace{-3em}
 
+\begin{tightmulticols}
 Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mariposas, colibríes y murciélagos, desempeñan un papel fundamental en los ecosistemas, ya que contribuyen a la fertilización de plantas y cultivos. Las abejas melíferas, en particular, han sido ampliamente estudiadas por su destacada participación en la polinización de cultivos que forman parte de nuestra alimentación.
 
-\par Durante las temporadas de mayor producción de miel como primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km \cite{Beekman2000}, viajando 3 km de ida y vuelta entre la colmena y fuentes de alimento como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación para las abejas en cuanto a regresar a la colmena y surtir la misma?
+\par Durante las temporadas de mayor producción de miel, como primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km \cite{Beekman2000}, viajando 3 km de ida y vuelta entre la colmena y fuentes de alimento como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación para las abejas en cuanto a regresar a la colmena y surtir la misma?
 
 \par Según Ruvinga \cite{ruvinga2021use}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas \cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear \cite{ruvinga2021use}.
 
@@ -267,9 +287,15 @@ Desarrollar un programa de monitoreo de frecuencias con el que se pueda determin
 
 Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión, si la reina está presente, ausente, rechazada o recién aceptada en la colonia.
 
+\end{tightmulticols}
+
 %-------------------------------------------------------------------------------------
 % 4. MARCO TEÓRICO
 %-------------------------------------------------------------------------------------
+
+\pagebreak
+\chapter{MARCO TEÓRICO}
+\vspace{-3em}
 
 %-------------------------------------------------------------------------------------
 % 4.1. Definición de conceptos clave
@@ -287,6 +313,10 @@ Dado que el comportamiento sonoro de una colmena varía según el estado de su r
 % 5. METODOLOGÍA
 %-------------------------------------------------------------------------------------
 
+\pagebreak
+\chapter{METODOLOGÍA}
+\vspace{-3em}
+
 %-------------------------------------------------------------------------------------
 % 5.1. Diseño de investigación
 %-------------------------------------------------------------------------------------
@@ -303,6 +333,10 @@ Dado que el comportamiento sonoro de una colmena varía según el estado de su r
 % 6. RESULTADOS
 %-------------------------------------------------------------------------------------
 
+\pagebreak
+\chapter{RESULTADOS}
+\vspace{-3em}
+
 %-------------------------------------------------------------------------------------
 % 6.1. Análisis de datos
 %-------------------------------------------------------------------------------------
@@ -314,6 +348,10 @@ Dado que el comportamiento sonoro de una colmena varía según el estado de su r
 %-------------------------------------------------------------------------------------
 % 7. DISCUSIÓN
 %-------------------------------------------------------------------------------------
+
+\pagebreak
+\chapter{DISCUSIÓN}
+\vspace{-3em}
 
 %-------------------------------------------------------------------------------------
 % 7.1. Interpretación de resultados
