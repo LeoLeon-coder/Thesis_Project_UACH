@@ -251,7 +251,7 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 
 \section{Planteamiento del Problema}
 
-La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar \cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena \cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
+\par La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar \cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena \cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
 
 \par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas y hasta errores humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia (que debe reconstruir el sello), sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna del panal. Esta situación puede conducir al colapso de toda la colonia.
 
@@ -261,7 +261,7 @@ La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se enca
 
 \section{Justificación}
 
-Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta fundamental para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina \cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
+\par Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta fundamental para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina \cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
 
 %-------------------------------------------------------------------------------------
 % 3.3. Objetivos
@@ -271,7 +271,7 @@ Contar con herramientas que permitan identificar la presencia o ausencia de la a
 
 \subsection{Objetivo General}
 
-Desarrollar un programa de monitoreo de frecuencias con el que se pueda determinar si una abeja reina se encuentra en la colmena, mediante el análisis de grabaciones de audio y técnicas de aprendizaje automático, a partir del cual se pueda proponer un sistema no invasivo de seguimiento para determinar el estado de la colmena.
+\par Desarrollar un programa de monitoreo de frecuencias con el que se pueda determinar si una abeja reina se encuentra en la colmena, mediante el análisis de grabaciones de audio y técnicas de aprendizaje automático, a partir del cual se pueda proponer un sistema no invasivo de seguimiento para determinar el estado de la colmena.
 
 \subsection{Objetivos Específicos}
 
@@ -285,7 +285,7 @@ Desarrollar un programa de monitoreo de frecuencias con el que se pueda determin
 
 \section{Hipótesis de Trabajo}
 
-Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión, si la reina está presente, ausente, rechazada o recién aceptada en la colonia.
+\par Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión, si la reina está presente, ausente, rechazada o recién aceptada en la colonia.
 
 \end{tightmulticols}
 
@@ -297,9 +297,20 @@ Dado que el comportamiento sonoro de una colmena varía según el estado de su r
 \chapter{MARCO TEÓRICO}
 \vspace{-3em}
 
+\begin{tightmulticols}
+
 %-------------------------------------------------------------------------------------
 % 4.1. Definición de conceptos clave
 %-------------------------------------------------------------------------------------
+
+\section{Definición de Conceptos Clave}
+
+\begin{itemize}
+    \item[\ding{43}] \textbf{Colmena}: estructura donde viven las abejas melíferas, compuesta por una reina, obreras y zánganos.
+	\item[\ding{43}] \textbf{Reina}: abeja hembra fértil encargada de la reproducción en la colmena.
+	\item[\ding{43}] \textbf{Razón de muestreo (Sample Rate)}: número de muestras de audio tomadas por segundo (cuyos valores para el monitoreo de abejas comunmente rondan entre los 16000 a 22050 Hz).
+	\item[\ding{43}] \textbf{MFCC (Mel-Frequency Cepstral Coefficients)}: características acústicas utilizadas para representar el contenido espectral de una señal de audio, especialmente útiles en el reconocimiento de patrones sonoros.
+\end{itemize}
 
 %-------------------------------------------------------------------------------------
 % Revisión de literatura
@@ -309,6 +320,9 @@ Dado que el comportamiento sonoro de una colmena varía según el estado de su r
 % Fundamentos teóricos
 %-------------------------------------------------------------------------------------
 
+
+\end{tightmulticols}
+
 %-------------------------------------------------------------------------------------
 % 5. METODOLOGÍA
 %-------------------------------------------------------------------------------------
@@ -317,17 +331,43 @@ Dado que el comportamiento sonoro de una colmena varía según el estado de su r
 \chapter{METODOLOGÍA}
 \vspace{-3em}
 
+\begin{tightmulticols}
+Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo. En este estudio, se utiliza una razón de muestreo de 16 kHz con un formato de mono-audio.
+
 %-------------------------------------------------------------------------------------
 % 5.1. Diseño de investigación
 %-------------------------------------------------------------------------------------
+\section{Diseño de Investigación}
+
+\par Este estudio se enmarca dentro de un diseño de investigación aplicada, con un enfoque cuantitativo. Se busca desarrollar un sistema que permita la detección automática del estado de la abeja reina en una colmena a partir del análisis de grabaciones de audio. Para ello, se emplearán técnicas de aprendizaje automático y procesamiento de señales acústicas.
 
 %-------------------------------------------------------------------------------------
 % 5.2. Instrumentos y técnicas
 %-------------------------------------------------------------------------------------
+\section{Instrumentos y Técnicas}
+
+\par El proceso de recolección de datos implicó la grabación de audio en condiciones controladas, asegurando que las grabaciones fueran representativas del comportamiento sonoro de las colmenas. Los datos fueron adquiridos utilizando un dispositivo IoT que incluía un módulo Wi-Fi ESP32, un micrófono digital INMP441 y un sensor de temperatura y humedad BME280. Estos sensores fueron colocados dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior— y se encerraron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
 
 %-------------------------------------------------------------------------------------
 % 5.3. Población y muestra (si aplica)
 %-------------------------------------------------------------------------------------
+
+\section{Base de Datos}
+
+El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+
+El conjunto de datos contiene múltiples características de metadatos que proporcionan información sobre el entorno de la colmena y la condición de la colonia. De particular relevancia para este estudio se encuentran las siguientes etiquetas:
+
+\begin{itemize}
+	\item[\ding{43}] \texttt{queen acceptance}: indica si la reina es aceptada por la colonia. Valores: 0 (sin reina), 1 (presente pero no aceptada), 2 (aceptada).
+	\item[\ding{43}] \texttt{queen presence}: indica si la reina está físicamente presente en la colmena.
+	\item[\ding{43}] \texttt{queen status}: una etiqueta combinada derivada de las dos anteriores, con los siguientes valores: 0 (original/con reina funcional), 1 (no presente), 2 (presente y rechazada), 3 (presente y recién aceptada). Esta es la etiqueta principal utilizada para la clasificación en este trabajo.
+	\item[\ding{43}] \texttt{time}: la hora del día, escalada entre 0 y 1 para representar un ciclo de 24 horas.
+\end{itemize}
+
+El proceso de etiquetado se basó en inspecciones manuales diarias de las colmenas, donde se observó el comportamiento de las abejas hacia la reina (por ejemplo, formación de enjambre o comportamiento tranquilo). Para aquellos casos en los que el estado de la reina cambió entre inspecciones (es decir, había ambigüedad sobre el momento exacto de aceptación), las muestras fueron descartadas para mantener la integridad de las etiquetas.
+
+\end{tightmulticols}
 
 %-------------------------------------------------------------------------------------
 % 6. RESULTADOS
