@@ -43,19 +43,17 @@
 \setlength{\columnsep}{25pt}           % separación entre columnas (default ~35pt)
 \setlength{\columnseprule}{0pt}      % línea entre columnas (0pt = sin línea)
 
+\usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+\usepackage[breakable]{tcolorbox}
 % Compactar el interlineado en columnas (opcional)
 \newenvironment{tightmulticols}{%
   \begin{multicols}{2}
   \setlength{\parskip}{0pt}
-  \setlength{\parindent}{1em}
+  \setlength{\parindent}{0em}
   \linespread{1}\selectfont
 }{%
   \end{multicols}
 }
-
-\usepackage[breakable]{tcolorbox}
-\usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
-
 
 % Basic figure setup, for now with no caption control since it's done
 % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
@@ -331,8 +329,10 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 \chapter{METODOLOGÍA}
 \vspace{-3em}
 
+% Crear una sección al final con los programas utilizados y hacer referencia a ella en el texto de esta sección.
+
 \begin{tightmulticols}
-Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo. En este estudio, se utiliza una razón de muestreo de 16 kHz con un formato de mono-audio.
+Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo [\ref{lst:waveform}]. En este estudio, se utiliza una razón de muestreo de 16 kHz con un formato de mono-audio (1 canal).
 
 %-------------------------------------------------------------------------------------
 % 5.1. Diseño de investigación
@@ -431,5 +431,39 @@ El proceso de etiquetado se basó en inspecciones manuales diarias de las colmen
 %-------------------------------------------------------------------------------------
 % 10. ANEXOS (opcional)
 %-------------------------------------------------------------------------------------
+
+\pagebreak
+\addcontentsline{toc}{chapter}{APÉNDICES}
+\begin{center}
+\large\textbf{APÉNDICE A}
+\end{center}
+
+\begin{lstlisting}[language=Python, caption={Visualización de la forma de onda de un archivo de audio.}, label={lst:waveform}]
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+
+# cargar archivo de audio
+sr, audio = wavfile.read('2022-06-08--14-52-28_1__segment3.wav')
+
+# normalizar si es int16
+if audio.dtype == np.int16:
+    audio = audio.astype(np.float32) / np.iinfo(np.int16).max
+
+# crear eje de tiempo
+duration_sec = len(audio) / sr
+time_axis = np.linspace(0, duration_sec, num=len(audio))
+
+# graficar la onda
+plt.figure(figsize=(12, 4))
+plt.plot(time_axis, audio)
+plt.title(f'Onda (Sample Rate: {sr} Hz)')
+plt.xlabel('Tiempo (segundos)')
+plt.ylabel('Amplitud')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+\end{lstlisting}
 
 \end{document}
