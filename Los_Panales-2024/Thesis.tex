@@ -329,27 +329,30 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 \chapter{METODOLOGÍA}
 \vspace{-3em}
 
-% Crear una sección al final con los programas utilizados y hacer referencia a ella en el texto de esta sección.
-
 \begin{tightmulticols}
-Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo [\ref{lst:waveform}]. En este estudio, se utiliza una razón de muestreo de 16 kHz con un formato de mono-audio (1 canal).
 
 %-------------------------------------------------------------------------------------
-% 5.1. Diseño de investigación
+% 5.1. Procedimiento
 %-------------------------------------------------------------------------------------
-\section{Diseño de Investigación}
+\section{Procedimiento}
 
-\par Este estudio se enmarca dentro de un diseño de investigación aplicada, con un enfoque cuantitativo. Se busca desarrollar un sistema que permita la detección automática del estado de la abeja reina en una colmena a partir del análisis de grabaciones de audio. Para ello, se emplearán técnicas de aprendizaje automático y procesamiento de señales acústicas.
+\par Se desarrolló un sistema que permite la detección automática del estado de la abeja reina en una colmena a partir del análisis de grabaciones de audio. Para ello, se emplearon técnicas de aprendizaje automático y procesamiento de señales acústicas.
+
+\par Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo a partir de un programa en Python [\ref{lst:waveform}]. En este estudio, se utiliza audio monofónico (1 canal), con formato PCM de 16 bits y una razón de muestreo de 22050 Hz. Luego, se tomó uno de los archivos para la extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), de donde se obtuvo una matriz tiempo-frecuencia
+\begin{align*}
+[\text{Time Frames}] \times [\text{13 MFCC Coefficients}] \; ,
+\end{align*}
+de 13 coeficientes por cada 25 ms de audio, con un solapamiento del 50\% entre ventanas.
 
 %-------------------------------------------------------------------------------------
 % 5.2. Instrumentos y técnicas
 %-------------------------------------------------------------------------------------
-\section{Instrumentos y Técnicas}
+\section{Instrumentos}
 
 \par El proceso de recolección de datos implicó la grabación de audio en condiciones controladas, asegurando que las grabaciones fueran representativas del comportamiento sonoro de las colmenas. Los datos fueron adquiridos utilizando un dispositivo IoT que incluía un módulo Wi-Fi ESP32, un micrófono digital INMP441 y un sensor de temperatura y humedad BME280. Estos sensores fueron colocados dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior— y se encerraron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
 
 %-------------------------------------------------------------------------------------
-% 5.3. Población y muestra (si aplica)
+% 5.3. Población y muestra
 %-------------------------------------------------------------------------------------
 
 \section{Base de Datos}
@@ -366,6 +369,50 @@ El conjunto de datos contiene múltiples características de metadatos que propo
 \end{itemize}
 
 El proceso de etiquetado se basó en inspecciones manuales diarias de las colmenas, donde se observó el comportamiento de las abejas hacia la reina (por ejemplo, formación de enjambre o comportamiento tranquilo). Para aquellos casos en los que el estado de la reina cambió entre inspecciones (es decir, había ambigüedad sobre el momento exacto de aceptación), las muestras fueron descartadas para mantener la integridad de las etiquetas.
+
+\end{tightmulticols}
+
+\begin{tightmulticols}
+
+%-------------------------------------------------------------------------------------
+% 5.1. Procedimiento
+%-------------------------------------------------------------------------------------
+\section{Procedimiento}
+
+\par Se desarrolló un sistema que permite la detección automática del estado de la abeja reina en una colmena, a partir del análisis de grabaciones de audio. Para ello, se emplearon técnicas de aprendizaje automático y procesamiento de señales acústicas.
+
+\par Inicialmente, se determinó el formato de los archivos de audio y la razón de muestreo utilizando un programa en Python [\ref{lst:waveform}]. En este estudio, se trabajó con audio monofónico (1 canal), con formato PCM de 16 bits y una razón de muestreo de 22050 Hz, valor seleccionado por ser común en tareas de análisis de sonido ambiental y por permitir una adecuada representación espectral con bajo costo computacional.
+
+\par Posteriormente, se realizó una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} [\ref{lst:test_mfcc}]. A partir de las grabaciones, se obtuvo una matriz tiempo-frecuencia:
+\begin{align*}
+[\text{Time Frames}] \times [\text{13 MFCC Coefficients}] \; ,
+\end{align*}
+correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, con un solapamiento del 50\% entre ventanas. Los resultados fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
+
+%-------------------------------------------------------------------------------------
+% 5.2. Instrumentos y técnicas
+%-------------------------------------------------------------------------------------
+\section{Instrumentos}
+
+\par El proceso de recolección de datos implicó la grabación de audio en condiciones controladas, asegurando que las muestras fueran representativas del comportamiento sonoro de las colmenas. Para ello, se empleó un dispositivo IoT diseñado a medida, que incluía un módulo Wi-Fi \texttt{ESP32}, un micrófono digital \texttt{INMP441}, y un sensor de temperatura y humedad \texttt{BME280}. Estos sensores se instalaron dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior—, y se protegieron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
+
+%-------------------------------------------------------------------------------------
+% 5.3. Población y muestra
+%-------------------------------------------------------------------------------------
+\section{Base de Datos}
+
+\par El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang \cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+
+\par El conjunto de datos incluye múltiples variables de metadatos que describen el entorno de la colmena y la condición de la colonia. De particular relevancia para este trabajo se encuentran las siguientes etiquetas:
+
+\begin{itemize}
+	\item[\ding{43}] \texttt{queen acceptance}: indica si la reina es aceptada por la colonia. Valores: 0 (sin reina), 1 (presente pero no aceptada), 2 (aceptada).
+	\item[\ding{43}] \texttt{queen presence}: indica si la reina está físicamente presente en la colmena.
+	\item[\ding{43}] \texttt{queen status}: una etiqueta combinada derivada de las dos anteriores, con los siguientes valores: 0 (original/con reina funcional), 1 (no presente), 2 (presente y rechazada), 3 (presente y recién aceptada). Esta es la etiqueta principal utilizada para la clasificación.
+	\item[\ding{43}] \texttt{time}: hora del día, escalada entre 0 y 1 para representar un ciclo de 24 horas.
+\end{itemize}
+
+\par El proceso de etiquetado se basó en inspecciones manuales diarias de las colmenas, durante las cuales se observó el comportamiento de las abejas hacia la reina (por ejemplo, formación de enjambre o conducta tranquila). En aquellos casos en los que el estado de la reina cambió entre inspecciones, generando ambigüedad sobre el momento exacto de aceptación, las muestras correspondientes fueron descartadas para mantener la integridad del etiquetado.
 
 \end{tightmulticols}
 
@@ -463,7 +510,45 @@ plt.ylabel('Amplitud')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+\end{lstlisting}
 
+\pagebreak
+\begin{center}
+\large\textbf{APÉNDICE A (continuación)}
+\end{center}
+
+\begin{lstlisting}[language=Python, caption={Prueba para extracción de características.}, label={lst:test_mfcc}]
+import librosa
+import numpy as np
+import pandas as pd
+import os
+
+# === CONFIG ===
+audio_path = <<archivo>>
+sample_rate = 22050
+n_mfcc = 13
+
+# === CARGAR ARCHIVO ===
+y, sr = librosa.load(audio_path, sr=sample_rate)
+
+# === EXTRAER MFCCs ===
+mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
+
+# Transponer de modo que la forma resultante es: [frames x coefficients]
+mfccs = mfccs.T
+
+# === Guardar en CSV ===
+base_name = os.path.splitext(os.path.basename(audio_path))[0]
+csv_output_path = f'{base_name}_mfcc.csv'
+np_output_path = f'{base_name}_mfcc.npy'
+
+pd.DataFrame(mfccs).to_csv(csv_output_path, index=False)
+
+# O, guardar como un archivo binario de numpy
+np.save(np_output_path, mfccs)
+
+print(f'MFCCs en:\n- CSV: {csv_output_path}\n- NPY: {np_output_path}')
+print(f'MFCCs forma: {mfccs.shape} to [frames x {n_mfcc}]')
 \end{lstlisting}
 
 \end{document}
