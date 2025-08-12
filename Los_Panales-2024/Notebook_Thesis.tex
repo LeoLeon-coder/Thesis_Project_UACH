@@ -360,6 +360,20 @@ i.e., Suppose a bouncing ball rises each time to $\frac{2}{3}$ of the height of 
 \newpage
 \chapter{THESIS ACTUAL CONTENT}
 
+\section{DEFINITIONS}
+
+\begin{itemize}
+	\item \textbf{PCM}: Pulse Code Modulation, is a method used to digitally represent analog signals. In PCM, the amplitude of the analog signal is sampled at uniform intervals and quantized to a series of symbols in a digital (usually binary) form. The PCM tells us how to decode the raw bytes into numerical values (amplitude over time). For example, a 16-bit PCM means that each sample is represented by 16 bits, allowing for 65536 different amplitude values.
+	\item \textbf{WAV}: Waveform Audio File Format, a standard format for storing audio on computers. It is a raw audio format that contains PCM data, which can be uncompressed or compressed. WAV files are typically larger than other audio formats like MP3 or AAC because they store audio data in a lossless format.
+	\item \textbf{Audio Sampling Rate}: The number of samples of audio carried per second, measured in Hz or kHz. For example, 44100 Hz means that 44100 samples are taken per second.
+	\item \textbf{Mono Channel}: Mono audio means that the sound is recorded or played back through a single channel. In contrast, stereo audio uses two channels (left and right) to create a sense of space and directionality in the sound.
+	\item \textbf{MFCC}: Mel-Frequency Cepstral Coefficients, a feature extraction technique used in audio processing.
+	\item \textbf{Spectrogram}: A visual representation of the spectrum of frequencies in a sound signal as they vary with time.
+	\item \textbf{Spectral Centroid}: A measure of the "center of mass" of the spectrum of a sound signal, often used to characterize timbre.
+	\item \textbf{Zero Crossing Rate}: The rate at which a signal changes sign, used as a feature in audio analysis.
+	\item \textbf{ESP32}: A low-cost, low-power system on
+\end{itemize}
+
 \section{DATASETS}
 
 \par The dataset\cite{AnnaYang-Dataset} was recorded by Anna Yang, it contains original data from European honeybee hives in California divided into 60-second segments and recorded approximately 23 to 24 samples per day, collected with a custom IoT device that combined an ESP32 Wi-Fi module, an INMP441 microphone module, and a BME280 temperature/humidity sensor. There are 7100 samples in total.
@@ -372,6 +386,30 @@ i.e., Suppose a bouncing ball rises each time to $\frac{2}{3}$ of the height of 
 \item  The ``{\tt target}" feature was another proposed way to combine ``{\tt queen presence}" and ``{\tt queen acceptance}", but the ``{\tt queen status}" feature was a better way to do it. "Time" is the time of day (24 hours) scaled to values between 0 and 1.
 \end{itemize}
 
+\subsection{Dataset Characteristics}
+
+The audiofiles are:
+\begin{enumerate}[label=\roman*)]
+	\item in WAV format,
+	\item mono channel,
+	\item 16-bit PCM,
+	\item sampled at 22050 Hz,
+\end{enumerate}
+
+\subsubsection{Loading Audio Correctly}
+
+\par Without the right sample rate, audio could sound sped up or slowed down.
+
+\subsubsection{Frame-level Feature Extraction}
+
+\par Many features like MFCC, spectral centroid, or zero crossing rate rely on splitting the audio into frames. A frame is a short segment of audio, typically 20-40 milliseconds long. The audio is split into overlapping frames, which allows for better analysis of the audio signal over time. The sample rate determines how many samples are in each frame. For example, with a sample rate of 22050 Hz and a frame length of 25 ms, each frame will contain 551 samples (22050 Hz * 0.025 s).
+
+\subsubsection{Spectogram / MFCC Resolution}
+
+\par A higher sample rate gives more detail in the frequency axis of the spectrogram, which can be useful for distinguishing between different sounds. However, it also increases the size of the audio file and the computational load for processing. A lower sample rate may lose some high-frequency detail but can be sufficient for many applications, especially if the focus is on lower frequencies.
+
+\par Since the goal is to detect subtle differences in hive states, working with the original sample rate of 22050 Hz is recommended to preserve the full range of frequencies present in the audio.
+
 \par\textbf{Notes of the dataset creator}: \textit{``{\tt queen status}" would be the indicator of the queen situation. The sensor was placed in the telescoping cover of the hive, which is below the outer cover but above the frames. The telescoping cover was sealed with wire mesh so bees could not get to the sensors, which decreased bee interference with the microphone as well.}
 
 \par\textit{To confirm whether the queen was accepted or rejected, I conducted a daily hive inspection. I observed the bees’ reaction towards the queen in the cage: Are they attempting to sting or ball (suffocate) her? Are they calm or excited? If there are 2+ layers of bees around the cage, it is an indication that they are aggressive and hostile towards the queen. In the 24-hour period that the queen’s status changes from rejected to accepted (between hive inspections), there was ambiguity around the exact time that the queen became accepted. As a result, I discarded the data from this uncertain period.}
@@ -379,6 +417,36 @@ i.e., Suppose a bouncing ball rises each time to $\frac{2}{3}$ of the height of 
 \par\textit{I do not believe I ever noted that the dataset related to colony collapse disorder. However, I can describe how it could be indirectly related. Colony collapse disorder, a phenomenon that occurs when the majority of bees in a colony mysteriously disappear, has been on the decline in recent years. Initially, it was very concerning for scientists and beekeepers because bees were dying, seemingly without reason. Despite it being not as severe now, overall colony loss is still a major concern to beekeepers, and it has been reported that queen failure -- when a colony is headed by a queen bee that is infertile or weak -- has been consistently identified as one of the top four causes of colony mortality, annually, since 2009 (from the annual study conducted by the Canadian Association of Professional Apiculturists). This dataset records the difference in sound between queen states, addressing the widespread issue of queen failure.}
 
 \par\textit{I did not collect data on varroa mites or pesticide exposure for this dataset. In fact, pesticide exposure is quite difficult to track, especially since the data was mostly collected on suburban backyard beehives. It is near impossible to know whether nearby residences treat their gardens with chemical or organic pesticides, and even where the bees were visiting, since they can fly 3-4 miles just to collect pollen and nectar.}
+
+
+\section{PROCEDIMIENTO}
+
+\par Se desarrolló un sistema que permite la detección automática del estado de la abeja reina en una colmena a partir del análisis de grabaciones de audio. Para ello, se emplearon técnicas de aprendizaje automático y procesamiento de señales acústicas.
+
+\par Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo a partir de un programa en Python [\ref{lst:waveform}]. En este estudio, se utiliza audio monofónico (1 canal), con formato PCM de 16 bits y una razón de muestreo de 22050 Hz. Luego, se tomó uno de los archivos para la extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), de donde se obtuvo una matriz tiempo-frecuencia
+\begin{align*}
+[\text{Time Frames}] \times [\text{13 MFCC Coefficients}] \; ,
+\end{align*}
+de 13 coeficientes por cada 25 ms de audio, con un solapamiento del 50\% entre ventanas.
+
+\subsection{Instrumentos}
+
+\par El proceso de recolección de datos implicó la grabación de audio en condiciones controladas, asegurando que las grabaciones fueran representativas del comportamiento sonoro de las colmenas. Los datos fueron adquiridos utilizando un dispositivo IoT que incluía un módulo Wi-Fi ESP32, un micrófono digital INMP441 y un sensor de temperatura y humedad BME280. Estos sensores fueron colocados dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior— y se encerraron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
+
+\subsection{Base de Datos}
+
+El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+
+El conjunto de datos contiene múltiples características de metadatos que proporcionan información sobre el entorno de la colmena y la condición de la colonia. De particular relevancia para este estudio se encuentran las siguientes etiquetas:
+
+\begin{itemize}
+	\item[\ding{43}] \texttt{queen acceptance}: indica si la reina es aceptada por la colonia. Valores: 0 (sin reina), 1 (presente pero no aceptada), 2 (aceptada).
+	\item[\ding{43}] \texttt{queen presence}: indica si la reina está físicamente presente en la colmena.
+	\item[\ding{43}] \texttt{queen status}: una etiqueta combinada derivada de las dos anteriores, con los siguientes valores: 0 (original/con reina funcional), 1 (no presente), 2 (presente y rechazada), 3 (presente y recién aceptada). Esta es la etiqueta principal utilizada para la clasificación en este trabajo.
+	\item[\ding{43}] \texttt{time}: la hora del día, escalada entre 0 y 1 para representar un ciclo de 24 horas.
+\end{itemize}
+
+El proceso de etiquetado se basó en inspecciones manuales diarias de las colmenas, donde se observó el comportamiento de las abejas hacia la reina (por ejemplo, formación de enjambre o comportamiento tranquilo). Para aquellos casos en los que el estado de la reina cambió entre inspecciones (es decir, había ambigüedad sobre el momento exacto de aceptación), las muestras fueron descartadas para mantener la integridad de las etiquetas.
 
 %-------------------------------------------------------------------------------------
 % BIBLIOGRAFÍA.
