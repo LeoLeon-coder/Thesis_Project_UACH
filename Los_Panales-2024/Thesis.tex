@@ -184,7 +184,6 @@
 \rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
 
 \renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
-
 \begin{document}
 	
 	\begin{titlepage}
@@ -216,53 +215,54 @@
 	\end{titlepage}
 
 %-------------------------------------------------------------------------------------
-% 1. ÍNDICE
+% ÍNDICE
 %-------------------------------------------------------------------------------------
 \tableofcontents
 \thispagestyle{empty} % No header/footer on the table of contents page
 
 
 %-------------------------------------------------------------------------------------
-% 2. RESUMEN/ABSTRACT
+% RESUMEN/ABSTRACT
 %-------------------------------------------------------------------------------------
 \pagebreak
 \chapter*{RESUMEN}
 \addcontentsline{toc}{chapter}{RESUMEN}
 
 %-------------------------------------------------------------------------------------
-% 3. INTRODUCCIÓN
+% 1. INTRODUCCIÓN
 %-------------------------------------------------------------------------------------
 \pagebreak
 \chapter{INTRODUCCIÓN}
 \vspace{-3em}
 
 \begin{tightmulticols}
-Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mariposas, colibríes y murciélagos, desempeñan un papel fundamental en los ecosistemas, ya que contribuyen a la fertilización de plantas y cultivos. Las abejas melíferas, en particular, han sido ampliamente estudiadas por su destacada participación en la polinización de cultivos que forman parte de nuestra alimentación.
+Las abejas melíferas han sido ampliamente estudiadas por su destacada contribución al medio ambiente, proporcionando recurosos que son vitales para animales, plantas y seres humanos. Su papel en la polinización es crucial para la biodiversidad y la producción agrícola\cite{leon2023calidad}. Además, la miel, el polen, la jalea real y la cera de abejas son productos altamente valorados por sus propiedades nutricionales y medicinales\cite{winston1987temperate}.\\
+\hspace{2em}
+\par Durante las temporadas de mayor producción de miel, como en primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km\cite{Beekman2000}, viajando aproximadamente 3 km de ida y vuelta entre la colmena y las fuentes de alimento, como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación de las abejas para regresar a la colmena y abastecerla?
+\par La comunicación dentro de la colmena es esencial para la supervivencia de la colonia. Las abejas utilizan una variedad de señales, incluyendo feromonas y sonidos, para coordinar sus actividades y mantener el orden social\cite{winston1987temperate}. La presencia de una abeja reina es fundamental para la cohesión del grupo, ya que su ausencia puede conducir a un comportamiento caótico y al eventual colapso de la colonia\cite{ruvinga2021use}. Otra forma de comunicación es el \textit{waggle dance}, mediante el cual las abejas pueden informar sobre la ubicación de fuentes de alimento, tomando como referencia los puntos cardinales y trazando un vector en la dirección requerida\cite{wang2025encoding}, lo que permite notificar a las demás abejas recolectoras.\\
 
-\par Durante las temporadas de mayor producción de miel, como primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km \cite{Beekman2000}, viajando 3 km de ida y vuelta entre la colmena y fuentes de alimento como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación para las abejas en cuanto a regresar a la colmena y surtir la misma?
-
-\par Según Ruvinga \cite{ruvinga2021use}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas \cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear \cite{ruvinga2021use}.
+\par Según Ruvinga\cite{ruvinga2021use}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas\cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear\cite{ruvinga2021use}.
 
 %-------------------------------------------------------------------------------------
-% 3.1. Planteamiento del problema
+% 1.1. Planteamiento del problema
 %-------------------------------------------------------------------------------------
 
 \section{Planteamiento del Problema}
 
-\par La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar \cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena \cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
+\par La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena\cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
 
 \par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas y hasta errores humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia (que debe reconstruir el sello), sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna del panal. Esta situación puede conducir al colapso de toda la colonia.
 
 %-------------------------------------------------------------------------------------
-% 3.2. Justificación
+% 1.2. Justificación
 %-------------------------------------------------------------------------------------
 
 \section{Justificación}
 
-\par Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta fundamental para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina \cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
+\par Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta fundamental para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina\cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
 
 %-------------------------------------------------------------------------------------
-% 3.3. Objetivos
+% 1.3. Objetivos
 %-------------------------------------------------------------------------------------
 
 \section{Objetivos}
@@ -288,7 +288,7 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 \end{tightmulticols}
 
 %-------------------------------------------------------------------------------------
-% 4. MARCO TEÓRICO
+% 2. MARCO TEÓRICO
 %-------------------------------------------------------------------------------------
 
 \pagebreak
@@ -298,7 +298,7 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 \begin{tightmulticols}
 
 %-------------------------------------------------------------------------------------
-% 4.1. Definición de conceptos clave
+% 2.1. Definición de conceptos clave
 %-------------------------------------------------------------------------------------
 
 \section{Definición de Conceptos Clave}
@@ -322,7 +322,7 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 \end{tightmulticols}
 
 %-------------------------------------------------------------------------------------
-% 5. METODOLOGÍA
+% 3. METODOLOGÍA
 %-------------------------------------------------------------------------------------
 
 \pagebreak
@@ -332,7 +332,7 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 \begin{tightmulticols}
 
 %-------------------------------------------------------------------------------------
-% 5.1. Procedimiento
+% 3.1. Procedimiento
 %-------------------------------------------------------------------------------------
 \section{Procedimiento}
 
@@ -345,18 +345,18 @@ Los polinizadores, como las abejas melíferas, abejorros, abejas solitarias, mar
 correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, con un solapamiento del 50\% entre ventanas. Los resultados fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
 
 %-------------------------------------------------------------------------------------
-% 5.2. Instrumentos y técnicas
+% 3.2. Instrumentos y técnicas
 %-------------------------------------------------------------------------------------
 \section{Instrumentos}
 
 \par Para el proceso de recolección de datos, se empleó un dispositivo IoT diseñado a medida, que incluía un módulo Wi-Fi \texttt{ESP32}, un micrófono digital \texttt{INMP441}, y un sensor de temperatura y humedad \texttt{BME280}. Estos sensores se instalaron dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior—, y se protegieron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
 
 %-------------------------------------------------------------------------------------
-% 5.3. Población y muestra
+% 3.3. Población y muestra
 %-------------------------------------------------------------------------------------
 \section{Base de Datos}
 
-\par El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang \cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+\par El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
 
 \par El conjunto de datos incluye múltiples variables de metadatos que describen el entorno de la colmena y la condición de la colonia. De particular relevancia para este trabajo se encuentran las siguientes etiquetas:
 
@@ -372,7 +372,7 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 \end{tightmulticols}
 
 %-------------------------------------------------------------------------------------
-% 6. RESULTADOS
+% 4. RESULTADOS
 %-------------------------------------------------------------------------------------
 
 \pagebreak
@@ -380,15 +380,15 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 \vspace{-3em}
 
 %-------------------------------------------------------------------------------------
-% 6.1. Análisis de datos
+% 4.1. Análisis de datos
 %-------------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------------
-% 6.2. Presentación de resultados
+% 4.2. Presentación de resultados
 %-------------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------------
-% 7. DISCUSIÓN
+% 5. DISCUSIÓN
 %-------------------------------------------------------------------------------------
 
 \pagebreak
@@ -396,33 +396,34 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 \vspace{-3em}
 
 %-------------------------------------------------------------------------------------
-% 7.1. Interpretación de resultados
+% 5.1. Interpretación de resultados
 %-------------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------------
-% 7.2. Comparación con la literatura
+% 5.2. Comparación con la literatura
 %-------------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------------
-% 8. CONCLUSIONES Y RECOMENDACIONES
+% 6. CONCLUSIONES Y RECOMENDACIONES
 %-------------------------------------------------------------------------------------
 \pagebreak
 \chapter{CONCLUSIONES Y RECOMENDACIONES}
 
+\par La abjea reina es un elemento crucial para la supervivencia de la colonia, y su presencia o ausencia puede influir significativamente en el comportamiento de las abejas, siendo una posibilidad el extingir la existensia de la colmena. 
+
 %-------------------------------------------------------------------------------------
-% 8.1. Conclusiones
+% 6.1. Conclusiones
 %-------------------------------------------------------------------------------------
 
 \section{Conclusiones}
 
 
+%-------------------------------------------------------------------------------------
+% 6.2. Recomendaciones
+%-------------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------------
-% 8.2. Recomendaciones
-%-------------------------------------------------------------------------------------
-
-%-------------------------------------------------------------------------------------
-% 9. REFERENCIAS BIBLIOGRÁFICAS
+% REFERENCIAS BIBLIOGRÁFICAS
 %-------------------------------------------------------------------------------------
 
 \pagebreak
@@ -431,7 +432,7 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 \thispagestyle{empty}
 
 %-------------------------------------------------------------------------------------
-% 10. ANEXOS (opcional)
+% ANEXOS (opcional)
 %-------------------------------------------------------------------------------------
 
 \pagebreak
@@ -478,21 +479,21 @@ import numpy as np
 import pandas as pd
 import os
 
-# === CONFIG ===
-audio_path = <<archivo>>
+# CONFIG
+audio_path = '<<archivo>>'
 sample_rate = 22050
 n_mfcc = 13
 
-# === CARGAR ARCHIVO ===
+# CARGAR ARCHIVO
 y, sr = librosa.load(audio_path, sr=sample_rate)
 
-# === EXTRAER MFCCs ===
+# EXTRAER MFCCs
 mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
 
 # Transponer de modo que la forma resultante es: [frames x coefficients]
 mfccs = mfccs.T
 
-# === Guardar en CSV ===
+# Guardar en CSV
 base_name = os.path.splitext(os.path.basename(audio_path))[0]
 csv_output_path = f'{base_name}_mfcc.csv'
 np_output_path = f'{base_name}_mfcc.npy'
@@ -504,6 +505,63 @@ np.save(np_output_path, mfccs)
 
 print(f'MFCCs en:\n- CSV: {csv_output_path}\n- NPY: {np_output_path}')
 print(f'MFCCs forma: {mfccs.shape} to [frames x {n_mfcc}]')
+\end{lstlisting}
+
+\pagebreak
+\begin{center}
+\large\textbf{APÉNDICE A (continuación)}
+\end{center}
+
+\begin{lstlisting}[language=Python, caption={Extracción de características.}, label={lst:FE_wavtonpy}]
+import os
+import librosa
+import numpy as np
+import pandas as pd
+
+# CONFIG
+audio_folder = '<<arch. *.wav>>'
+output_folder = '<<dir. guardar archs. npy>>'
+csv_path = '<<arch. *.csv>>'
+sample_rate = 22050
+n_mfcc = 13
+
+# Crear una carpeta de salida en caso de que no exista
+os.makedirs(output_folder, exist_ok=True)
+
+# Cargar info de etiquetas
+labels_df = pd.read_csv(csv_path)
+labels_df['file name'] = labels_df['file name'].str.strip()
+labels_df.set_index('file name', inplace=True)
+
+# Guardar el enlace con las etiquetas
+metadata = []
+
+# Procesando cada archivo de audio
+for filename in os.listdir(audio_folder):
+    if filename.endswith('.wav'):
+        try:
+            file_path = os.path.join(audio_folder, filename)
+            y, sr = librosa.load(file_path, sr=sample_rate)
+            mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
+            mfcc = mfcc.T  # Shape: [frames, 13]
+
+            # Guardar matriz MFCC como .npy
+            npy_name = filename.replace('.wav', '_mfcc.npy')
+            np.save(os.path.join(output_folder, npy_name), mfcc)
+
+			# Vincular con la etiqueta usando el nombre del archivo sin el segmento
+            raw_key = filename.split('__')[0] + '.raw'
+            label = labels_df.loc[raw_key]['queen status'] if raw_key in labels_df.index else None
+
+            metadata.append({'file_name': filename, 'mfcc_file': npy_name, 'queen_status': label})
+
+        except Exception as e:
+            print(f'Error processing {filename}: {e}')
+
+# Guardar archivo de metadatos
+pd.DataFrame(metadata).to_csv('mfcc_metadata.csv', index=False)
+
+print(f'Fin. Se procesaron {len(metadata)} archivos. MFCCs guardados en '{output_folder}'')
 \end{lstlisting}
 
 \end{document}
