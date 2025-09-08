@@ -1,0 +1,12 @@
+{
+  "sr": 22050,
+  "win_length": 551,
+  "hop_length": 276,
+  "n_fft": 1024,
+  "n_mels": 40,
+  "n_mfcc": 13,
+  "fmin": 20,
+  "fmax": 11025.0,
+  "window": "hann",
+  "center": true
+}

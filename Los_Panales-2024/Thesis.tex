@@ -269,7 +269,7 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 
 \subsection{Objetivo General}
 
-\par Desarrollar un programa de monitoreo de frecuencias con el que se pueda determinar si una abeja reina se encuentra en la colmena, mediante el análisis de grabaciones de audio y técnicas de aprendizaje automático, a partir del cual se pueda proponer un sistema no invasivo de seguimiento para determinar el estado de la colmena.
+\par Desarrollar un sistema de detección automática con respecto a la presencia de la abeja reina en una colmena a partir de la recolección de datos, el análisis de audio y la implementación de técnicas de aprendizaje automático. Se pretende obtener un modelo capaz de clasificar el estado de la reina en función de las características acústicas extraídas de grabaciones de audio. Este enfoque no invasivo busca minimizar la perturbación de la colonia durante las inspecciones recurrentes que suele hacer un apicultor, preservando así el bienestar de las abejas y la integridad del panal.
 
 \subsection{Objetivos Específicos}
 
@@ -301,7 +301,7 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 % 2.1. Definición de conceptos clave
 %-------------------------------------------------------------------------------------
 
-\section{Definición de Conceptos Clave}
+\section{Conceptos Clave}
 
 \begin{itemize}
     \item[\ding{43}] \textbf{Colmena}: estructura donde viven las abejas melíferas, compuesta por una reina, obreras y zánganos.
@@ -336,13 +336,19 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 %-------------------------------------------------------------------------------------
 \section{Procedimiento}
 
-\par Para desarrollar un sistema de detección automática con respecto a la presencia de la abeja reina en una colmena, se llevó a cabo un proceso que incluyó la recolección de datos, el análisis de audio y la implementación de técnicas de aprendizaje automático. El objetivo fue crear un modelo capaz de clasificar el estado de la reina en función de las características acústicas extraídas de grabaciones de audio.
+\par En este estudio, se trabajó con audio monofónico (1 canal), formato PCM de 16 bits y una razón de muestreo de 22050 Hz, lo cual se determinó por medio del programa \ref{lst:waveform}. Posteriormente, se crearon diversos archivos *.ipynb a partir de los cuales se desarrollaba el código que corresponde a cada paso del programa final. Los resultados fueron el determinante para realizar modificaciones en las líneas de código, con el objetivo de aumentar la precisión de los resultados en cada corrida. Es decir, si los resultados no eran los esperados, con una presición de almenos el 90\%; se alteraban cualesquiera de los archivos de código en función de mejorar los mismos.
 
-\par Para ello se debe determinar el formato de los archivos de audio y la razón de muestreo, esto se puede hacer por medio un programa en Python (\ref{lst:waveform}). En este estudio, se trabajó con audio monofónico (1 canal), con formato PCM de 16 bits y una razón de muestreo de 22050 Hz. Posteriormente, se realizó una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} (\ref{lst:test_mfcc}). En este programa se utilizó un archivo de audio (\url{2022-06-08--14-52-28_1__segment3.wav}), a partir del cual se obtuvo una matriz tiempo-frecuencia:
+\par Inicialmente se llevó a cabo una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} (\ref{lst:test_mfcc}). De modo que si llegase a existir un error en la conversión del archivo de audio a un \texttt{*.csv} o \texttt{*.npy}, se pudiese detectar y corregir a tiempo.
+
+\par En este programa de prueba se utilizó un archivo de audio (\url{2022-06-08--14-52-28_1__segment3.wav}), a partir del cual se obtuvo una matriz tiempo-frecuencia:
 \begin{align*}
 [\text{Time Frames}] \times [\text{13 MFCC Coefficients}] \; ,
 \end{align*}
-correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, con un solapamiento del 50\% entre ventanas. Los resultados fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
+correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, con un solapamiento del 50\% entre ventanas.
+
+\subsection{1er Programa}
+
+\par Estó porporcionó archivos que fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
 
 %-------------------------------------------------------------------------------------
 % 3.2. Instrumentos y técnicas
@@ -409,14 +415,13 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 \pagebreak
 \chapter{CONCLUSIONES Y RECOMENDACIONES}
 
-\par La abjea reina es un elemento crucial para la supervivencia de la colonia, y su presencia o ausencia puede influir significativamente en el comportamiento de las abejas, siendo una posibilidad el extingir la existensia de la colmena. 
-
 %-------------------------------------------------------------------------------------
 % 6.1. Conclusiones
 %-------------------------------------------------------------------------------------
 
 \section{Conclusiones}
 
+\par La abjea reina es un elemento crucial para la supervivencia de la colonia, y su presencia o ausencia puede influir significativamente en el comportamiento de las abejas, siendo una posibilidad el extingir la existensia de la colmena.
 
 %-------------------------------------------------------------------------------------
 % 6.2. Recomendaciones
@@ -561,7 +566,7 @@ for filename in os.listdir(audio_folder):
 # Guardar archivo de metadatos
 pd.DataFrame(metadata).to_csv('mfcc_metadata.csv', index=False)
 
-print(f'Fin. Se procesaron {len(metadata)} archivos. MFCCs guardados en '{output_folder}'')
+print(f'{len(metadata)} archivos han sido procesados. MFCCs guardados en '{output_folder}'')
 \end{lstlisting}
 
 \end{document}
