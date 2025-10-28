@@ -11,6 +11,7 @@
 *.synctex.gz
 *.bbl-SAVE-ERROR
 
-# ignore ALL files in ANY directory named Temp
+# ignore ALL files in ANY directory named:
 Temp/
 mfcc_npy_files/
+.vscode/
