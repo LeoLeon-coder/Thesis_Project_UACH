@@ -236,7 +236,7 @@
 \vspace{-3em}
 
 \begin{tightmulticols}
-Las abejas melíferas han sido ampliamente estudiadas por su destacada contribución al medio ambiente, proporcionando recurosos que son vitales para animales, plantas y seres humanos. Su papel en la polinización es crucial para la biodiversidad y la producción agrícola\cite{leon2023calidad}. Además, la miel, el polen, la jalea real y la cera de abejas son productos altamente valorados por sus propiedades nutricionales y medicinales\cite{winston1987temperate}.\\
+Las abejas melíferas han sido ampliamente estudiadas por su destacada contribución al medio ambiente, proporcionando recursos que son vitales para animales, plantas y seres humanos. Su papel en la polinización es crucial para la biodiversidad y la producción agrícola\cite{leon2023calidad}. Además, la miel, el polen, la jalea real y la cera de abejas son productos altamente valorados por sus propiedades nutricionales y medicinales\cite{winston1987temperate}.\\
 \hspace{2em}
 \par Durante las temporadas de mayor producción de miel, como en primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km\cite{Beekman2000}, viajando aproximadamente 3 km de ida y vuelta entre la colmena y las fuentes de alimento, como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación de las abejas para regresar a la colmena y abastecerla?
 \par La comunicación dentro de la colmena es esencial para la supervivencia de la colonia. Las abejas utilizan una variedad de señales, incluyendo feromonas y sonidos, para coordinar sus actividades y mantener el orden social\cite{winston1987temperate}. La presencia de una abeja reina es fundamental para la cohesión del grupo, ya que su ausencia puede conducir a un comportamiento caótico y al eventual colapso de la colonia\cite{ruvinga2021use}. Otra forma de comunicación es el \textit{waggle dance}, mediante el cual las abejas pueden informar sobre la ubicación de fuentes de alimento, tomando como referencia los puntos cardinales y trazando un vector en la dirección requerida\cite{wang2025encoding}, lo que permite notificar a las demás abejas recolectoras.\\
@@ -251,7 +251,9 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 
 \par La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena\cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
 
-\par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas y hasta errores humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia (que debe reconstruir el sello), sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna del panal. Esta situación puede conducir al colapso de toda la colonia.
+\par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas e inclusive seres humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia, que debe reconstruir el sello de propóleo y reabastecer el panal con respecto a las abejas que mueren en este proceso; sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna de la colmena, lo que puede conducir al colapso de toda la colonia si no se toma acción inmediata.
+
+\par Una abeja reina puede ser reemplazada por la colonia mediante la crianza de una nueva reina a partir de larvas seleccionadas, siempre y cuando existan suficientes recursos y tiempo para que la nueva reina se desarrolle completamente. Este proceso puede tardar entre 16 y 24 días, dependiendo de las condiciones ambientales y la disponibilidad de alimento\cite{winston1987temperate}. Durante este período, la colonia puede volverse vulnerable a enfermedades, depredadores y otros factores estresantes que pueden afectar su supervivencia. Como una alternativa, los apicultores pueden introducir una reina comprada o criada en otro lugar para restablecer la estabilidad de la colonia. Sin embargo, la aceptación de una nueva reina por parte de las obreras no está garantizada y puede variar según el comportamiento de la colonia y las condiciones ambientales\cite{ruvinga2021use}.
 
 %-------------------------------------------------------------------------------------
 % 1.2. Justificación
@@ -259,7 +261,7 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 
 \section{Justificación}
 
-\par Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta fundamental para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina\cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
+\par Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta de gran utilidad para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina\cite{ruvinga2021use, maarefremote, hunter2013signal, ruvinga2023identifying}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
 
 %-------------------------------------------------------------------------------------
 % 1.3. Objetivos
@@ -269,7 +271,7 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 
 \subsection{Objetivo General}
 
-\par Desarrollar un sistema de detección automática con respecto a la presencia de la abeja reina en una colmena a partir de la recolección de datos, el análisis de audio y la implementación de técnicas de aprendizaje automático. Se pretende obtener un modelo capaz de clasificar el estado de la reina en función de las características acústicas extraídas de grabaciones de audio. Este enfoque no invasivo busca minimizar la perturbación de la colonia durante las inspecciones recurrentes que suele hacer un apicultor, preservando así el bienestar de las abejas y la integridad del panal.
+\par Desarrollar un sistema de detección automática con respecto a la presencia de la abeja reina en una colmena, a partir del cual se permita la recolección de datos, el análisis de audio y la implementación de técnicas de aprendizaje automático. Se pretende obtener un modelo capaz de clasificar el estado de la reina en función de las características acústicas extraídas de grabaciones de audio. Este enfoque no invasivo busca minimizar la perturbación de la colonia durante las inspecciones recurrentes que suele hacer un apicultor, preservando así el bienestar de las abejas y la integridad del panal.
 
 \subsection{Objetivos Específicos}
 
@@ -306,8 +308,13 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 \begin{itemize}
     \item[\ding{43}] \textbf{Colmena}: estructura donde viven las abejas melíferas, compuesta por una reina, obreras y zánganos.
 	\item[\ding{43}] \textbf{Reina}: abeja hembra fértil encargada de la reproducción en la colmena.
-	\item[\ding{43}] \textbf{Razón de muestreo (Sample Rate)}: número de muestras de audio tomadas por segundo (cuyos valores para el monitoreo de abejas comunmente rondan entre los 16000 a 22050 Hz).
-	\item[\ding{43}] \textbf{MFCC (Mel-Frequency Cepstral Coefficients)}: características acústicas utilizadas para representar el contenido espectral de una señal de audio, especialmente útiles en el reconocimiento de patrones sonoros.
+	\item[\ding{43}] \textbf{Propóleo}: resina proveniente de árboles y plantas, utilizada por las abejas para sellar y proteger la colmena.
+	\item[\ding{43}] \textbf{Zángano}: abeja macho cuya función principal es la reproducción con la reina.
+	\item[\ding{43}] \textbf{Obrera}: abeja hembra estéril que realiza diversas tareas dentro y fuera de la colmena.
+	\item[\ding{43}] \textbf{Larva}: etapa de desarrollo de las abejas entre el huevo y la pupa.
+	\item[\ding{43}] \textbf{Pupa}: etapa de desarrollo de las abejas entre la larva y el adulto.
+	\item[\ding{43}] \textbf{Panal}: estructura de celdas hexagonales construida por las abejas para almacenar miel, polen y criar a las larvas.
+	\item[\ding{43}] \textbf{Feromonas}: sustancias químicas producidas por las abejas para comunicarse y regular el comportamiento dentro de la colmena.
 \end{itemize}
 
 %-------------------------------------------------------------------------------------
@@ -336,17 +343,31 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 %-------------------------------------------------------------------------------------
 \section{Procedimiento}
 
-\par En este estudio, se trabajó con audio monofónico (1 canal), formato PCM de 16 bits y una razón de muestreo de 22050 Hz, lo cual se determinó por medio del programa \ref{lst:waveform}. Posteriormente, se crearon diversos archivos *.ipynb a partir de los cuales se desarrollaba el código que corresponde a cada paso del programa final. Los resultados fueron el determinante para realizar modificaciones en las líneas de código, con el objetivo de aumentar la precisión de los resultados en cada corrida. Es decir, si los resultados no eran los esperados, con una presición de almenos el 90\%; se alteraban cualesquiera de los archivos de código en función de mejorar los mismos.
+\par En este estudio, se trabajó con audio monofónico (1 canal), formato PCM de 16 bits y una razón de muestreo de 22050 Hz, lo cual se determinó por medio del programa \ref{lst:waveform}. Posteriormente, se crearon diversos archivos *.ipynb a partir de los cuales se desarrolló el código que corresponde a cada paso del programa final. Los resultados fueron el determinante para realizar modificaciones en las líneas de código, con el objetivo de aumentar la precisión en cada corrida. Es decir, si los resultados no eran los esperados, con una presición de al menos el 90\%; se alteraban cualesquiera de los archivos de código en función de mejorar los mismos.
 
-\par Inicialmente se llevó a cabo una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} (\ref{lst:test_mfcc}). De modo que si llegase a existir un error en la conversión del archivo de audio a un \texttt{*.csv} o \texttt{*.npy}, se pudiese detectar y corregir a tiempo.
+\par Inicialmente se ejecutó una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} (\ref{lst:test_mfcc}). De modo que si llegase a existir un error en la conversión del archivo de audio a un \texttt{*.csv} o \texttt{*.npy}, se pudiese detectar y corregir a tiempo.
 
-\par En este programa de prueba se utilizó un archivo de audio (\url{2022-06-08--14-52-28_1__segment3.wav}), a partir del cual se obtuvo una matriz tiempo-frecuencia:
+\par En este programa de prueba se utilizó un archivo de audio (\url{2022-06-05--19-39-14_2__segment2.wav}), a partir del cual se obtuvo una matriz tiempo-frecuencia:
 \begin{align*}
 [\text{Time Frames}] \times [\text{13 MFCC Coefficients}] \; ,
 \end{align*}
-correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, con un solapamiento del 50\% entre ventanas.
+correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, con un solapamiento del 50\% entre ventanas. A partir del cual se determinaron los parámetros para poder analizar los audios (\textit{audio monofónico (1 canal), formato PCM de 16 bits y una razón de muestreo de 22050 Hz}, ver la Figura~\ref{fig:AmplitudeXTime}).
+
+\end{tightmulticols}
+
+\begin{figure}[h!]
+	\centering
+	% Adjust width as needed
+	\includegraphics[width=0.9\textwidth]{Graph_2022-06-05--19-39-14_2__segment2.png}
+	\caption{\footnotesize{Forma de onda del archivo de audio \texttt{2022-06-05--19-39-14\_2\_\_segment2.wav}.}}
+	\label{fig:AmplitudeXTime}
+\end{figure}
+
+\begin{tightmulticols}
 
 \subsection{1er Programa}
+
+\par Bla bla bla
 
 \par Estó porporcionó archivos que fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
 
