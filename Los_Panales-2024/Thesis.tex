@@ -249,9 +249,9 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 
 \section{Planteamiento del Problema}
 
-\par La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena\cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
+\par La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena\cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.\\
 
-\par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas e inclusive seres humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia, que debe reconstruir el sello de propóleo y reabastecer el panal con respecto a las abejas que mueren en este proceso; sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna de la colmena, lo que puede conducir al colapso de toda la colonia si no se toma acción inmediata.
+\par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas e inclusive seres humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia, que debe reconstruir el sello de propóleo y reabastecer el panal con respecto a las abejas que mueren en este proceso; sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna de la colmena, lo que puede conducir al colapso de toda la colonia si no se toma acción inmediata.\\
 
 \par Una abeja reina puede ser reemplazada por la colonia mediante la crianza de una nueva reina a partir de larvas seleccionadas, siempre y cuando existan suficientes recursos y tiempo para que la nueva reina se desarrolle completamente. Este proceso puede tardar entre 16 y 24 días, dependiendo de las condiciones ambientales y la disponibilidad de alimento\cite{winston1987temperate}. Durante este período, la colonia puede volverse vulnerable a enfermedades, depredadores y otros factores estresantes que pueden afectar su supervivencia. Como una alternativa, los apicultores pueden introducir una reina comprada o criada en otro lugar para restablecer la estabilidad de la colonia. Sin embargo, la aceptación de una nueva reina por parte de las obreras no está garantizada y puede variar según el comportamiento de la colonia y las condiciones ambientales\cite{ruvinga2021use}.
 
@@ -343,9 +343,9 @@ Las abejas melíferas han sido ampliamente estudiadas por su destacada contribuc
 %-------------------------------------------------------------------------------------
 \section{Procedimiento}
 
-\par En este estudio, se trabajó con audio monofónico (1 canal), formato PCM de 16 bits y una razón de muestreo de 22050 Hz, lo cual se determinó por medio del programa \ref{lst:waveform}. Posteriormente, se crearon diversos archivos *.ipynb a partir de los cuales se desarrolló el código que corresponde a cada paso del programa final. Los resultados fueron el determinante para realizar modificaciones en las líneas de código, con el objetivo de aumentar la precisión en cada corrida. Es decir, si los resultados no eran los esperados, con una presición de al menos el 90\%; se alteraban cualesquiera de los archivos de código en función de mejorar los mismos.
+\par En este estudio, se trabajó con audio monofónico (1 canal), formato PCM de 16 bits y una razón de muestreo de 22050 Hz, lo cual se determinó por medio del programa \ref{lst:waveform}. Posteriormente, se crearon diversos archivos *.ipynb a partir de los cuales se desarrolló el código que corresponde a cada paso del programa final. Los resultados fueron el determinante para realizar modificaciones en las líneas de código, con el objetivo de aumentar la precisión en cada corrida. Es decir, si los resultados no eran los esperados, con una presición de al menos el 90\%; se alteraban cualesquiera de los archivos de código en función de mejorar los mismos.\\
 
-\par Inicialmente se ejecutó una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} (\ref{lst:test_mfcc}). De modo que si llegase a existir un error en la conversión del archivo de audio a un \texttt{*.csv} o \texttt{*.npy}, se pudiese detectar y corregir a tiempo.
+\par Inicialmente se ejecutó una prueba de extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), con apoyo de la librería \texttt{librosa} (\ref{lst:test_mfcc}). De modo que si llegase a existir un error en la conversión del archivo de audio a un \texttt{*.csv} o \texttt{*.npy}, se pudiese detectar y corregir a tiempo.\\
 
 \par En este programa de prueba se utilizó un archivo de audio (\url{2022-06-05--19-39-14_2__segment2.wav}), a partir del cual se obtuvo una matriz tiempo-frecuencia:
 \begin{align*}
@@ -365,6 +365,24 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 
 \begin{tightmulticols}
 
+\par Visto de otra forma, una frecuencia de muestreo de $22050$ Hz indica que el audio se representó de forma discreta mediante $22050$ muestras por segundo. A partir del análisis en Python, se observó que el archivo contiene un vector unidimensional (1D) de $N = 1{,}323{,}000$ muestras, por lo que su duración aproximada es
+\begin{equation*}
+	N/f_s = 1323000/22050 \approx 60 \text{ segundos.}
+\end{equation*}
+\par Cada muestra corresponde a un valor numérico (en este caso almacenado como \texttt{float32}) que representa la amplitud instantánea de la señal en ese instante de tiempo. En consecuencia, un archivo de audio puede interpretarse como una secuencia de valores que describe cómo varía la presión del aire (sonido) a lo largo del tiempo.
+
+\par Desde un enfoque matemático, la señal de audio discreta puede representarse como $x[n]$, definida como:
+\begin{equation}\label{eq:signal-x_n}
+	\begin{aligned}
+	    x[n] = \{x_0, x_1, \ldots, x_{N-1}\},\\
+	    n = 0,1,\ldots,N-1,
+	\end{aligned}
+\end{equation}
+
+donde $x[n]$ representa la amplitud de la señal en el instante discreto $n$ y $N$ es el número total de muestras.
+
+\par$\qquad$ No obstante, para el entrenamiento de un modelo de aprendizaje profundo, esta representación temporal no siempre es la más conveniente, ya que dificulta capturar patrones espectro-temporales relevantes de forma eficiente. Por ello, se transforma la señal al dominio tiempo--frecuencia mediante el cálculo de espectros por ventanas (STFT), se proyecta su energía a bandas en escala Mel y se aplica una compresión logarítmica; posteriormente, se obtiene un conjunto compacto de descriptores mediante la Transformada Discreta del Coseno (DCT), resultando en los coeficientes cepstrales en escala Mel (MFCC). Estos coeficientes resumen la envolvente espectral y son ampliamente utilizados en el procesamiento de señales de audio. La secuencia de MFCC a lo largo del tiempo puede representarse como una matriz (análoga a una imagen) que preserva información espectral temporal, lo cual facilita el uso de redes neuronales convolucionales (CNN) para la tarea de clasificación.
+
 \subsection{1er Programa}
 
 \par Bla bla bla
@@ -383,7 +401,7 @@ correspondiente a 13 coeficientes calculados por cada 25 milisegundos de audio, 
 %-------------------------------------------------------------------------------------
 \section{Base de Datos}
 
-\par El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+\par El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.\\
 
 \par El conjunto de datos incluye múltiples variables de metadatos que describen el entorno de la colmena y la condición de la colonia. De particular relevancia para este trabajo se encuentran las siguientes etiquetas:
 
