@@ -1,0 +1,19 @@
+# ignore ALL .log, .blg, .toc, .aux, .bbl, .bcf, .out, .fls, .fdb_latexmk, .synctex.gz files
+*.log
+*.blg
+*.toc
+*.aux
+*.bbl
+*.bcf
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl-SAVE-ERROR
+*.wav
+*.npy
+
+# ignore ALL files in ANY directory named:
+temporary/
+.vscode/
+Temp/

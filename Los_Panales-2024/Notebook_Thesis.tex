@@ -1,0 +1,481 @@
+\documentclass[12pt]{report}
+\usepackage[a4paper, total={7in, 9in}]{geometry}
+\usepackage{setspace} %Line spacing
+\onehalfspacing
+
+\usepackage{pdfpages}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.71667pt} % Increased as recommended by fancyhdr
+\addtolength{\topmargin}{-1.21667pt} % Optional: adjust topmargin as suggested
+\usepackage{lastpage}
+
+% For the chapters not to modify the page style
+\usepackage{titlesec}
+\titleformat{\chapter}{\bfseries}{\huge\arabic{chapter}.}{10pt}{\huge}
+\titleclass{\chapter}{straight}
+
+\usepackage{siunitx, multirow, booktabs}
+\usepackage{blindtext,alltt}
+\usepackage{csquotes} % Recommended for biblatex with babel/polyglossia
+\usepackage[backend=biber, style=numeric, sorting=none, locallabelwidth]{biblatex}
+\addbibresource{ThesisReferences.bib}
+
+\usepackage{listings}
+
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{url}
+\usepackage[nottoc]{tocbibind} %Add references to index.
+\usepackage{amsmath, amssymb}
+\usepackage{upgreek, dsfont, mathrsfs}
+\usepackage{stmaryrd}
+
+\usepackage{multicol}
+
+% Estilo compacto para secciones en columnas
+\titlespacing{\section}{0pt}{1ex plus 0.6ex minus 0.2ex}{0.8ex}
+\titlespacing{\subsection}{0pt}{0.8ex plus 0.4ex minus 0.2ex}{0.5ex}
+\titlespacing{\subsubsection}{0pt}{0.6ex plus 0.3ex minus 0.1ex}{0.4ex}
+
+% Configuración de columnas tipo revista
+\setlength{\columnsep}{25pt}           % separación entre columnas (default ~35pt)
+\setlength{\columnseprule}{0pt}      % línea entre columnas (0pt = sin línea)
+
+% Compactar el interlineado en columnas (opcional)
+\newenvironment{tightmulticols}{%
+  \begin{multicols}{2}
+  \setlength{\parskip}{0pt}
+  \setlength{\parindent}{1em}
+  \linespread{1}\selectfont
+}{%
+  \end{multicols}
+}
+
+\usepackage[breakable]{tcolorbox}
+\usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+\usepackage{caption}
+
+%Footnoe symbol instead of numbers
+%1   asterisk        *   2   dagger      †   3   double dagger       ‡
+%4   section symbol  §   5   paragraph   ¶   6   parallel lines      ‖
+%7   two asterisks   **  8   two daggers ††  9   two double daggers  ‡‡
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage{float}
+\floatplacement{figure}{H} % forces figures to be placed at the correct location
+
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+	\def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+
+\usepackage{iftex}
+\ifPDFTeX
+\IfFileExists{alphabeta.sty}{
+	\usepackage{alphabeta}
+}{
+	\usepackage[mathletters]{ucs}
+	\usepackage[utf8x]{inputenc}
+}
+\else
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\fi
+
+
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+% The default LaTeX title has an obnoxious amount of whitespace. By default,
+% titling removes some of it. It also provides customization options.
+\usepackage{titling}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+% normalem makes italics be italics, not underlines
+\usepackage{mathrsfs}
+
+% More styles for bullets
+\usepackage{pifont}
+
+% Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+\definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+\definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+% common color for the border for error outputs.
+\definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy 
+% Setup hyperref package
+\hypersetup{
+	breaklinks=true,  % so long urls are correctly broken across lines
+	colorlinks=true,
+	urlcolor=urlcolor,
+	linkcolor=linkcolor,
+	citecolor=citecolor,
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{NOTES $|$ \textcolor{red}{THESIS RELATED TOPICS}}
+\lfoot{Universidad Autónoma de Chihuahua}
+\rfoot{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
+
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+		\begin{tabular}{c}
+			\includegraphics[scale=0.2]{BN_uach.png}\\[3.5ex]
+			\textbf{\LARGE Universidad Autónoma de Chihuahua}\\[3.5ex]
+			\textbf{\Large Facultad de Ingeniería}\\[3.5ex]
+			\hline\\[3ex]
+			\begin{minipage}{17cm}
+				\centering
+				\begin{doublespace}
+					\textbf{\LARGE NOTEBOOK: Development of Topics Related to the Project}
+				\end{doublespace}
+			\end{minipage}\\[3.5ex]
+			\hline
+		\end{tabular}\vfill
+		{\large Notes Before Start Working on the Thesis}\\\vfill
+		{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
+		{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
+		{\large \textbf{Advisors:}}\\[3.5ex]
+		\begin{itemize}
+			\item {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
+			\item {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
+		\end{itemize}
+		\vfill
+		{\large \textbf{Chihuahua, Chih.,} April 14, 2024.}\\[3.5ex]
+	\end{center}
+\end{titlepage}
+
+\part*{DIFFERENTIAL EQUATIONS}
+
+%-------------------------------------------------------------------------------------
+% 1. Differential Equations - Notes
+%-------------------------------------------------------------------------------------
+
+	\chapter{INTRODUCTION TO DIFFERENTIAL EQUATIONS}
+
+	\par \textbf{DEFINITION 1.1.1 - Differential Equation}
+
+	\par An equation containing the derivatives of one or more unknown functions (or dependent variables), with respect to one or more independent variables, is said to be a \textbf{differential equation (DE)}.
+
+		\section{NOTATION}
+
+		\begin{itemize}
+			\item \textbf{Leibinz notation}:
+			\begin{align*}
+				\frac{dy}{dx}, \; \frac{d^{2}y}{dx^{2}}, \; \frac{d^{3}y}{dx^{3}}, \; ...
+			\end{align*}
+			\item \textbf{Prime notation}:
+			\begin{align*}
+				y', \; y'', \; y''', \; y^{(4)}, \; ...
+			\end{align*}
+		\end{itemize}
+		In general, the $n$th derivative of y is written as $\frac{d^{n}y}{dx^{n}}$ or $y^{(n)}$.
+		\begin{itemize}
+			\item \textbf{Newton's dot notation}: used in physical science and engineering, to denote derivatives with respect to time $t$,
+			\begin{align*}
+				\frac{d^{2}s}{dt^{2}} = -32 \; \rightarrow \; \text{becomes} \; \rightarrow \; \ddot{s} = -32.
+			\end{align*}
+			\item \textbf{Subscript notation}: often used in partial derivatives indicating the independent variables.
+			\begin{align*}
+				\frac{\partial^{2} u}{\partial x^{2}} = \frac{\partial^{2} u}{\partial t^{2}} - 2 \frac{\partial u}{\partial t}\; \rightarrow \; \text{becomes} \; \rightarrow \; u_{xx} = u_{tt} - 2 u_{t}.
+			\end{align*}
+		\end{itemize}
+
+		\section{CLASSIFICATION BY TYPE}
+
+		\par If a differential equation contains only ordinary derivatives of one or more unknown functions with respect to a single independent variable, it is said to be an \textbf{ordinary differential equation (ODE)}. An equation involving partial derivatives of one or more unknown functions of two or more independent variables is called a \textbf{partial differential equation (PDE)}.
+
+		\section{CLASSIFICATION BY ORDER}
+
+		\par The order of a differential equation (either ODE or PDE) is the order of the highest derivative in the equation. For example,
+		\begin{align*}
+			\frac{d^{2}y}{dx^{2}} + 5 \left( \frac{dy}{dx} \right)^3 - 4y = e^{x} \; ,
+		\end{align*}
+		\par is a second-order differential equation.
+
+		\section{DIFFERENTIAL EQUATIONS AS MATHEMATICAL MODELS}
+
+		If the rate at which the population grows is defined as $\frac{dP}{dt} = kP$ where $P(t)$ is the total population at a time $t$, then if we consider death and birth rate at which the population changes and taking them as a net rate - that is, the difference between the rate of birth and the rate of death in the community. The model for the population $P(t)$ if both (birth and death), are proportional to the population present at a time $t > 0$ is presented as
+
+		\begin{equation}
+			\frac{dP}{dt} = k_1P - k_2P,
+		\end{equation}
+
+		where $k_1$ and $k_2$ are the the constants of proportionality. Then, to determine a model for a population $P(t)$ if the birth rate is proportional to the population present at time $t$ but the death rate is proportional to the square of the population present at time $t$, we see that the birth rate is described as $k_1 P$ (does not change). Then, the rate of death is given by $k_2 P^2$ and,
+
+		\begin{equation}
+			\frac{dP}{dt} = k_1P - k_2P^2.
+		\end{equation}
+
+		\par \textbf{Newton's Law of Cooling/Warming}. According to Newton's empirical law of cooling/warming, the rate at which the temperature of a body changes is proportional to the difference between the temperature of the body and the temperature of the surrounding medium, the so-called ambient temperature. If $T(t)$ represents the temperature of a body at time $t$, $T_m$ the temperature of the surrounding medium, and $\frac{dT}{dt}$ the rate at which the temperature of the body changes, then Newton's law of cooling/warming translates into the mathematical statement
+
+		\begin{equation}\label{eq:CoolWarm}
+			\frac{dT}{dt} \quad\alpha\quad T - T_m \quad\text{ or }\quad \frac{dT}{dt} = k (T- T_m),
+		\end{equation}
+
+		where $k$ is a constant of proportionality. In either case, cooling or warming, if $T_m$ is a constant, it stands to reason that $k < 0$.
+
+%-------------------------------------------------------------------------------------
+% 2. Maths of Physics - Notes
+%-------------------------------------------------------------------------------------
+
+\part{MATHEMATICS OF PHYSICS}
+
+\chapter{INFINITE SERIES, POWER SERIES}
+
+\section{The Geometric Serie}
+
+\par \textbf{Geometric Progression}, is a sequence of numbers where each term after the first is found by multiplying the previous term by a fixed, non-zero number called the common ratio. The \textbf{general form} of a geometric progression is:
+\begin{equation}\label{eq:GP_general-form-1}
+a, \, ar, \, ar^{2}, \, ar^{3}, \, ...
+\end{equation}
+where $a$ is the \textit{first term} and $r$ is the \textit{common ratio}. Geometric Progressions have some interesting properties:
+\begin{itemize}
+\item If $r > 1$, the terms will increase.
+\item If $0 < r < 1$, the terms will decrease.
+\item If $r = 1$ the sequence becomes constant (where each term is the same).
+\item If $r < 0$, the terms will alternate between positive and negative values.
+\end{itemize} 
+i.e., Suppose a bouncing ball rises each time to $\frac{2}{3}$ of the height of the previous bounce. Then	
+\begin{equation}\label{BounceBall-ie1}
+1, \, \frac{2}{3}, \, \frac{4}{9}, \, \frac{8}{27}, \, \frac{16}{81}, \, ... \, ,
+\end{equation}
+
+%-------------------------------------------------------------------------------------
+% 3. Numerical Methods - Notes
+%-------------------------------------------------------------------------------------
+
+\part{NUMERICAL METHODS}
+
+\chapter{INTRODUCTION}
+
+\par The term \textbf{Numerical Methods} refers to those techniques used to approximate the solution to a mathematical problem, these methods are used for mathematical processes such as integrals, differential equations, nonlinear equations in which the solution is close to the exact one and the error of that result can also be quantified by an approximation.
+
+\section{Steps for solving an Engineering Problem}
+
+\begin{itemize}
+\item \textbf{Description}: present the problem exposing every single need related to it, write the background of it and the need for its solution.
+\item \textbf{Mathematical Model}: present an equation that best describes the situation when fitting the given data.
+\item \textbf{Solution of the Mathematical Model}: find the solution to the proposed equation.
+\item \textbf{Using the Solution}: propose a solution to the real problem based on the obtained result from the mathematical model.
+\end{itemize}
+
+\chapter{MATHEMATICAL PROCESSES}
+
+\section{Roots of Nonlinear Equations}
+
+\section{Simultaneous Linear Equations}
+
+\section{Curve Fitting by Interpolation}
+
+\section{Differentiation}
+
+\section{Curve Fitting by Regression}
+
+\section{Numerical Integration}
+
+\section{Ordinary Differential Equations}
+
+\section{Partial Differential Equations}
+
+\section{Optimization}
+
+\section{Fast Fourier Transform}
+
+%-------------------------------------------------------------------------------------
+% RELEVANT NOTES
+%-------------------------------------------------------------------------------------
+\newpage
+\chapter{THESIS ACTUAL CONTENT}
+
+\section{DEFINITIONS}
+
+\begin{itemize}
+	\item \textbf{PCM}: Pulse Code Modulation, is a method used to digitally represent analog signals. In PCM, the amplitude of the analog signal is sampled at uniform intervals and quantized to a series of symbols in a digital (usually binary) form. The PCM tells us how to decode the raw bytes into numerical values (amplitude over time). For example, a 16-bit PCM means that each sample is represented by 16 bits, allowing for 65536 different amplitude values.
+	\item \textbf{WAV}: Waveform Audio File Format, a standard format for storing audio on computers. It is a raw audio format that contains PCM data, which can be uncompressed or compressed. WAV files are typically larger than other audio formats like MP3 or AAC because they store audio data in a lossless format.
+	\item \textbf{Audio Sampling Rate}: The number of samples of audio carried per second, measured in Hz or kHz. For example, 44100 Hz means that 44100 samples are taken per second.
+	\item \textbf{Mono Channel}: Mono audio means that the sound is recorded or played back through a single channel. In contrast, stereo audio uses two channels (left and right) to create a sense of space and directionality in the sound.
+	\item \textbf{MFCC}: Mel-Frequency Cepstral Coefficients, a feature extraction technique used in audio processing.
+	\item \textbf{Spectrogram}: A visual representation of the spectrum of frequencies in a sound signal as they vary with time.
+	\item \textbf{Spectral Centroid}: A measure of the "center of mass" of the spectrum of a sound signal, often used to characterize timbre.
+	\item \textbf{Zero Crossing Rate}: The rate at which a signal changes sign, used as a feature in audio analysis.
+	\item \textbf{ESP32}: A low-cost, low-power system on
+\end{itemize}
+
+\section{DATASETS}
+
+\par The dataset\cite{AnnaYang-Dataset} was recorded by Anna Yang, it contains original data from European honeybee hives in California divided into 60-second segments and recorded approximately 23 to 24 samples per day, collected with a custom IoT device that combined an ESP32 Wi-Fi module, an INMP441 microphone module, and a BME280 temperature/humidity sensor. There are 7100 samples in total.
+
+\begin{itemize}
+\item First recording: 08 - June - 2022 at 14:52:28.
+\item Last recording: 15 - July - 2022 at 15:28:21.
+\item The ``{\tt queen acceptance}" values indicate whether the queen is accepted by the hive (0 - no queen present, 1 - not accepted/rejected, 2 - accepted).
+\item ``{\tt queen status}" is a combined value for ``{\tt queen presence}" and ``{\tt queen acceptance}" (0, queenright/original queen, 1 - not present, 2 - present and rejected, 3 - present and newly accepted).
+\item  The ``{\tt target}" feature was another proposed way to combine ``{\tt queen presence}" and ``{\tt queen acceptance}", but the ``{\tt queen status}" feature was a better way to do it. "Time" is the time of day (24 hours) scaled to values between 0 and 1.
+\end{itemize}
+
+\subsection{Dataset Characteristics}
+
+The audiofiles are:
+\begin{enumerate}[label=\roman*)]
+	\item in WAV format,
+	\item mono channel,
+	\item 16-bit PCM,
+	\item sampled at 22050 Hz,
+\end{enumerate}
+
+\subsubsection{Loading Audio Correctly}
+
+\par Without the right sample rate, audio could sound sped up or slowed down.
+
+\subsubsection{Frame-level Feature Extraction}
+
+\par Many features like MFCC, spectral centroid, or zero crossing rate rely on splitting the audio into frames. A frame is a short segment of audio, typically 20-40 milliseconds long. The audio is split into overlapping frames, which allows for better analysis of the audio signal over time. The sample rate determines how many samples are in each frame. For example, with a sample rate of 22050 Hz and a frame length of 25 ms, each frame will contain 551 samples (22050 Hz * 0.025 s).
+
+\subsubsection{Spectogram / MFCC Resolution}
+
+\par A higher sample rate gives more detail in the frequency axis of the spectrogram, which can be useful for distinguishing between different sounds. However, it also increases the size of the audio file and the computational load for processing. A lower sample rate may lose some high-frequency detail but can be sufficient for many applications, especially if the focus is on lower frequencies.
+
+\par Since the goal is to detect subtle differences in hive states, working with the original sample rate of 22050 Hz is recommended to preserve the full range of frequencies present in the audio.
+
+\par\textbf{Notes of the dataset creator}: \textit{``{\tt queen status}" would be the indicator of the queen situation. The sensor was placed in the telescoping cover of the hive, which is below the outer cover but above the frames. The telescoping cover was sealed with wire mesh so bees could not get to the sensors, which decreased bee interference with the microphone as well.}
+
+\par\textit{To confirm whether the queen was accepted or rejected, I conducted a daily hive inspection. I observed the bees' reaction towards the queen in the cage: Are they attempting to sting or ball (suffocate) her? Are they calm or excited? If there are 2+ layers of bees around the cage, it is an indication that they are aggressive and hostile towards the queen. In the 24-hour period that the queen's status changes from rejected to accepted (between hive inspections), there was ambiguity around the exact time that the queen became accepted. As a result, I discarded the data from this uncertain period.}
+
+\par\textit{I do not believe I ever noted that the dataset related to colony collapse disorder. However, I can describe how it could be indirectly related. Colony collapse disorder, a phenomenon that occurs when the majority of bees in a colony mysteriously disappear, has been on the decline in recent years. Initially, it was very concerning for scientists and beekeepers because bees were dying, seemingly without reason. Despite it being not as severe now, overall colony loss is still a major concern to beekeepers, and it has been reported that queen failure -- when a colony is headed by a queen bee that is infertile or weak -- has been consistently identified as one of the top four causes of colony mortality, annually, since 2009 (from the annual study conducted by the Canadian Association of Professional Apiculturists). This dataset records the difference in sound between queen states, addressing the widespread issue of queen failure.}
+
+\par\textit{I did not collect data on varroa mites or pesticide exposure for this dataset. In fact, pesticide exposure is quite difficult to track, especially since the data was mostly collected on suburban backyard beehives. It is near impossible to know whether nearby residences treat their gardens with chemical or organic pesticides, and even where the bees were visiting, since they can fly 3-4 miles just to collect pollen and nectar.}
+
+
+\section{PROCEDIMIENTO}
+
+\par Se desarrolló un sistema que permite la detección automática del estado de la abeja reina en una colmena a partir del análisis de grabaciones de audio. Para ello, se emplearon técnicas de aprendizaje automático y procesamiento de señales acústicas.
+
+\par Inicialmente se determinó el formato de los archivos de audio y la razón de muestreo a partir de un programa en Python. En este estudio, se utiliza audio monofónico (1 canal), con formato PCM de 16 bits y una razón de muestreo de 22050 Hz. Luego, se tomó uno de los archivos para la extracción de características acústicas, específicamente los coeficientes cepstrales en la escala Mel (MFCC), de donde se obtuvo una matriz tiempo-frecuencia
+\begin{align*}
+	[\text{Time Frames}] \times [\text{13 MFCC Coefficients}] \; ,
+\end{align*}
+de 13 coeficientes por cada 25 ms de audio, con un solapamiento del 50\% entre ventanas.
+
+\subsection{Instrumentos}
+
+\par El proceso de recolección de datos implicó la grabación de audio en condiciones controladas, asegurando que las grabaciones fueran representativas del comportamiento sonoro de las colmenas. Los datos fueron adquiridos utilizando un dispositivo IoT que incluía un módulo Wi-Fi ESP32, un micrófono digital INMP441 y un sensor de temperatura y humedad BME280. Estos sensores fueron colocados dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior— y se encerraron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
+
+\subsection{Base de Datos}
+
+El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+
+El conjunto de datos contiene múltiples características de metadatos que proporcionan información sobre el entorno de la colmena y la condición de la colonia. De particular relevancia para este estudio se encuentran las siguientes etiquetas:
+
+\begin{itemize}[label=\ding{43}]
+	\item \texttt{queen acceptance}: indica si la reina es aceptada por la colonia. Valores: 0 (sin reina), 1 (presente pero no aceptada), 2 (aceptada).
+	\item \texttt{queen presence}: indica si la reina está físicamente presente en la colmena.
+	\item \texttt{queen status}: una etiqueta combinada derivada de las dos anteriores, con los siguientes valores: 0 (original/con reina funcional), 1 (no presente), 2 (presente y rechazada), 3 (presente y recién aceptada). Esta es la etiqueta principal utilizada para la clasificación en este trabajo.
+	\item \texttt{time}: la hora del día, escalada entre 0 y 1 para representar un ciclo de 24 horas.
+\end{itemize}
+
+El proceso de etiquetado se basó en inspecciones manuales diarias de las colmenas, donde se observó el comportamiento de las abejas hacia la reina (por ejemplo, formación de enjambre o comportamiento tranquilo). Para aquellos casos en los que el estado de la reina cambió entre inspecciones (es decir, había ambigüedad sobre el momento exacto de aceptación), las muestras fueron descartadas para mantener la integridad de las etiquetas.
+
+\section{GPT NOTAS}
+
+\section{Real-time decision logic}
+
+The model predicts per 2-second segment and since real life needs stability temporal smoothing is applied as follows:
+\begin{enumerate}
+	\item Every 1 second:
+	\begin{enumerate}[label=\roman*.]
+		\item take last 2 seconds of audio,
+		\item compute features,
+		\item predict class probabilities $p_t$.
+	\end{enumerate}
+	\item Keep a rolling window of the last N predictions (e.g., 60 seconds $\to N\approx 60$):
+	\begin{itemize}[label=\ding{43}]
+		\item average probabilities:
+		\begin{equation}\label{av-prob}
+			\bar{p} = \frac{1}{N}\sum_{t=1}^{N} p_t \; .
+		\end{equation}
+		\item Output class $= argmax(\bar{p})$.
+		\item Confidence $= max(\bar{p})$.
+	\end{itemize}
+\end{enumerate}
+%-------------------------------------------------------------------------------------
+% BIBLIOGRAFÍA.
+%-------------------------------------------------------------------------------------
+\pagebreak
+\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+\printbibliography
+\thispagestyle{empty}
+
+\end{document}

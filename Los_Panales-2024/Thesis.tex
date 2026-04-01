@@ -1,0 +1,2434 @@
+\documentclass[12pt]{report}
+\usepackage[spanish]{babel}
+\usepackage[a4paper, total={7in, 9in}]{geometry}
+\usepackage{setspace} %Line spacing
+\onehalfspacing
+
+\usepackage{pdfpages}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.71667pt} % Increased as recommended by fancyhdr
+\addtolength{\topmargin}{-1.21667pt} % Optional: adjust topmargin as suggested
+\usepackage{lastpage}
+
+% For the chapters not to modify the page style
+\usepackage{titlesec}
+\titleformat{\chapter}{\bfseries}{\huge\arabic{chapter}.}{10pt}{\huge}
+\titleclass{\chapter}{straight}
+
+\usepackage{siunitx, multirow, booktabs}
+\usepackage{blindtext,alltt}
+\usepackage{csquotes} % Recommended for biblatex with babel/polyglossia
+\usepackage[backend=biber, style=numeric, sorting=none, locallabelwidth]{biblatex}
+\addbibresource{ThesisReferences.bib}
+
+\usepackage{listings}
+
+\usepackage{wrapfig}
+\usepackage{array}
+\usepackage{url}
+\usepackage[nottoc]{tocbibind} %Add references to index.
+\usepackage{amsmath, amssymb}
+\usepackage{upgreek, dsfont, mathrsfs}
+\usepackage{stmaryrd}
+
+\usepackage{multicol}
+
+% Estilo compacto para secciones en columnas
+\titlespacing{\section}{0pt}{1ex plus 0.6ex minus 0.2ex}{0.8ex}
+\titlespacing{\subsection}{0pt}{0.8ex plus 0.4ex minus 0.2ex}{0.5ex}
+\titlespacing{\subsubsection}{0pt}{0.6ex plus 0.3ex minus 0.1ex}{0.4ex}
+
+% Configuración de columnas tipo revista
+\setlength{\columnsep}{25pt}           % separación entre columnas (default ~35pt)
+\setlength{\columnseprule}{0pt}      % línea entre columnas (0pt = sin línea)
+
+%\usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+\usepackage[breakable]{tcolorbox}
+% Compactar el interlineado en columnas (opcional)
+\newenvironment{tightmulticols}{%
+  \begin{multicols}{2}
+  \setlength{\parskip}{1.2pt}
+  %\setlength{\parindent}{0em}
+  \linespread{1}\selectfont
+}{%
+  \end{multicols}
+}
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+%Footnoe symbol instead of numbers
+%1   asterisk        *   2   dagger      †   3   double dagger       ‡
+%4   section symbol  §   5   paragraph   ¶   6   parallel lines      ‖
+%7   two asterisks   **  8   two daggers ††  9   two double daggers  ‡‡
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage{float}
+\floatplacement{figure}{H} % forces figures to be placed at the correct location
+
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+	\def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+
+\usepackage{iftex}
+\ifPDFTeX
+\IfFileExists{alphabeta.sty}{
+	\usepackage{alphabeta}
+}{
+	\usepackage[mathletters]{ucs}
+	\usepackage[utf8x]{inputenc}
+}
+\else
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\fi
+
+
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+% The default LaTeX title has an obnoxious amount of whitespace. By default,
+% titling removes some of it. It also provides customization options.
+\usepackage{titling}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+% normalem makes italics be italics, not underlines
+\usepackage{mathrsfs}
+
+% More styles for bullets
+\usepackage{pifont}
+
+% For Appendix
+\newcounter{specialchapter}
+\renewcommand{\thespecialchapter}{\Alph{specialchapter}}
+\newcommand{\specialchapter}[1]{%
+  \chapter*{#1}%
+  \setcounter{specialchapter}{\value{chapter}}%
+  \renewcommand{\thechapter}{\thespecialchapter}%
+}
+
+% Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+\definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+\definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+% common color for the border for error outputs.
+\definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy 
+% Setup hyperref package
+\hypersetup{
+	breaklinks=true,  % so long urls are correctly broken across lines
+	colorlinks=true,
+	urlcolor=urlcolor,
+	linkcolor=linkcolor,
+	citecolor=citecolor,
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{APRENDIZAJE PROFUNDO $|$ \textcolor{orange}{DETECCIÓN DE LA ABEJA REINA EN LA COLMENA}}
+\lfoot{Universidad Autónoma de Chihuahua}
+\rfoot{Página \thepage \hspace{1pt} de \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.5pt} %ancho de la recta del encabezado superior
+\begin{document}
+	
+	\begin{titlepage}
+		\begin{center}
+			\begin{tabular}{c}
+				\includegraphics[scale=0.2]{BN_uach.png}\\[3.5ex]
+				\textbf{\LARGE Universidad Autónoma de Chihuahua}\\[3.5ex]
+				\textbf{\Large Facultad de Ingeniería}\\[3.5ex]
+				\hline\\[3ex]
+				\begin{minipage}{17cm}
+					\centering
+					\begin{doublespace}
+						\textbf{\LARGE Detección de la Abeja Reina en una Colmena por Medio del Aprendizaje Profundo}\\[3.5ex]
+					\end{doublespace}
+				\end{minipage}\\[3.5ex]
+				\hline
+			\end{tabular}\vfill
+			{\large Análisis de Frecuencias Emitidas por el Panal}\\\vfill
+			{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
+			{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
+			{\large \textbf{Advisors:}}\\[3.5ex]
+			\begin{itemize}
+				\item[\ding{226}] {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
+				\item[\ding{226}] {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
+			\end{itemize}
+			\vfill
+			{\large \textbf{Chihuahua, Chih.,} \today.}\\[3.5ex]
+		\end{center}
+	\end{titlepage}
+
+%-------------------------------------------------------------------------------------
+% ÍNDICE
+%-------------------------------------------------------------------------------------
+\tableofcontents
+\thispagestyle{empty} % No header/footer on the table of contents page
+
+
+%-------------------------------------------------------------------------------------
+% RESUMEN/ABSTRACT
+%-------------------------------------------------------------------------------------
+\pagebreak
+\chapter*{RESUMEN}
+\addcontentsline{toc}{chapter}{RESUMEN}
+
+%-------------------------------------------------------------------------------------
+% 1. INTRODUCCIÓN
+%-------------------------------------------------------------------------------------
+\pagebreak
+\chapter{INTRODUCCIÓN}
+\vspace{-3em}
+
+\begin{tightmulticols}
+
+\noindent Las abejas melíferas han sido ampliamente estudiadas por su destacada contribución al medio ambiente, proporcionando recursos que son vitales para animales, plantas y seres humanos. Su papel en la polinización es crucial para la biodiversidad y la producción agrícola\cite{leon2023calidad}. Además, la miel, el polen, la jalea real y la cera de abejas son productos altamente valorados por sus propiedades nutricionales y medicinales\cite{winston1987temperate}.
+
+\par Durante las temporadas de mayor producción de miel, como en primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km\cite{Beekman2000}, viajando aproximadamente 3 km de ida y vuelta entre la colmena y las fuentes de alimento, como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación de las abejas para regresar a la colmena y abastecerla?
+
+\par La comunicación dentro de la colmena es esencial para la supervivencia de la colonia. Las abejas utilizan una variedad de señales, incluyendo feromonas y sonidos, para coordinar sus actividades y mantener el orden social\cite{winston1987temperate}. La presencia de una abeja reina es fundamental para la cohesión del grupo, ya que su ausencia puede conducir a un comportamiento caótico y al eventual colapso de la colonia\cite{ruvinga2021}. Otra forma de comunicación es el \textit{waggle dance}, mediante el cual las abejas pueden informar sobre la ubicación de fuentes de alimento, tomando como referencia los puntos cardinales y trazando un vector en la dirección requerida\cite{wang2025encoding}, lo que permite notificar a las demás abejas recolectoras.
+
+\par Según Ruvinga\cite{ruvinga2021}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas\cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear\cite{ruvinga2021}.
+
+%-------------------------------------------------------------------------------------
+% 1.1. Planteamiento del problema
+%-------------------------------------------------------------------------------------
+
+\section{Planteamiento del Problema}
+
+\noindent La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena\cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
+
+\par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas e inclusive seres humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia, que debe reconstruir el sello de propóleo y reabastecer el panal con respecto a las abejas que mueren en este proceso; sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna de la colmena, lo que puede conducir al colapso de toda la colonia si no se toma acción inmediata.
+
+\par Una abeja reina puede ser reemplazada por la colonia mediante la crianza de una nueva reina a partir de larvas seleccionadas, siempre y cuando existan suficientes recursos y tiempo para que la nueva reina se desarrolle completamente. Este proceso puede tardar entre 16 y 24 días, dependiendo de las condiciones ambientales y la disponibilidad de alimento\cite{winston1987temperate}. Durante este período, la colonia puede volverse vulnerable a enfermedades, depredadores y otros factores estresantes que pueden afectar su supervivencia. Como una alternativa, los apicultores pueden introducir una reina comprada o criada en otro lugar para restablecer la estabilidad de la colonia. Sin embargo, la aceptación de una nueva reina por parte de las obreras no está garantizada y puede variar según el comportamiento de la colonia y las condiciones ambientales\cite{ruvinga2021}.
+
+%-------------------------------------------------------------------------------------
+% 1.2. Justificación
+%-------------------------------------------------------------------------------------
+
+\section{Justificación}
+
+\noindent Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta de gran utilidad para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina\cite{ruvinga2021, maarefremote, howard2013, ruvinga2023}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
+
+%-------------------------------------------------------------------------------------
+% 1.3. Objetivos
+%-------------------------------------------------------------------------------------
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+\noindent Desarrollar un sistema de detección automática con respecto a la presencia de la abeja reina en una colmena, a partir del cual se permita la recolección de datos, el análisis de audio y la implementación de técnicas de aprendizaje automático. Se pretende obtener un modelo capaz de clasificar el estado de la reina en función de las características acústicas extraídas de grabaciones de audio. Este enfoque no invasivo busca minimizar la perturbación de la colonia durante las inspecciones recurrentes que suele hacer un apicultor, preservando así el bienestar de las abejas y la integridad del panal.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}[label = \ding{43}]
+    \item Realizar una revisión bibliográfica sobre la estructura de las colonias de abejas melíferas y los efectos de la ausencia de la reina.
+    \item Procesar y organizar un conjunto de datos de audio de colmenas etiquetado con el estado de la reina.
+    \item Extraer características acústicas relevantes, como los coeficientes cepstrales en la escala Mel (MFCC), a partir de las grabaciones.
+    \item Entrenar y evaluar modelos de aprendizaje automático para clasificar el estado de la reina basado en características extraídas.
+    \item Validar la efectividad del sistema en términos de precisión, sensibilidad y especificidad.
+\end{itemize}
+
+\section{Hipótesis de Trabajo}
+
+\noindent Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión, si la reina está presente, ausente, rechazada o recién aceptada en la colonia.
+
+\end{tightmulticols}
+
+%-------------------------------------------------------------------------------------
+% 2. MARCO TEÓRICO
+%-------------------------------------------------------------------------------------
+
+\pagebreak
+\chapter{MARCO TEÓRICO}
+\vspace{-3em}
+
+%====================================================================================
+% 2.1. CONTEXTO: ABEJAS, POLINIZACIÓN Y MONITOREO
+%====================================================================================
+
+\section{Las Abejas Melíferas y su Importancia Ecológica y Económica}
+
+\begin{tightmulticols}
+
+\subsection{Rol de las Abejas en la Agricultura y Ecosistemas}
+
+\noindent Las abejas melíferas (\textit{Apis mellifera}) constituyen uno de los grupos de polinizadores más importantes a nivel mundial, visitando más del 90\% de los 107 principales tipos de cultivos globales \cite{khalifa2021}. Su labor de polinización contribuye directamente a la producción de aproximadamente el 75\% de los cultivos de importancia alimentaria, incluyendo la mayoría de frutas, semillas y nueces, así como cultivos de alto valor comercial como café, cacao y canola \cite{potts2016}.
+
+\par El valor económico de los servicios de polinización animal se estima entre USD \$235-577 mil millones anuales a nivel global \cite{potts2016}, representando aproximadamente el 9.5\% del valor total de la producción agrícola destinada al consumo humano. Sin embargo, más allá del valor monetario directo, la polinización por abejas es fundamental para la seguridad alimentaria global: se estima que entre 5-8\% de la producción mundial de cultivos se perdería sin servicios de polinización animal \cite{khalifa2021}, lo que requeriría cambios significativos en las dietas humanas y una expansión desproporcionada de tierras agrícolas.
+
+\subsection{Declive de Poblaciones y Factores de Riesgo}
+
+\noindent En las últimas décadas se ha documentado un declive alarmante en las poblaciones de abejas melíferas en múltiples regiones del mundo, particularmente en Europa occidental y Norteamérica \cite{potts2016}. Este declive ha sido atribuido a diversos factores interrelacionados, incluyendo:
+
+\begin{itemize}
+    \item \textbf{Cambios en el uso del suelo}: La conversión de hábitats semi-naturales a agricultura intensiva reduce la disponibilidad de recursos florales y sitios de anidación \cite{potts2016}.
+    \item \textbf{Pesticidas}: Particularmente los neonicotinoides, que han demostrado efectos letales y subletales en polinizadores, afectando su navegación, aprendizaje y reproducción \cite{potts2016}.
+    \item \textbf{Patógenos y parásitos}: El ácaro \textit{Varroa} y virus asociados representan amenazas significativas para la salud de las colonias \cite{potts2016}.
+    \item \textbf{Cambio climático}: Alteraciones en la sincronización temporal y espacial entre las abejas y las plantas que polinizan \cite{potts2016}.
+    \item \textbf{Especies invasoras}: Introducción de depredadores y competidores que alteran las redes de polinización establecidas.
+\end{itemize}
+
+\subsection{Estructura Social de la Colmena y Rol de la Reina}
+
+\noindent Las abejas melíferas son insectos eusociales altamente organizados. Una colonia típica en verano puede contener entre 30,000 y 80,000 individuos, reduciendo a tan solo 5,000 en invierno. La colmena está compuesta por tres castas principales: la reina (única hembra fértil), miles de obreras (hembras estériles) y cientos de zánganos (machos) durante la temporada reproductiva \cite{ruvinga2021}.
+
+\par \textbf{La reina} es el eje central de la colonia, siendo la única capaz de poner huevos fertilizados. \textbf{Su presencia es crítica para la supervivencia a largo plazo de la colmena}, ya que regula la cohesión social mediante la producción de feromonas específicas, particularmente la feromona mandibular de la reina (QMP) \cite{ruvinga2023}. \textbf{La pérdida de la reina}, conocida como estado de \textit{queenlessness}, resulta en un declive gradual de la población que \textbf{eventualmente lleva a la extinción de la colonia} si no se toman medidas correctivas oportunas \cite{ruvinga2023}.
+
+\par \textbf{Las obreras} realizan todas las tareas necesarias para el mantenimiento de la colonia, incluyendo construcción de panales, recolección de néctar y polen (forrajeo), alimentación de larvas, regulación de temperatura, defensa y limpieza. Sus funciones varían según su edad en un proceso conocido como \textit{polietismo temporal} \cite{ruvinga2021}.
+
+\par \textbf{Los zánganos} tienen como función primordial la fecundación de reinas vírgenes. Aunque no participan en tareas laborales dentro de la colmena, pueden contribuir a la termorregulación del nido \cite{ruvinga2021}.
+
+\subsection{Necesidad de Sistemas de Monitoreo No Invasivos}
+
+\noindent El monitoreo tradicional de colmenas mediante inspección visual directa es laborioso, requiere experiencia, puede ser estresante para las abejas y potencialmente disemina enfermedades y parásitos entre colonias. Además, existe el riesgo de muerte accidental de la reina durante la inspección \cite{ruvinga2023}. Por estas razones, existe una demanda creciente por sistemas de monitoreo remoto, no invasivo y continuo que permitan a los apicultores detectar tempranamente problemas en sus colmenas.
+
+\end{tightmulticols}
+
+%====================================================================================
+% 2.2. MONITOREO ACÚSTICO DE COLMENAS: ESTADO DEL ARTE
+%====================================================================================
+
+\section{Monitoreo Acústico de Colmenas: Estado del Arte}
+
+\begin{tightmulticols}
+
+\subsection{Fundamentos del Análisis Acústico en Apicultura}
+
+\noindent Las abejas producen una variedad de señales acústicas y vibratorias que transmiten información sobre el estado de la colonia. Estas señales son generadas principalmente por el batido de alas, aunque también incluyen vibraciones torácicas transmitidas al sustrato \cite{howard2013}. El análisis de estas señales acústicas ofrece una modalidad de monitoreo apropiada porque:
+
+\begin{itemize}
+    \item Es completamente no invasivo.
+    \item Permite el monitoreo continuo y en tiempo real.
+    \item Requiere equipamiento relativamente simple (micrófono).
+    \item Proporciona información rica sobre eventos importantes en la colmena.
+\end{itemize}
+
+\subsection{Comunicación Acústica en Abejas Melíferas}
+
+\noindent Estudios pioneros han documentado diversos tipos de señales acústicas producidas por las abejas \cite{howard2013}. La Tabla \ref{tab:bee_signals} resume las principales señales identificadas:
+
+\end{tightmulticols}
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Señales acústicas y vibratorias en \textit{Apis mellifera}}}
+\label{tab:bee_signals}
+\begin{tabular}{|c|p{3cm}|p{2.5cm}|p{5cm}|}
+\hline
+\textbf{Señal} & \textbf{Frecuencia} & \textbf{Duración} & \textbf{Contexto/Función} \\
+\hline
+\textit{Queen Piping} & 340-450 Hz & 1.25 s & Producida por reina virgen recién emergida \\
+\hline
+\textit{Queen Quacking} & $<$ 450 Hz & $<$ 200 ms & Respuesta de reinas no emergidas \\
+\hline
+\textit{Worker Piping} (alas juntas) & 200-2000 Hz & 0.2-2 s & En enjambres, modulación en frecuencia \\
+\hline
+\textit{Worker Piping} (alas separadas) & 300-400 Hz & 0.2-2 s & En colmenas, sin modulación \\
+\hline
+Danza del meneo & 200-300 Hz + 13-15 Hz (cola) & Pulsos cortos & Comunicación de ubicación de recursos \\
+\hline
+Señal de detención & 350 Hz (media) & 0.05-0.2 s & Interrupción de reclutamiento \\
+\hline
+Señal de vibración & 16-18 Hz & 1-2 s & Activación general de obreras \\
+\hline
+\end{tabular}
+\end{table}
+
+\pagebreak
+
+\begin{tightmulticols}
+
+\subsection{Detección de Eventos mediante Análisis Acústico}
+
+\subsubsection{Detección de un comportamiento de enjambre (\textit{Swarming})}
+
+\noindent Swarming es el proceso natural de reproducción de colonias mediante el cual una porción significativa de la colonia abandona la colmena original con la reina vieja para establecer una nueva colonia. Este evento representa una pérdida económica considerable para el apicultor.\\
+
+\par\textbf{Ferrari et al. (2008)}\cite{ferrari2008} realizaron uno de los primeros estudios cuantitativos sobre la predicción del Swarming mediante análisis acústico. Monitorearon sonidos y temperatura en el periodo alrededor de un evento de Swarming, observando que las bandas de frecuencia dominantes se desplazan de 100-300 Hz en condiciones normales a 500-600 Hz inmediatamente antes del enjambre. Este incremento fue atribuido al batido intensivo de alas en preparación para el vuelo.\\
+
+\par\textbf{Bencsik et al. (2011)} utilizaron acelerómetros en lugar de micrófonos, capturando vibraciones del panal. Mediante análisis de componentes principales (PCA) y eigenespectros identificaron patrones característicos previos a Swarming.
+
+\subsubsection{Detección de Ausencia de Reina (\textit{Queenlessness})}
+
+\noindent La detección del estado \textit{queenless} es crítica porque permite intervención temprana antes de que la colonia decline irreversiblemente.\\
+
+\par \textbf{Boys (1999)} reportó observaciones empíricas de apicultores experimentados, notando que el sonido ``warble'' característico entre 225-285 Hz disminuye en amplitud en colmenas sin reina, siendo reemplazado por un sonido ``quejumbroso'' a frecuencias ligeramente menores. Adicionalmente, el sonido general fue descrito como discordante en colmenas \textit{queenless}, en contraste con el sonido armonioso de colmenas \textit{queenright} (aquellos panales que si conservan a la reina).\\
+
+\par \textbf{Howard et al. (2013)} \cite{howard2013} realizaron el primer estudio cuantitativo sistemático sobre detección de \textit{queenlessness} mediante procesamiento de señales. Utilizaron:
+
+\begin{itemize}
+    \item Grabaciones de cuatro colmenas (dos control \textit{queenright}, dos experimentales con reina removida).
+    \item Análisis espectral mediante Transformada de Stockwell.
+    \item Clasificación mediante Mapas Auto-organizados (SOM).
+    \item Análisis de Densidad Espectral de Potencia (PSD).
+\end{itemize}
+
+\noindent Aunque sus resultados fueron algo inconclusos, establecieron la metodología base y confirmaron diferencias espectrales entre ambos estados, particularmente en el rango 165-285 Hz.\\
+
+\par\textbf{Ruvinga et al. (2021, 2023)} representan el avance más significativo en esta área, aplicando técnicas modernas de aprendizaje profundo. Su trabajo se desarrolló en dos fases:
+
+\noindent\textbf{Fase 1 (2021)\cite{ruvinga2021}:} Comparación de clasificadores usando MFCC
+\begin{itemize}
+    \item \textbf{Dataset}: 480 grabaciones de 1 minuto (Aug 2012, 4 colmenas).
+    \item \textbf{Características}: 14 MFCC (13 coeficientes + log-energía).
+    \item \textbf{Modelos evaluados}: Regresión Logística, MLP, LSTM.
+    \item \textbf{Resultados}: LSTM alcanzó 92\% de precisión, superando a MLP (90\%) y Regresión Logística (87\%).
+\end{itemize}
+
+\noindent\textbf{Fase 2 (2023)\cite{ruvinga2023}:} Extensión con CNN y validación cruzada
+\begin{itemize}
+    \item Incorporación de espectrogramas STFT como entrada para CNN.
+    \item CNN alcanzó 99.31\% de precisión (training) y 99\% (validación).
+    \item Validación en dataset independiente (Surrey, UK, verano 2020): CNN mantuvo 98.61\% de precisión.
+    \item Confirmación de generalización del modelo a diferentes ubicaciones y temporadas.
+\end{itemize}
+
+\noindent La Tabla \ref{tab:comparison_models} resume los resultados comparativos:
+
+\end{tightmulticols}
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Comparación de modelos para detección de \textit{queenlessness}}}
+\label{tab:comparison_models}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Características} & \textbf{Precisión} & \textbf{Recall} & \textbf{F1-Score} \\
+\hline
+Reg. Logística & 14 MFCC & 87.4\% & - & - \\
+MLP & 14 MFCC & 90.1\% & - & - \\
+LSTM & 14 MFCC & 92.0\% & 92\% & 92\% \\
+\textbf{CNN} & \textbf{Espectrograma} & \textbf{99.31\%} & \textbf{99.31\%} & \textbf{99.31\%} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{tightmulticols}
+
+\subsection{Otros Enfoques de Machine Learning}
+
+\noindent \textbf{Robles-Guerrero et al. (2019, 2020)}\cite{robles2019} exploraron diferentes aproximaciones:
+
+\begin{itemize}
+    \item \textbf{Lasso Logistic Regression} combinada con Singular Value Decomposition (SVD) para clasificación multiclase de estados de colmena.
+    \item Identificación de patrones sonoros específicos en colmenas sin reina.
+    \item Enfoque en características espectrales de alta dimensión reducidas mediante SVD.
+\end{itemize}
+
+\noindent \textbf{Peng et al. (2020)}\cite{peng2020} reportaron el uso de MLP con dos capas ocultas y función de activación tangente hiperbólica, alcanzando 90\% de precisión con señales limpias, aunque el desempeño cayó a 61\% con señales ruidosas, evidenciando la importancia del preprocesamiento de señales.
+
+\subsection{Limitaciones de Estudios Previos y Brechas de Conocimiento}
+
+\noindent A pesar de los avances significativos, persisten limitaciones importantes:
+\begin{enumerate}
+    \item \textbf{Datos limitados}: la mayoría de los estudios usan datasets pequeños de pocos días y pocas colmenas.
+    \item \textbf{Condiciones controladas}: pocos estudios se validan en condiciones de campo reales con ruido ambiental variable.
+    \item \textbf{Generalización}: falta evidencia de que modelos funcionen en diferentes:
+    \begin{itemize}
+        \item Razas de abejas (\textit{A. m. ligustica} vs \textit{A. m. carnica}, etc.).
+        \item Condiciones climáticas y estaciones del año.
+        \item Ubicaciones geográficas.
+    \end{itemize}
+    \item \textbf{Sistemas embebidos}: pocos trabajos abordan la implementación en hardware de bajo costo para monitoreo en tiempo real.
+\end{enumerate}
+
+\end{tightmulticols}
+
+%====================================================================================
+% 2.3. FUNDAMENTOS DE PROCESAMIENTO DIGITAL DE SEÑALES DE AUDIO
+%====================================================================================
+
+\section{Fundamentos de Procesamiento Digital de Señales de Audio}
+
+\begin{tightmulticols}
+
+\subsection{Representación Digital de Señales de Audio}
+
+\noindent Una señal de audio continua $x(t)$ se convierte en una señal digital mediante muestreo a intervalos regulares determinados por la frecuencia de muestreo $f_s$. La señal digital resultante se representa como una secuencia discreta:
+
+\begin{equation}
+    \begin{split}
+        x[n] = x(t = nT) \; , \\
+        n = 0, 1, 2, \ldots, N-1 \; ,
+    \end{split}
+\end{equation}
+
+\noindent donde $T = 1/f_s$ siendo este término el periodo de muestreo y $N$ es el número total de muestras.
+
+\par Según el \textbf{Teorema de Muestreo de Nyquist-Shannon}, para evitar aliasing (solapamiento espectral), la frecuencia de muestreo debe ser al menos el doble de la frecuencia máxima contenida en la señal:
+
+\begin{equation}
+    f_s \geq 2f_{\text{max}} \; .
+\end{equation}
+
+\noindent En estudios de audio de colmenas, Ruvinga et al. \cite{ruvinga2023} utilizaron $f_s =$ 44.1 kHz, mientras que otros trabajos han usado 20.38 kHz, ambos valores adecuados considerando que la energía significativa en sonidos de abejas se concentra por debajo de 11 kHz \cite{ruvinga2023}.
+
+\subsection{Características de Señales de Audio de Colmenas}
+
+\noindent Las señales de audio de colmenas presentan características particulares \cite{ruvinga2023}:
+
+\begin{itemize}
+    \item \textbf{No estacionarias}: sus propiedades estadísticas varían en el tiempo.
+    \item \textbf{Multicomponente}: contienen componentes armónicos (batido de alas), transitorios (impactos, movimientos) y estocásticos (ruido de fondo).
+    \item \textbf{Energía concentrada}: frecuencia fundamental $\sim$100 Hz, con información relevante hasta 6 kHz.
+    \item \textbf{Variabilidad temporal}: cambios según hora del día, actividad de forrajeo y condiciones climáticas.
+\end{itemize}
+
+\subsection{Transformada de Fourier de Tiempo Corto (STFT)}\label{sec:stft}
+
+\noindent Debido a la naturaleza no estacionaria de las señales de audio, el análisis frecuencial tradicional mediante Transformada de Fourier (DFT) es insuficiente, ya que proporciona el contenido frecuencial promedio pero pierde completamente la información temporal.
+
+\par La \textbf{Transformada de Fourier de Tiempo Corto (STFT)} resuelve esta limitación dividiendo la señal en segmentos cortos (ventanas) donde se puede asumir estacionariedad local, aplicando la DFT a cada segmento:
+
+\begin{equation}
+    X[m, k] = \sum_{n=0}^{L-1} x[n + mH] \cdot w[n] \cdot e^{-j\frac{2\pi kn}{N}} \; ,
+\end{equation}
+
+\noindent donde:
+\begin{itemize}
+    \item $x[n]$: señal de entrada.
+    \item $w[n]$: función de ventana de longitud $L$.
+    \item $m$: índice de trama ($m = 0, 1, 2, \ldots$).
+    \item $H$: hop size (salto entre ventanas, típicamente $H = L/2$ para 50\% de traslape).
+    \item $k$: índice de frecuencia ($k = 0, 1, \ldots, N-1$).
+    \item $N$: longitud de la FFT (típicamente $N \geq L$, potencia de 2 para eficiencia).
+\end{itemize}
+
+\noindent El \textbf{espectrograma} se obtiene como el módulo al cuadrado de la STFT:
+
+\begin{equation}
+    S[m, k] = |X[m, k]|^2 \; ,
+\end{equation}
+
+\noindent el cual representa la densidad de energía en el plano tiempo-frecuencia y se visualiza típicamente como una imagen donde:
+\begin{itemize}
+    \item Eje horizontal: tiempo (índice de trama $m$).
+    \item Eje vertical: frecuencia (índice de bin $k$).
+    \item Intensidad/color: magnitud de la energía.
+\end{itemize}
+
+\subsubsection{Segmentación y Ventaneo}
+
+\noindent La señal se divide en \textbf{tramas} (\textit{frames}) de duración típica entre 20-40 ms, con un traslape (\textit{overlap}) entre tramas consecutivas. Esta duración se selecciona porque:
+
+\begin{itemize}
+    \item Es suficientemente corta para capturar variaciones rápidas.
+    \item Es suficientemente larga para obtener resolución frecuencial adecuada.
+    \item Minimiza efectos de no-estacionariedad local.
+\end{itemize}
+
+\noindent Para una frecuencia de muestreo $f_s$ y duración de trama $D$ (en segundos), el número de muestras por ventana es:
+
+\begin{equation*}
+    L = \lfloor D \cdot f_s \rfloor \; .
+\end{equation*}
+
+\noindent Ejemplo: Para $f_s = 44100$ Hz y $D = 25$ ms:
+\begin{equation*}
+    L = \lfloor 0.025 \times 44100 \rfloor = 1102 \; .
+\end{equation*}
+
+\noindent En la práctica, se suele ajustar $L$ a la potencia de 2 más cercana para eficiencia de la FFT, por ejemplo $L = 1024$.
+
+\par El \textbf{hop size} $H$ determina el desplazamiento entre tramas consecutivas. Para un traslape del 50\%:
+
+\begin{equation*}
+    H = \frac{L}{2} \; .
+\end{equation*}
+
+\noindent Esto significa que cada trama comparte la mitad de sus muestras con las tramas adyacentes. El traslape es particularmente importante cuando se usan ventanas que atenúan los extremos, garantizando que cada muestra contribuya aproximadamente igual al análisis global.
+
+\par El número total de tramas $M$ para una señal de longitud $N_{\text{total}}$ es:
+
+\begin{equation*}
+    M = \left\lfloor \frac{N_{\text{total}} - L}{H} \right\rfloor + 1 \; .
+\end{equation*}
+
+\subsubsection{Funciones de Ventana}
+
+\noindent Se aplica una función de ventana $w[n]$ a cada trama para reducir el efecto de Gibbs (oscilaciones espectrales espurias) causado por la discontinuidad en los bordes de segmentos rectangulares. Las ventanas más comunes son:
+
+\noindent\textbf{Ventana de Hamming}:
+\begin{equation*}
+    \begin{split}
+        w[n] = 0.53836 - 0.46164 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
+        0 \leq n \leq L-1 \; .
+    \end{split}
+\end{equation*}
+
+\noindent Frecuentemente aproximada como:
+\begin{equation*}
+    \begin{split}
+        w[n] \approx 0.54 - 0.46 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
+        0 \leq n \leq L-1 \; .
+    \end{split}
+\end{equation*}
+
+\noindent\textbf{Ventana de Hanning (Hann)}:
+\begin{equation*}
+    \begin{split}
+        w[n] = 0.5 - 0.5 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
+        0 \leq n \leq L-1 \; .
+    \end{split}
+\end{equation*}
+
+\noindent Ambas se pueden expresar en forma generalizada como:
+\begin{equation*}
+    \begin{split}
+        w[n] = (1-\omega) - \omega \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
+        0 \leq n \leq L-1 \; .
+    \end{split}
+\end{equation*}
+donde $\omega = 0.5$ para Hanning y $\omega \approx 0.46$ para Hamming.
+
+\par La ventana de Hamming ofrece mejor supresión de lóbulos laterales ($\sim$43 dB) comparada con Hanning ($\sim$31 dB), lo que reduce interferencia espectral entre componentes frecuenciales adyacentes.
+
+\subsection{Transformada Rápida de Fourier (FFT)}
+
+\noindent La FFT es un algoritmo eficiente para calcular la Transformada Discreta de Fourier (DFT). Para una trama ventaneada $x_w[n] = x[n] \cdot w[n]$:
+
+\begin{equation*}
+    X[k] = \sum_{n=0}^{N-1} x_w[n] \cdot e^{-j\frac{2\pi kn}{N}}, \quad k = 0, 1, \ldots, N-1 \; .
+\end{equation*}
+
+\par La complejidad computacional de la FFT es $O(N \log N)$ comparada con $O(N^2)$ de la DFT directa, lo que la hace práctica para procesamiento en tiempo real.
+
+\par Los bins frecuenciales resultantes tienen una resolución frecuencial de:
+\begin{equation*}
+    \Delta f = \frac{f_s}{N} \; .
+\end{equation*}
+
+\noindent Y cada bin $k$ corresponde a una frecuencia física de:
+\begin{equation*}
+    f_k = \frac{k \cdot f_s}{N}, \quad k = 0, 1, \ldots, \left\lfloor\frac{N}{2}\right\rfloor \; .
+\end{equation*}
+
+\noindent El rango útil de frecuencias (espectro unilateral) va de $0$ Hz hasta la frecuencia de Nyquist $f_s/2$.
+
+\par Ejemplo: Con $f_s = 44100$ Hz y $N = 1024$:
+\begin{equation*}
+    \Delta f = \frac{44100}{1024} \approx 43.07 \text{ Hz} \; ,
+\end{equation*}
+proporcionando bins frecuenciales de aproximadamente 43 Hz de ancho, con el espectro útil abarcando de 0 Hz a 22050 Hz (frecuencia de Nyquist).
+
+\end{tightmulticols}
+
+\pagebreak
+
+%====================================================================================
+% 2.4. COEFICIENTES CEPSTRALES EN FRECUENCIA MEL (MFCC)
+%====================================================================================
+
+\section{Coeficientes Cepstrales en Frecuencia Mel (MFCC)}
+
+\begin{tightmulticols}
+
+\subsection{Motivación y Fundamento Perceptual}
+
+\noindent Los \textbf{Coeficientes Cepstrales en Frecuencia Mel (MFCC)} constituyen una representación compacta y robusta del contenido espectral de señales de audio, inspirada en el sistema auditivo humano \cite{ruvinga2023}. Su diseño se basa en dos observaciones fundamentales de la psicoacústica:
+
+\begin{enumerate}
+    \item \textbf{Percepción no lineal de frecuencias}: el oído humano no percibe frecuencias de manera lineal. Es más sensible a cambios en bajas frecuencias que en altas.
+    \item \textbf{Enmascaramiento frecuencial}: componentes espectrales cercanos se enmascaran mutuamente, haciendo innecesaria una resolución espectral uniforme muy alta.
+\end{enumerate}
+
+\noindent Los MFCC han demostrado excelencia en múltiples dominios:
+\begin{itemize}
+    \item Reconocimiento automático de voz (ASR) \cite{ruvinga2023}.
+    \item Clasificación de sonidos ambientales.
+    \item Clasificación de géneros musicales.
+    \item Reconocimiento de sonidos cardíacos.
+    \item \textbf{Clasificación de estados de colmenas} \cite{ruvinga2021, ruvinga2023}.
+\end{itemize}
+
+\subsection{La Escala Mel}
+
+\noindent \noindent La \textbf{escala Mel} es una escala perceptual de tonos (\textit{pitch}) propuesta por Stevens et al.~\cite{stevens1937scale}, definida de tal forma que intervalos iguales en la escala Mel son percibidos como igualmente espaciados por oyentes humanos.
+
+\par La relación entre frecuencia física $f$ (Hz) y frecuencia percibida $m$ (Mel) se define como~\cite{shimodaira2013speech, zheng2001comparison}:
+\begin{equation}
+    m = 2595 \log_{10}\left(1 + \frac{f}{700}\right) \; .
+    \label{eq:mel_scale}
+\end{equation}
+
+\noindent Alternativamente, con base natural:
+\begin{equation}
+    m = 1127 \ln\left(1 + \frac{f}{700}\right) \; .
+\end{equation}
+
+\noindent La transformación inversa es:
+\begin{equation}
+    f = 700\left(10^{m/2595} - 1\right) \; .
+\end{equation}
+
+\noindent Por diseño, 1000 Hz corresponde a aproximadamente 1000 Mel, sirviendo como punto de referencia. La escala comprime progresivamente las frecuencias altas, modelando la mayor sensibilidad del oído humano a diferencias de tono en el rango de bajas frecuencias.
+
+\par Esta relación aproxima el comportamiento del sistema auditivo humano:
+\begin{itemize}
+    \item Alrededor de 1000 Hz: punto de referencia donde $m \approx f$ (1000 Hz $\approx$ 1000 Mel).
+    \item Para frecuencias bajas: la percepción del tono es aproximadamente lineal con la frecuencia.
+    \item Para frecuencias altas: la percepción del tono sigue una relación logarítmica.
+\end{itemize}
+
+\noindent La Figura \ref{fig:mel_scale} ilustra esta relación no lineal.
+
+\subsection{Proceso de Extracción de MFCC}
+
+\noindent La extracción de MFCC es un proceso de 7 etapas secuenciales \cite{ruvinga2023}, ilustrado en la Figura~\ref{fig:mfcc_process}.
+
+\end{tightmulticols}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Pics/relation-fs-y-m.png}
+    \caption{Relación entre frecuencia física (Hz) y escala Mel. Nótese la transición de comportamiento lineal a logarítmico alrededor de 1 kHz.}
+    \label{fig:mel_scale}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Pics/mfcc-7-etapas.png}
+    \caption{Proceso de extracción de MFCC en 7 etapas.}
+    \label{fig:mfcc_process}
+\end{figure}
+
+\begin{tightmulticols}
+
+\subsubsection{Etapa 1: Pre-énfasis}
+
+\noindent El \textbf{filtro de pre-énfasis} es un filtro pasa-altos de primer orden que amplifica las componentes de alta frecuencia, compensando la caída natural de energía en altas frecuencias que ocurre durante la generación y grabación de audio.
+
+\par Se implementa como un filtro FIR de primer orden:
+\begin{equation}
+    y[n] = x[n] - \alpha \cdot x[n-1] \; ,
+\end{equation}
+\noindent donde $\alpha$ es el coeficiente de pre-énfasis, típicamente $0.95 \leq \alpha \leq 0.97$.
+
+\par En el dominio $z$:
+\begin{equation}
+    H_{pre}(z) = 1 - \alpha z^{-1} \; .
+\end{equation}
+
+\noindent En estudios de audio de colmenas, este filtro es particularmente importante porque \cite{ruvinga2023}:
+\begin{itemize}
+    \item Información relevante existe en bandas de 3-6 kHz.
+    \item Estas frecuencias tienden a atenuarse durante grabación.
+    \item El pre-énfasis mejora la discriminación espectral.
+\end{itemize}
+
+\subsubsection{Etapa 2: Segmentación (\textit{Framing}) y Ventaneo}
+
+\noindent Ya descrita en la sección \ref{sec:stft}, la señal se segmenta en tramas con traslape. Para MFCC, los parámetros típicos son \cite{ruvinga2023}:
+
+\begin{itemize}
+    \item Duración de trama: 20-40 ms (25 ms es común).
+    \item Traslape: 50\% (12.5 ms si trama = 25 ms).
+    \item Ventana: Hamming o Hanning.
+\end{itemize}
+
+\noindent Para cada trama $i$:
+\begin{equation}
+    \begin{split}
+    s_i[n] = x[n + iH] \cdot w[n] \; , \\
+    n = 0, \ldots, N-1 \; ,
+    \end{split}
+\end{equation}
+donde $H$ es el salto entre tramas (\textit{hop size}).
+
+\subsubsection{Etapa 3: Transformada Rápida de Fourier (FFT)}
+
+\noindent Se aplica la FFT a cada trama ventaneada para obtener el espectro de magnitud:
+\begin{equation}
+    \begin{split}
+    S_i[k] = \left|\sum_{n=0}^{N-1} s_i[n] e^{-j\frac{2\pi kn}{N}}\right|^2 \; , \\
+    k = 0, \ldots, \frac{N}{2} \; .
+    \end{split}
+\end{equation}
+\noindent Solo se conservan los primeros $N/2 + 1$ bins (frecuencias positivas) debido a la simetría de la FFT para señales reales.
+
+\subsubsection{Etapa 4: Banco de Filtros Mel}
+
+\noindent El \textbf{banco de filtros Mel} es el componente que implementa la escala perceptual. Consiste en un conjunto de $M$ filtros triangulares solapados, distribuidos en escala Mel, que cubren el rango de frecuencias de interés.
+
+\noindent\textbf{Construcción del banco de filtros}:
+
+\begin{enumerate}
+    \item \textbf{Definir rango}: Frecuencias mínima $f_{min}$ y máxima $f_{max}$ (ej: 0 Hz a $f_s/2$).
+    \item \textbf{Convertir a escala Mel}:
+    \begin{align*}
+        m_{min} &= 2595 \log_{10}\left(1 + \frac{f_{min}}{700}\right) \; , \\
+        m_{max} &= 2595 \log_{10}\left(1 + \frac{f_{max}}{700}\right) \; .
+    \end{align*}
+    \item \textbf{Dividir uniformemente en Mel}: Crear $M+2$ puntos equiespaciados
+    \begin{equation*}
+        \begin{split}
+        m[b] = m_{min} + \frac{b}{M+1}(m_{max} - m_{min}) \; , \\
+        b = 0, \ldots, M+1 \; .
+        \end{split}
+    \end{equation*}
+    \item \textbf{Convertir de vuelta a Hz}:
+    \begin{equation*}
+        f[b] = 700\left(10^{m[b]/2595} - 1\right) \; .
+    \end{equation*}
+    \item \textbf{Mapear a bins de FFT}:
+    \begin{equation*}
+        \text{bin}[b] = \left\lfloor \frac{(N+1) \cdot f[b]}{f_s} \right\rfloor \; .
+    \end{equation*}
+    \item \textbf{Construir filtros triangulares}: Para cada filtro $m$ $(m = 1, \ldots, M)$:
+\end{enumerate}
+
+\end{tightmulticols}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{1pt}}
+\begin{equation*}
+    H_m[k] = \begin{cases}
+    0 & k < \text{bin}[m-1] \\[0.6ex]
+    \frac{k - \text{bin}[m-1]}{\text{bin}[m] - \text{bin}[m-1]} & \text{bin}[m-1] \leq k < \text{bin}[m] \\[0.6ex]
+    \frac{\text{bin}[m+1] - k}{\text{bin}[m+1] - \text{bin}[m]} & \text{bin}[m] \leq k < \text{bin}[m+1] \\[0.6ex]
+    0 & k \geq \text{bin}[m+1]
+    \end{cases}
+\end{equation*}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{1pt}}
+
+\begin{tightmulticols}
+
+\noindent Los filtros se aplican al espectro de potencia:
+\begin{equation*}
+    \begin{split}
+    E_m = \sum_{k=0}^{N/2} S[k] \cdot H_m[k] \; , \\
+    m = 1, \ldots, M \; .    
+    \end{split}
+\end{equation*}
+
+\par Parámetros típicos:
+\begin{itemize}
+    \item $M = 20-40$ filtros (26-40 es común).
+    \item $f_{min} = 0$ Hz o 20 Hz.
+    \item $f_{max} = f_s/2$ o valor menor si se conoce BW del contenido.
+\end{itemize}
+
+\subsubsection{Etapa 5: Logaritmo}
+
+\noindent Se aplica logaritmo para:
+\begin{enumerate}
+    \item Comprimir el rango dinámico.
+    \item Aproximar la percepción logarítmica de sonoridad humana.
+    \item Convertir productos espectrales en sumas (separación de fuente/filtro).
+\end{enumerate}
+
+\begin{equation*}
+    \begin{split}
+        \log E_m = \log\left(\sum_{k} S[k] \cdot H_m[k]\right) \; ,  \\
+        m = 1, \ldots, M \; .
+    \end{split}
+\end{equation*}
+
+\par Típicamente se usa $\log_{10}$ o $\ln$. Para evitar $\log(0)$:
+\begin{equation*}
+   \log E_m = \log(\max(E_m, \epsilon)) \; .
+\end{equation*}
+\noindent donde $\epsilon$ es un valor pequeño (ej: $10^{-10}$).
+
+\subsubsection{Etapa 6: Transformada Discreta del Coseno (DCT)}
+
+\noindent La \textbf{DCT} decorrela las energías de los bancos de filtros Mel, que tienden a estar correlacionadas debido al traslape entre filtros.
+
+\par La DCT de tipo II se define como:
+\begin{equation*}
+    \begin{split}
+    c[n] = \sum_{m=1}^{M} \log E_m \cdot \cos\left[\frac{\pi n (m - 0.5)}{M}\right] \; , \\
+    n = 0, \ldots, M-1 \; .        
+    \end{split}
+\end{equation*}
+\noindent Los coeficientes resultantes $c[n]$ son los \textbf{MFCC}. Típicamente se conservan solo los primeros $C$ coeficientes (usualmente $C = 12$ o $13$):
+\begin{equation*}
+    \text{MFCC} = [c_0, c_1, c_2, \ldots, c_{C-1}] \; .
+\end{equation*}
+\noindent \textbf{Interpretación física}:
+\begin{itemize}
+    \item $c_0$: Relacionado con energía promedio (a veces se descarta o reemplaza por log-energía).
+    \item $c_1, c_2$: Capturan envolvente espectral gruesa.
+    \item $c_3, \ldots, c_{12}$: Detalles espectrales más finos.
+    \item $c_{>12}$: Usualmente desechados (información menos relevante, más ruido).
+\end{itemize}
+
+\subsubsection{Etapa 7: Características Dinámicas ($\Delta$ y $\Delta^2$)}
+
+\noindent Los MFCC estáticos capturan información espectral instantánea pero ignoran la dinámica temporal. Las \textbf{derivadas temporales} capturan estos cambios:
+
+\noindent\textbf{Delta (velocidad)}: primera derivada, captura tasa de cambio
+\begin{equation*}
+    \Delta c[n, t] = \frac{\sum_{\theta=1}^{\Theta} \theta (c[n, t+\theta] - c[n, t-\theta])}{2\sum_{\theta=1}^{\Theta} \theta^2} \; .
+\end{equation*}
+
+\noindent\textbf{Delta-Delta (aceleración)}: segunda derivada
+\begin{equation*}
+    \Delta^2 c[n, t] = \frac{\sum_{\theta=1}^{\Theta} \theta (\Delta c[n, t+\theta] - \Delta c[n, t-\theta])}{2\sum_{\theta=1}^{\Theta} \theta^2} \; ,
+\end{equation*}
+\noindent donde $\Theta$ es la ventana de cálculo (típicamente $\Theta = 2$).
+
+\par El \textbf{vector de características completo} para cada trama es:
+\begin{equation*}
+\mathbf{f}_t = [\text{MFCC}_t, \Delta\text{MFCC}_t, \Delta^2\text{MFCC}_t] \; .
+\end{equation*}
+\noindent Si se usan 13 MFCC, el vector tiene dimensión $13 \times 3 = 39$ características.
+
+\subsection{Configuraciones de MFCC en Estudios de Colmenas}
+
+\noindent Ruvinga et al. \cite{ruvinga2021, ruvinga2023} evaluaron 4 configuraciones:
+
+\begin{table}[htbp]
+\centering
+\caption{Configuraciones de MFCC evaluadas por Ruvinga et al.}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Dataset} & \textbf{MFCC 1-13} & \textbf{MFCC 2-13} & \textbf{Log-Energía} \\
+\hline
+Dataset 1 & \checkmark & & \checkmark \\
+Dataset 2 & \checkmark & & \\
+Dataset 3 & & \checkmark & \checkmark \\
+Dataset 4 & & \checkmark & \\
+\hline
+\end{tabular}
+\end{table}
+
+\par \textbf{Resultados clave}:
+\begin{itemize}
+    \item Dataset 1 (14 características) dio \textbf{mejores resultados}.
+    \item $c_0$ (relacionado con energía DC) y log-energía son informativos.
+    \item Dataset 4 (12 características, sin $c_0$ ni log-energía) dio peores resultados.
+\end{itemize}
+
+\noindent Esto sugiere que tanto la información de energía global como la estructura armónica completa son relevantes para discriminar estados de colmena.
+
+\subsection{Implementación Práctica}
+
+\noindent Librerías ampliamente usadas para MFCC:
+\begin{itemize}
+    \item \textbf{Python}: \texttt{librosa.feature.mfcc()}, \texttt{python\_speech\_features}.
+    \item \textbf{MATLAB}: \texttt{mfcc()} en Audio Toolbox.
+    \item \textbf{C++}: Bibliotecas como \texttt{Essentia}, \texttt{Aquila}.
+\end{itemize}
+
+\noindent Parámetros típicos para audio de colmenas basados en tu trabajo:
+
+\end{tightmulticols}
+
+\begin{lstlisting}[language=Python]
+import librosa
+
+mfcc = librosa.feature.mfcc(
+    y=audio_signal,
+    sr=22050,              # Frecuencia de muestreo
+    n_mfcc=13,             # Numero de coeficientes
+    n_fft=2048,            # Tamano de FFT
+    hop_length=512,        # Salto entre tramas
+    n_mels=40,             # Numero de filtros Mel
+    fmin=0,                # Frecuencia minima
+    fmax=8000              # Frecuencia maxima
+)
+\end{lstlisting}
+
+%====================================================================================
+% 2.5. APRENDIZAJE PROFUNDO PARA CLASIFICACIÓN DE AUDIO
+%====================================================================================
+
+\section{Aprendizaje Profundo para Clasificación de Audio}
+
+\begin{tightmulticols}
+
+\subsection{Conceptos Fundamentales de Redes Neuronales}
+
+\noindent Las \textbf{redes neuronales artificiales (ANN)} son modelos computacionales inspirados en el sistema nervioso biológico, compuestos por unidades interconectadas (neuronas artificiales) organizadas en capas.
+
+\subsubsection{Perceptrón y Arquitectura Básica}
+
+\noindent Una neurona artificial implementa:
+\begin{equation*}
+    y = \phi\left(\sum_{i=1}^{n} w_i x_i + b\right) = \phi(\mathbf{w}^T\mathbf{x} + b) \; ,
+\end{equation*}
+\noindent donde:
+\begin{itemize}
+    \item $\mathbf{x} = [x_1, \ldots, x_n]^T$: vector de entrada.
+    \item $\mathbf{w} = [w_1, \ldots, w_n]^T$: pesos sinápticos.
+    \item $b$: sesgo (\textit{bias}).
+    \item $\phi(\cdot)$: función de activación no lineal.
+\end{itemize}
+
+\subsubsection{Funciones de Activación}
+
+\noindent\textbf{Sigmoide (Logística)}:
+\begin{equation*}
+    \sigma(z) = \frac{1}{1 + e^{-z}} \in (0, 1) \; ,
+\end{equation*}
+\noindent usada en capas de salida para clasificación binaria.\\
+
+\noindent\textbf{Tangente Hiperbólica}:
+\begin{equation*}
+    \tanh(z) = \frac{e^{2z} - 1}{e^{2z} + 1} \in (-1, 1) \; ,
+\end{equation*}
+\noindent preferida sobre sigmoide en capas ocultas por estar centrada en cero.\\
+
+\noindent\textbf{ReLU (Rectified Linear Unit)}:
+\begin{equation*}
+    \text{ReLU}(z) = \max(0, z) \; ,
+\end{equation*}
+\noindent actualmente la más popular por:
+\begin{itemize}
+    \item Eficiencia computacional.
+    \item Mitigación del problema de gradientes desvanecientes.
+    \item Inducción de escasez (sparsity).
+\end{itemize}
+
+\noindent\textbf{Softmax (para clasificación multiclase)}:
+\begin{equation*}
+    \text{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}} \; ,
+\end{equation*}
+\noindent donde $K$ es el número de clases.
+
+\subsubsection{Entrenamiento: Retropropagación y Optimización}
+
+\noindent El entrenamiento consiste en ajustar $\mathbf{w}$ y $b$ para minimizar una función de pérdida $\mathcal{L}$.\\
+
+\noindent\textbf{Función de pérdida para clasificación binaria (Entropía Cruzada)}:
+\begin{equation*}
+    \mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N} [y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)] \; .
+\end{equation*}
+\noindent El algoritmo de \textbf{retropropagación} calcula gradientes:
+\begin{equation*}
+    \frac{\partial \mathcal{L}}{\partial w_{ij}} = \frac{\partial \mathcal{L}}{\partial y} \cdot \frac{\partial y}{\partial z} \cdot \frac{\partial z}{\partial w_{ij}} \; ,
+\end{equation*}
+\noindent y los parámetros se actualizan mediante \textbf{descenso de gradiente}:
+\begin{equation*}
+    w_{ij}^{(t+1)} = w_{ij}^{(t)} - \eta \frac{\partial \mathcal{L}}{\partial w_{ij}} \; ,
+\end{equation*}
+donde $\eta$ es la tasa de aprendizaje.
+
+\subsection{Perceptrón Multicapa (MLP)}
+
+\noindent Un MLP es una red feedforward con al menos una capa oculta. Para clasificación binaria de estados de colmena:
+
+\begin{itemize}
+    \item \textbf{Capa de entrada}: $n$ neuronas (dimensión de MFCC, ej: 14).
+    \item \textbf{Capas ocultas}: $L$ capas con $h_1, \ldots, h_L$ neuronas cada una.
+    \item \textbf{Capa de salida}: 1 neurona con activación sigmoide.
+\end{itemize}
+
+\noindent Ruvinga et al. \cite{ruvinga2023} reportaron:
+\begin{itemize}
+    \item MLP con 14 MFCC de entrada.
+    \item Función de activación: tangente hiperbólica en capas ocultas.
+    \item Precisión: 90.1\% (Dataset 1).
+\end{itemize}
+
+\subsection{Regresión Logística}
+
+\noindent Puede verse como un MLP sin capas ocultas (modelo lineal + sigmoide):
+\begin{equation*}
+    P(y=1|\mathbf{x}) = \sigma(\mathbf{w}^T\mathbf{x} + b) \; .
+\end{equation*}
+
+\noindent Ruvinga et al.: Precisión 87.4\% con 14 MFCC.
+
+\noindent\par \textbf{Limitación}: Asume separabilidad lineal en el espacio de características.
+
+\subsection{Redes Neuronales Recurrentes (RNN) y LSTM}
+
+\subsubsection{Limitaciones de MLP para Secuencias}
+
+\noindent Los MLP procesan cada trama de forma independiente, ignorando:
+\begin{itemize}
+    \item Dependencias temporales entre tramas.
+    \item Contexto histórico de la señal.
+    \item Patrones secuenciales.
+\end{itemize}
+
+\noindent Para audio, esto es subóptimo porque el significado depende de la evolución temporal.
+
+\subsubsection{Redes Neuronales Recurrentes (RNN)}
+
+\noindent Las RNN mantienen un \textbf{estado oculto} que se actualiza en cada paso temporal:
+
+\begin{align*}
+    a_t &= \tanh(W_{hh}a_{t-1} + W_{xh}x_t + b_h) \; , \\
+    y_t &= W_{hy}a_t + b_y \; .
+\end{align*}
+
+\noindent \textbf{Ventajas}:
+\begin{itemize}
+    \item Memoria de eventos pasados.
+    \item Parámetros compartidos en el tiempo (generalización).
+\end{itemize}
+
+\noindent \textbf{Problema crítico}: \textbf{Desvanecimiento/explosión de gradientes}.
+
+\noindent Durante retropropagación a través del tiempo (BPTT), los gradientes se calculan como productos de derivadas:
+\begin{equation*}
+    \frac{\partial \mathcal{L}}{\partial a_1} = \frac{\partial \mathcal{L}}{\partial a_T} \prod_{t=2}^{T} \frac{\partial a_t}{\partial a_{t-1}} \; .
+\end{equation*}
+
+\noindent Si $\|\frac{\partial a_t}{\partial a_{t-1}}\| < 1$: gradientes desvanecen exponencialmente.\\
+
+\noindent Si $\|\frac{\partial a_t}{\partial a_{t-1}}\| > 1$: gradientes explotan.\\
+
+\par Consecuencia: Incapacidad de aprender dependencias a largo plazo.
+
+\subsubsection{Long Short-Term Memory (LSTM)}
+
+\noindent Las \textbf{LSTM} \cite{hochreiter1997} resuelven el problema de gradientes mediante una arquitectura especializada que fuerza flujo constante de error.\\
+
+\noindent\textbf{Arquitectura de la Célula LSTM}:
+
+\begin{itemize}
+    \item \textbf{Estado de celda} $c_t$: "memoria" de largo plazo.
+    \item \textbf{Estado oculto} $a_t$: salida de corto plazo.
+    \item \textbf{Tres compuertas} que controlan flujo de información:
+    \begin{itemize}
+        \item Compuerta de olvido $f_t$.
+        \item Compuerta de entrada $i_t$.
+        \item Compuerta de salida $o_t$.
+    \end{itemize}
+\end{itemize}
+
+\end{tightmulticols}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Pics/LSTM-diagram.png}
+    \caption{Arquitectura de una célula LSTM mostrando las tres compuertas y los estados de celda.}
+    \label{fig:lstm_cell}
+\end{figure}
+
+\noindent\textbf{Ecuaciones de la LSTM}:
+
+\begin{align*}
+    f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \quad &\text{(compuerta de olvido).} \\
+    i_t &= \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \quad &\text{(compuerta de entrada).} \\
+    \tilde{c}_t &= \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) \quad &\text{(candidato a estado de celda).} \\
+    c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \quad &\text{(actualización del estado).} \\
+    o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \quad &\text{(compuerta de salida).} \\
+    a_t &= o_t \odot \tanh(c_t) \quad &\text{(estado oculto de salida).}
+\end{align*}
+
+\begin{tightmulticols}
+
+\noindent donde:
+\begin{itemize}
+    \item $\sigma$: función sigmoide (salidas en $[0,1]$).
+    \item $\odot$: producto de Hadamard (elemento a elemento).
+\end{itemize}
+
+\noindent\textbf{Interpretación de las Compuertas}:
+
+\begin{enumerate}
+    \item \textbf{Compuerta de olvido} ($f_t \in [0,1]$):
+    \begin{itemize}
+        \item Decide qué información del estado previo $c_{t-1}$ descartar.
+        \item $f_t \approx 0$: olvida completamente.
+        \item $f_t \approx 1$: retiene completamente.
+    \end{itemize}
+    
+    \item \textbf{Compuerta de entrada} ($i_t \in [0,1]$):
+    \begin{itemize}
+        \item Decide qué nueva información almacenar en $c_t$.
+        \item Filtra el candidato $\tilde{c}_t$.
+        \item $i_t \approx 0$: ignora nueva información.
+        \item $i_t \approx 1$: incorpora completamente.
+    \end{itemize}
+    
+    \item \textbf{Compuerta de salida} ($o_t \in [0,1]$):
+    \begin{itemize}
+        \item Decide qué partes del estado de celda $c_t$ exponer como salida $a_t$.
+    \end{itemize}
+\end{enumerate}
+
+\noindent\textbf{Flujo de Gradientes}: la clave del éxito de LSTM está en la actualización del estado de celda:
+\begin{equation*}
+    c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \; .
+\end{equation*}
+
+\noindent El gradiente fluye como:
+\begin{equation*}
+    \frac{\partial c_t}{\partial c_{t-1}} = f_t \; .
+\end{equation*}
+
+\noindent Si $f_t \approx 1$, el gradiente fluye sin atenuación (evita desvanecimiento).
+
+\subsubsection{LSTM para Clasificación de Estados de Colmena}
+
+\noindent Ruvinga et al. \cite{ruvinga2021, ruvinga2023} implementaron:
+
+\begin{itemize}
+    \item \textbf{Entrada}: secuencia de vectores MFCC $\mathbf{X} = [x_1, x_2, \ldots, x_T]$ donde $x_t \in \mathbb{R}^{14}$.
+    \item \textbf{Arquitectura}:
+    \begin{itemize}
+        \item 1 capa LSTM con 100 unidades.
+        \item Capa densa (fully connected) con 1 neurona + sigmoide.
+    \end{itemize}
+    \item \textbf{Función de pérdida}: entropía cruzada binaria.
+    \item \textbf{Optimizador}: ADAM (Adaptive Moment Estimation).
+    \begin{itemize}
+        \item Combina momentum y RMSProp.
+        \item Tasas de aprendizaje adaptativas por parámetro.
+        \item Eficiente computacionalmente.
+    \end{itemize}
+    \item \textbf{Resultados}:
+    \begin{itemize}
+        \item Precisión: 92\% (validación).
+        \item F1-Score: 92\%.
+        \item Superó a MLP (90\%) y Regresión Logística (87\%).
+    \end{itemize}
+\end{itemize}
+
+\noindent\textbf{Ventajas de LSTM sobre MLP}:
+\begin{itemize}
+    \item Captura patrones temporales en la evolución del sonido.
+    \item Detecta transiciones entre estados acústicos.
+    \item Más robusto a variaciones temporales naturales.
+\end{itemize}
+
+\subsection{Redes Neuronales Convolucionales (CNN)}
+
+\subsubsection{Motivación para Audio}
+
+\noindent Mientras LSTM opera sobre secuencias de vectores (MFCC), las CNN procesan representaciones bidimensionales como espectrogramas, tratándolos como ``imágenes'' tiempo-frecuencia.
+
+\noindent\textbf{Ventajas de CNN}:
+\begin{itemize}
+    \item Detección automática de características jerárquicas.
+    \item Invarianza a traslaciones temporales y frecuenciales.
+    \item Uso eficiente de parámetros (compartición de pesos).
+    \item Capacidad de detectar patrones locales y globales.
+\end{itemize}
+
+\subsubsection{Arquitectura de CNN}
+
+\noindent Una CNN típica consta de:
+
+\begin{enumerate}
+    \item \textbf{Capas Convolucionales}: Detectan características locales.
+    \item \textbf{Capas de Activación}: Introducen no linealidad (ReLU).
+    \item \textbf{Capas de Pooling}: Reducen dimensionalidad espacial.
+    \item \textbf{Capas Densas (Fully Connected)}: Clasificación final.
+\end{enumerate}
+
+\noindent\textbf{Operación de Convolución 2D}: para una entrada $I$ (espectrograma) y un kernel $K$ de tamaño $m \times n$,
+
+\begin{equation*}
+    (I * K)(i, j) = \sum_{p=0}^{m-1} \sum_{q=0}^{n-1} I(i+p, j+q) \cdot K(p, q) \; .
+\end{equation*}
+
+\noindent Cada filtro produce un \textbf{mapa de características} (feature map).
+
+\noindent\textbf{Capa Convolucional}:
+
+\noindent Con $C$ filtros, hiperparámetros:
+\begin{itemize}
+    \item Número de filtros $C$ (ej: 32, 64, 128).
+    \item Tamaño de kernel $f \times f$ (ej: $3 \times 3$, $5 \times 5$).
+    \item Stride $s$ (desplazamiento del kernel).
+    \item Padding $p$ (relleno de bordes).
+\end{itemize}
+
+\par Dimensiones de salida:
+\begin{align*}
+    w_{out} &= \left\lfloor \frac{w_{in} - f + 2p}{s} \right\rfloor + 1 \; , \\
+    a_{out} &= \left\lfloor \frac{a_{in} - f + 2p}{s} \right\rfloor + 1 \; .
+\end{align*}
+
+\noindent\textbf{Capa de Pooling}: reduce dimensión espacial, reteniendo información relevante.\\
+
+\noindent\textbf{Max Pooling}: Toma el valor máximo en cada región
+\begin{equation*}
+    y_{ij} = \max_{(p,q) \in R_{ij}} x_{pq} \; .
+\end{equation*}
+
+\noindent\textbf{Average Pooling}: Toma el promedio
+\begin{equation*}
+    y_{ij} = \frac{1}{|R_{ij}|} \sum_{(p,q) \in R_{ij}} x_{pq} \; .
+\end{equation*}
+
+\noindent Tamaño típico: $2 \times 2$ con stride 2 (reduce dimensión a la mitad).
+
+\subsubsection{CNN para Clasificación de Colmenas}
+
+\noindent Ruvinga et al. \cite{ruvinga2023} implementaron:
+
+\begin{itemize}
+    \item \textbf{Entrada}: Espectrogramas STFT de $64 \times 64$ píxeles.
+    
+    \item \textbf{Arquitectura}:
+    \begin{itemize}
+        \item Capa Conv2D: 64 filtros, kernel $3 \times 3$, ReLU.
+        \item MaxPooling: $2 \times 2$.
+        \item Capa Conv2D: 128 filtros, kernel $3 \times 3$, ReLU.
+        \item MaxPooling: $2 \times 2$.
+        \item Flatten (aplanar).
+        \item Capa densa: N neuronas, ReLU.
+        \item Capa de salida: 1 neurona, sigmoide.
+    \end{itemize}
+    
+    \item \textbf{Preprocesamiento}:
+    \begin{itemize}
+        \item Segmentos de audio de 5 segundos.
+        \item Espectrogramas calculados con STFT.
+        \item Normalización de píxeles.
+    \end{itemize}
+    
+    \item \textbf{Resultados}:
+    \begin{itemize}
+        \item \textbf{Precisión (training)}: 99.12\%.
+        \item \textbf{Precisión (validación)}: 99.31\%.
+        \item \textbf{Precisión (test, dataset independiente)}: 99\%.
+        \item \textbf{Recall}: 99.31\%.
+        \item \textbf{F1-Score}: 99.31\%.
+    \end{itemize}
+\end{itemize}
+
+\noindent\textbf{Superioridad de CNN}:
+\begin{itemize}
+    \item Captura patrones espacio-temporales en espectrogramas.
+    \item Detecta texturas acústicas características.
+    \item Aprende representaciones jerárquicas automáticamente.
+    \item Menor sensibilidad a variaciones locales (pooling).
+\end{itemize}
+
+\subsection{Comparación de Arquitecturas}
+
+\begin{table}[htbp]
+\centering
+\caption{Comparación de modelos para detección de \textit{queenlessness}}
+\begin{tabular}{|l|c|p{3cm}|c|c|}
+\hline
+\textbf{Modelo} & \textbf{Entrada} & \textbf{Capacidad de Modelado} & \textbf{Precisión} & \textbf{F1} \\
+\hline
+Reg. Logística & 14 MFCC & Lineal, sin memoria temporal & 87.4\% & - \\
+\hline
+MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
+\hline
+\textbf{LSTM} & \textbf{Secuencia MFCC} & \textbf{Memoria temporal, dependencias largas} & \textbf{92\%} & \textbf{92\%} \\
+\hline
+\textbf{CNN} & \textbf{Espectrograma} & \textbf{Patrones espacio-temporales jerárquicos} & \textbf{99.31\%} & \textbf{99.31\%} \\
+\hline
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Lecciones clave}:
+\begin{enumerate}
+    \item Modelado temporal (LSTM) > Estático (MLP, LR).
+    \item Representación rica (espectrograma) > Compacta (MFCC).
+    \item Aprendizaje jerárquico (CNN) muy efectivo para patrones complejos.
+    \item Trade-off: Precisión vs. complejidad computacional.
+\end{enumerate}
+
+%====================================================================================
+% 2.6. SÍNTESIS Y JUSTIFICACIÓN METODOLÓGICA
+%====================================================================================
+
+\section{Síntesis y Justificación Metodológica}
+
+\noindent Este capítulo ha establecido los fundamentos teóricos para la detección automática del estado de \textit{queenlessness} en colmenas mediante análisis acústico y aprendizaje profundo. Los principales hallazgos de la revisión son:
+
+\subsection{Contexto y Motivación}
+
+\begin{enumerate}
+    \item Las abejas melíferas son polinizadores críticos, contribuyendo USD \$235-577 mil millones anuales a la agricultura global.
+    \item El declive poblacional documentado en múltiples regiones amenaza la seguridad alimentaria.
+    \item La reina es esencial para la supervivencia de la colonia; su pérdida lleva a extinción si no se detecta tempranamente.
+    \item El monitoreo tradicional es invasivo, laborioso y riesgoso.
+\end{enumerate}
+
+\subsection{Estado del Arte en Monitoreo Acústico}
+
+\begin{enumerate}
+    \item Las abejas producen señales acústicas informativas sobre el estado de la colonia.
+    \item Estudios previos han identificado características espectrales distintivas de \textit{queenlessness} (especialmente 165-285 Hz).
+    \item Técnicas de machine learning han mostrado precisiones de 87-92\% usando MFCC.
+    \item Deep learning (CNN) ha alcanzado hasta 99\% de precisión usando espectrogramas.
+    \item Persisten brechas en generalización, robustez al ruido, e implementación en sistemas embebidos.
+\end{enumerate}
+
+\subsection{Fundamentos Técnicos}
+
+\begin{enumerate}
+    \item \textbf{MFCC} proporcionan representación compacta y robusta del contenido espectral, capturando información perceptualmente relevante.
+    \item \textbf{LSTM} capturan dependencias temporales a largo plazo, superando a modelos estáticos.
+    \item \textbf{CNN} procesan espectrogramas como imágenes tiempo-frecuencia, aprendiendo características jerárquicas automáticamente.
+    \item La elección de características (MFCC vs. espectrograma) y arquitectura (LSTM vs. CNN) implica trade-offs entre precisión, interpretabilidad y costo computacional.
+\end{enumerate}
+
+\subsection{Justificación de la Metodología Propuesta}
+
+\noindent Basándose en esta revisión, el presente estudio adoptará:
+\begin{itemize}
+    \item \textbf{MFCC como características primarias}: Por su compacidad, robustez y éxito demostrado en la literatura.
+    \item \textbf{Evaluación de múltiples arquitecturas}: LSTM y potencialmente CNN para comparación exhaustiva.
+    \item \textbf{Énfasis en preprocesamiento}: Segmentación, normalización, y posible denoising para mejorar robustez.
+    \item \textbf{Validación rigurosa}: División train/validation/test con datos de múltiples colmenas y condiciones cuando sea posible.
+    \item \textbf{Consideración de implementación}: Evaluación de viabilidad en sistemas embebidos de bajo costo.
+\end{itemize}
+\noindent El siguiente capítulo detallará la metodología específica implementada, incluyendo el dataset utilizado, preprocesamiento de señales, extracción de características, diseño de modelos y métricas de evaluación.
+
+\end{tightmulticols}
+
+%-------------------------------------------------------------------------------------
+% 3. METODOLOGÍA
+%-------------------------------------------------------------------------------------
+
+\pagebreak
+\chapter{METODOLOGÍA}
+\vspace{-3em}
+
+\begin{tightmulticols}
+
+%-------------------------------------------------------------------------------------
+% 3.1. Procedimiento
+%-------------------------------------------------------------------------------------
+
+\section{Procedimiento}
+
+\noindent Como verificación inicial, se ejecutó un programa de prueba (programa~\ref{lst:waveform}) para la extracción de características acústicas utilizando coeficientes cepstrales en escala Mel (MFCC) y validar la conversión del audio a representaciones numéricas (dimensionalidad esperada, ausencia de valores indefinidos y consistencia temporal), antes de procesar el conjunto completo.
+
+\end{tightmulticols}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Graph_2022-06-05--19-39-14_2__segment2.png}
+	\caption{\footnotesize{Forma de onda del archivo de audio \texttt{2022-06-05--19-39-14\_2\_\_segment2.wav}.}}
+	\label{fig:AmplitudeXTime}
+\end{figure}
+
+\begin{tightmulticols}
+
+\noindent En este estudio se trabajó con audio monofónico (1 canal) en formato .WAV (figura~\ref{fig:AmplitudeXTime}) cuyos metadatos indican una frecuencia de muestreo de $22050$ Hz y muestras \texttt{float32} (en punto flotante de 32 bits). Para estandarizar el procesamiento y reducir el costo computacional, todas las señales se remuestrearon a $16000$ Hz durante la carga en Python.
+
+\par El flujo de procesamiento se validó por etapas en cuadernos \texttt{*.ipynb} y posteriormente se automatizó para el conjunto completo: carga, normalización, segmentación, extracción de características, generación de arreglos \texttt{*.npy} para el entrenamiento, desarrollo y aplicación del modelo.
+
+\par Tras la carga y remuestreo a $16000$ Hz, se aplicó un recorte de silencios con un umbral de \texttt{top\_db = 30}. Luego, cada señal recortada se normalizó, escalando la amplitud de modo que el valor absoluto máximo fuese igual a $1.0$:
+\begin{equation*}
+	x_{\text{norm}}[n] = \frac{x_{\text{trim}}[n]}{A_{\text{max}}}
+\end{equation*}
+donde $A_{\text{max}} = \max_m \left|x_{\text{trim}}[m]\right|$ es el valor máximo absoluto de la señal recortada y $x_{\text{trim}}[n]$ es la señal después del recorte de silencios. Esta normalización garantiza que la señal resultante tenga valores en el rango $\left[-1,\,1\right]$. Al aplicarse a nivel de archivo, reduce el efecto de diferencias globales de ganancia entre grabaciones sobre la extracción de características espectrales, permitiendo que el modelo se enfoque en patrones relevantes para la clasificación del estado de la reina.
+
+\par Finalmente, cada señal normalizada se segmentó en ventanas de $2$ segundos con un desplazamiento (hop) de $1$ segundo, como se muestra en el ejemplo de la figura~\ref{fig:Windowing} (a) y (b), lo que equivale a un solapamiento del $50\%$ entre segmentos consecutivos. Esta segmentación incrementa el número de ejemplos disponibles para el entrenamiento y, al mismo tiempo, produce entradas de duración fija para el modelo. Una vez obtenidos los segmentos de $2$ segundos, se procedió a la extracción de características espectrales mediante coeficientes cepstrales en escala Mel (MFCC).
+
+\par Para cada segmento, se calcularon MFCC utilizando una ventana de análisis de $25$ ms (\texttt{win\_length} $= 0.025 \cdot 16000 = 400$ muestras), con un tamaño de FFT de $N_{\text{FFT}} = 512$ puntos (potencia de $2$ inmediatamente superior), y un desplazamiento temporal de $10$ ms (\texttt{hop\_length} $= 0.010 \cdot 16000 = 160$ muestras), como en la figura~\ref{fig:Windowing} (c). En el dominio espectral, para la construcción del mel-spectrogram, la energía se analizó en el rango de frecuencias de $20$ Hz a $8000$ Hz (frecuencia de Nyquist para la tasa de muestreo de $16000$ Hz), utilizando $40$ filtros en escala Mel. Esta configuración permite capturar la distribución espectral con mayor resolución en bajas frecuencias, donde se esperaba encontrar patrones acústicos relevantes para la clasificación del estado de la reina.
+
+\end{tightmulticols}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Pics/Ejemplo-Windowing.png}
+	\caption{\footnotesize{Ejemplo de segmentación de una señal de audio y ventanas MFCC.}}
+	\label{fig:Windowing}
+\end{figure}
+
+\pagebreak
+
+\begin{tightmulticols}
+
+\noindent En la figura~\ref{fig:WindowingZoom} se muestra un acercamiento de las primeras 10 ventanas MFCC que fueron expuestas en la figura~\ref{fig:Windowing} (c), donde se puede observar la representación de cada ventana de $25$ ms con un desplazamiento de $10$ ms y un solapamiento del 60\% entre ventanas consecutivas. Esta configuración permite capturar la evolución temporal de las características espectrales, lo que es crucial para la tarea de clasificación del estado de la reina, ya que se esperaba que ciertos patrones acústicos se manifestaran de manera dinámica a lo largo del tiempo dentro de la colmena.
+
+\end{tightmulticols}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Pics/Ejemplo-Windowing-zoom.png}
+	\caption{\footnotesize{ZOOM: Primeras 10 ventanas MFCC (25 ms con Hop 10 ms) - 60\% Overlap.}}
+	\label{fig:WindowingZoom}
+\end{figure}
+
+\begin{tightmulticols}
+
+\noindent Posteriormente, mediante la Transformada Discreta del Coseno (DCT), se obtuvieron coeficientes cepstrales que comprimen esta información espectral. Para los audios involucrados en el estudio, se calcularon inicialmente $33$ coeficientes MFCC y posteriormente se eliminó el coeficiente $C_0$, que representa la energía promedio del espectro y puede ser menos informativo para la clasificación especialmente en presencia de variaciones de intensidad entre grabaciones; resultando en $32$ coeficientes finales (ver figura~\ref{fig:MFCCs-Dv-Dv2} (a)). Adicionalmente, se incluyeron las derivadas temporales de primer y segundo orden ($\Delta$ y $\Delta^2$) para capturar dinámica temporal (figura~\ref{fig:MFCCs-Dv-Dv2} (b) y (c)), obteniendo una representación final de tamaño $(3 \times 32 \times T)$ por segmento, donde $T$ es el número de cuadros temporales en el segmento (esta fue la representación que se organizó en arreglos \texttt{*.npy} para su uso posterior en el entrenamiento del modelo de aprendizaje profundo).
+
+\end{tightmulticols}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Pics/MFCCs-Dv-Dv2.png}
+	\caption{\footnotesize{Ejemplo de estas tres capas de características para un segmento de $2$ segundos.}}
+	\label{fig:MFCCs-Dv-Dv2}
+\end{figure}
+
+\pagebreak
+
+\begin{tightmulticols}
+
+\noindent  La señal de audio para uno de los archivos, como el de la figura~\ref{fig:AmplitudeXTime}, se representa de forma discreta. Una frecuencia de muestreo de $22050$ Hz indica que el audio se capturó mediante $22050$ muestras por segundo. A partir del análisis en Python, se observó que este archivo contiene un vector unidimensional de $N = 1{,}323{,}000$ muestras, por lo que su duración aproximada es
+\begin{equation*}
+	N/f_s = 1{,}323{,}000/22{,}050 \approx 60 \text{ segundos.}
+\end{equation*}
+Cada muestra corresponde a un valor numérico (almacenado como \texttt{float32}) que representa la amplitud instantánea de la señal. Matemáticamente, esta señal discreta puede formalizarse como:
+\begin{equation}\label{eq:signal-x_n}
+	\begin{aligned}
+	    x[n] &= \{x_0, x_1, \ldots, x_{N-1}\},\\
+	    n &= 0,1,\ldots,N-1,
+	\end{aligned}
+\end{equation}
+donde $x[n]$ representa la amplitud en el instante discreto $n$ y $N$ es el número total de muestras. En consecuencia, un archivo de audio puede interpretarse como una secuencia de valores que describe cómo varía la presión del aire (sonido) a lo largo del tiempo.
+
+\par No obstante, para el entrenamiento de un modelo de aprendizaje profundo, esta representación temporal no es la más conveniente para capturar patrones espectrales relevantes en la clasificación del estado de la reina. Por ello, la señal se transforma a una representación tiempo--frecuencia mediante el cálculo de espectros por ventanas (STFT), se proyecta su energía según bandas en escala Mel y se aplica una compresión logarítmica; posteriormente, se obtiene un conjunto compacto de descriptores mediante la Transformada Discreta del Coseno (DCT), resultando en los coeficientes cepstrales en escala Mel (MFCC). Esta representación puede interpretarse como una matriz (análoga a una imagen), lo cual facilita el uso de redes neuronales convolucionales (CNN) para la tarea de clasificación.
+
+\subsection{Extracción de Características Acústicas para la Clasificación del Estado de la Reina}
+
+
+
+\par Bla bla bla
+
+\par Estó porporcionó archivos que fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
+
+%-------------------------------------------------------------------------------------
+% 3.2. Instrumentos y técnicas
+%-------------------------------------------------------------------------------------
+\section{Instrumentos}
+
+\noindent Para el proceso de recolección de datos, se empleó un dispositivo IoT diseñado a medida, que incluía un módulo Wi-Fi \texttt{ESP32}, un micrófono digital \texttt{INMP441}, y un sensor de temperatura y humedad \texttt{BME280}. Estos sensores se instalaron dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior—, y se protegieron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
+
+%-------------------------------------------------------------------------------------
+% 3.3. Población y muestra
+%-------------------------------------------------------------------------------------
+\section{Base de Datos}
+
+\noindent El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
+
+\par El conjunto de datos incluye múltiples variables de metadatos que describen el entorno de la colmena y la condición de la colonia. De particular relevancia para este trabajo se encuentran las siguientes etiquetas:
+
+\begin{itemize}[label = \ding{43}]
+	\item\texttt{queen acceptance}: indica si la reina es aceptada por la colonia. Valores: 0 (sin reina), 1 (presente pero no aceptada), 2 (aceptada).
+	\item\texttt{queen presence}: indica si la reina está físicamente presente en la colmena.
+	\item\texttt{queen status}: una etiqueta combinada derivada de las dos anteriores, con los siguientes valores: 0 (original/con reina funcional), 1 (no presente), 2 (presente y rechazada), 3 (presente y recién aceptada). Esta es la etiqueta principal utilizada para la clasificación.
+	\item\texttt{time}: hora del día, escalada entre 0 y 1 para representar un ciclo de 24 horas.
+\end{itemize}
+
+\noindent El proceso de etiquetado se basó en inspecciones manuales diarias de las colmenas, durante las cuales se observó el comportamiento de las abejas hacia la reina (por ejemplo, formación de enjambre o conducta tranquila). En aquellos casos en los que el estado de la reina cambió entre inspecciones, generando ambigüedad sobre el momento exacto de aceptación, las muestras correspondientes fueron descartadas para mantener la integridad del etiquetado.
+
+\end{tightmulticols}
+
+\pagebreak
+
+%-------------------------------------------------------------------------------------
+% 4. RESULTADOS
+%-------------------------------------------------------------------------------------
+
+\chapter{RESULTADOS}
+\vspace{-3em}
+
+%-------------------------------------------------------------------------------------
+% 4.1. Análisis de datos
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 4.2. Presentación de resultados
+%-------------------------------------------------------------------------------------
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.42\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Pics/QueenStatusConfidenceOverTime-05-1.png}
+         \caption{Evolución temporal de la confianza del modelo según \texttt{queen status}.}
+		\label{fig:qscot-05-1}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.56\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Pics/SmoothedQueenStatusOverTime-05-1.png}
+         \caption{Clase predicha suavizada a lo largo del tiempo según \texttt{queen status}.}
+		\label{fig:sqsot-05-1}
+     \end{subfigure}
+        \caption{Resultados del primer modelo de clasificación para el estado de la reina a lo largo del tiempo.}
+        \label{fig:NN-results-05-1}
+\end{figure}
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.42\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Pics/QueenStatusConfidenceOverTime-05-2.png}
+         \caption{Evolución temporal de la confianza del modelo según \texttt{queen status}.}
+		\label{fig:qscot-05-2}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.56\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Pics/SmoothedQueenStatusOverTime-05-2.png}
+         \caption{Clase predicha suavizada a lo largo del tiempo según \texttt{queen status}.}
+		\label{fig:sqsot-05-2}
+     \end{subfigure}
+        \caption{Resultados del segundo modelo de clasificación para el estado de la reina a lo largo del tiempo.}
+        \label{fig:NN-results-05-2}
+\end{figure}
+
+%-------------------------------------------------------------------------------------
+% 5. DISCUSIÓN
+%-------------------------------------------------------------------------------------
+
+\pagebreak
+\chapter{DISCUSIÓN}
+\vspace{-3em}
+
+%-------------------------------------------------------------------------------------
+% 5.1. Interpretación de resultados
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 5.2. Comparación con la literatura
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% 6. CONCLUSIONES Y RECOMENDACIONES
+%-------------------------------------------------------------------------------------
+\pagebreak
+\chapter{CONCLUSIONES Y RECOMENDACIONES}
+
+%-------------------------------------------------------------------------------------
+% 6.1. Conclusiones
+%-------------------------------------------------------------------------------------
+
+\section{Conclusiones}
+
+\noindent La abjea reina es un elemento crucial para la supervivencia de la colonia, y su presencia o ausencia puede influir significativamente en el comportamiento de las abejas, siendo una posibilidad el extingir la existensia de la colmena.
+
+%-------------------------------------------------------------------------------------
+% 6.2. Recomendaciones
+%-------------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------------
+% REFERENCIAS BIBLIOGRÁFICAS
+%-------------------------------------------------------------------------------------
+
+\pagebreak
+\addcontentsline{toc}{chapter}{BIBLIOGRAFÍA}
+\printbibliography
+\thispagestyle{empty}
+
+%-------------------------------------------------------------------------------------
+% ANEXOS (opcional)
+%-------------------------------------------------------------------------------------
+
+\pagebreak
+\setcounter{chapter}{1}
+\addcontentsline{toc}{chapter}{APÉNDICE A}
+\specialchapter{APÉNDICE A}
+
+\textbf{NOTA}: los acentos fueron removidos en la descrtipción de los programas por problemas de compatibilidad con la librería 'listing' en \LaTeX.
+
+\begin{center}
+\large\textbf{Programa \# 1}
+\end{center}
+\addcontentsline{toc}{section}{Programa \# 1}
+
+\begin{lstlisting}[language=Python, caption={Prueba de extracción de características acústicas (MFCC) y validación de la representación numérica del audio.o}, label={lst:waveform}]
+import numpy as np
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+from pathlib import Path
+
+def peak_normalize(x, eps=1e-9):
+    '''
+    Normalizacion por pico (peak normalization).
+    Se aplica despues de trim y antes de segmentar (a nivel de archivo completo).
+    - Args:
+        x: senal de audio (1D numpy array)
+        eps: epsilon para evitar division por cero
+    - Returns:
+        Audio normalizado con pico = 1.0
+    '''
+    return x / (np.max(np.abs(x)) + eps)
+
+def segment_signal(x, sr, seg_sec, hop_sec):
+    '''
+    Segmenta la senal de audio en ventanas con overlap.
+    Si un segmento es mas corto que seg_sec, se hace padding con reflect.
+    - Args:
+        x: senal de audio (1D numpy array)
+        sr: sample rate
+        seg_sec: duracion del segmento en segundos
+        hop_sec: hop entre segmentos en segundos
+    - Returns:
+        Lista de segmentos de audio
+    '''
+    seg_len = int(seg_sec * sr)
+    hop_len = int(hop_sec * sr)
+    
+    # Si el audio es mas corto que seg_len, hacer padding
+    if len(x) < seg_len:
+        x = np.pad(x, (0, seg_len - len(x)), mode='reflect')
+    
+    segments = []
+    for start in range(0, max(1, len(x) - seg_len + 1), hop_len):
+        seg = x[start:start + seg_len]
+        if len(seg) < seg_len:
+            seg = np.pad(seg, (0, seg_len - len(seg)), mode='reflect')
+        segments.append(seg)
+    return segments
+
+def extract_mfcc_features(audio_segment):
+    '''
+    Extrae MFCCs siguiendo el pipeline de produccion:
+    1. Extrae N_MFCC_RAW (33) MFCCs
+    2. Elimina C0 (primer coeficiente) - queda (32, T)
+    3. Calcula delta y delta-delta sobre los 32 coeficientes
+    4. Apila - (3, 32, T) si ADD_DELTAS=True
+    - Args:
+        audio_segment: senal de audio (1D numpy array)
+    - Returns:
+        features: numpy array con shape (channels, N_MFCC_FINAL, T_frames)
+                  channels = 3 si ADD_DELTAS=True, else 1
+    '''
+    # Extraer MFCCs con C0 incluido
+    mfcc = librosa.feature.mfcc(
+        y=audio_segment,
+        sr=SR,
+        n_mfcc=N_MFCC_RAW,      # 33 coeficientes
+        n_fft=N_FFT,
+        hop_length=HOP_LEN,
+        fmin=FMIN,
+        fmax=FMAX
+    )
+    # Eliminar C0 (primer coeficiente) - shape: (32, T)
+    mfcc = mfcc[1:, :]
+    
+    if ADD_DELTAS:
+        # Calcular deltas sobre los 32 coeficientes (sin C0)
+        delta = librosa.feature.delta(mfcc)
+        delta2 = librosa.feature.delta(mfcc, order=2)
+        # Apilar: (3, 32, T)
+        features = np.stack([mfcc, delta, delta2], axis=0)
+    else:
+        # Solo MFCCs: (1, 32, T)
+        features = mfcc[np.newaxis, :, :]
+    return features.astype(np.float32)
+
+def preprocess_audio_file(audio_path):
+    '''
+    Pipeline completo de preprocesamiento consistente con produccion:
+	- Args:
+        audio_path: ruta al archivo de audio
+	- Returns:
+        segments_features: lista de arrays con shape (3, 32, T_frames)
+        metadata: diccionario con informacion del procesamiento
+    '''
+    audio_path = Path(audio_path)
+    
+    # 1. Load + resample
+    audio_raw, _ = librosa.load(str(audio_path), sr=SR, mono=True)
+
+    # 2. Trim
+    audio_trimmed, _ = librosa.effects.trim(audio_raw, top_db=TRIM_DB)
+    
+    # 3. Peak normalization (a nivel de archivo)
+    audio_normalized = peak_normalize(audio_trimmed)
+    
+    # 4. Segmentar
+    segments = segment_signal(audio_normalized, SR, SEG_SEC, HOP_SEC)
+    
+    # 5. Extraer features por segmento
+    segments_features = []
+    for i, seg in enumerate(segments):
+        feat = extract_mfcc_features(seg)
+        segments_features.append(feat)
+    
+    # Metadata
+    metadata = {
+        'filename': audio_path.name,
+        'duration_original': len(audio_raw) / SR,
+        'duration_trimmed': len(audio_trimmed) / SR,
+        'num_segments': len(segments),
+        'feature_shape': segments_features[0].shape if segments_features else None
+    }
+    return segments_features, metadata
+
+# PARAMETROS DE PREPROCESAMIENTO
+
+# Audio Configuration
+SR = 16000              # Sample rate (resample todo a 16kHz)
+TRIM_DB = 30            # Top dB para trim (eliminar silencios)
+
+# Segmentacion
+SEG_SEC = 2.0           # Duracion de cada segmento: 2 segundos
+HOP_SEC = 1.0           # Hop entre segmentos: 1 segundo (50% overlap)
+
+# MFCC FE
+# Ventana: 25ms, Hop: 10ms (estandar en ASR)
+N_FFT = int(0.025 * SR)       # 25ms - 400 muestras
+HOP_LEN = int(0.010 * SR)     # 10ms - 160 muestras
+
+# Frecuencias
+FMIN = 20                     # Frecuencia minima (Hz)
+FMAX = SR // 2                # Frecuencia maxima (Nyquist): 8000 Hz
+
+# Coeficientes MFCC
+N_MFCC_RAW = 33               # Extraemos 33 MFCCs inicialmente
+N_MFCC_FINAL = 32             # Eliminamos C0 - 32 coeficientes finales
+ADD_DELTAS = True             # Incluir delta y delta-delta
+
+AUDIO_PATH = r'<<archivo de audio>>'
+features, metadata = preprocess_audio_file(AUDIO_PATH, verbose=True)
+
+# Directorio con audios
+DATA_DIR = Path(r'<<directorio con archivos de audio>>')
+
+# Buscar los primeros 5 archivos WAV
+audio_files = list(DATA_DIR.rglob('*.wav'))[:5]
+
+if len(audio_files) == 0:
+    print('No se encontraron archivos .wav en el directorio.')
+else:
+    print(f'\n{'='*70}')
+    print(f'TEST BATCH: Procesando {len(audio_files)} archivos')
+    print(f'{'='*70}\n')
+    
+    results = []
+    for audio_path in audio_files:
+        try:
+            features, metadata = preprocess_audio_file(audio_path, verbose=False)
+            results.append({
+                'filename': metadata['filename'],
+                'num_segments': metadata['num_segments'],
+                'shape': metadata['feature_shape']
+            })
+            print(f'{metadata['filename']:<30} - {metadata['num_segments']:>3} segmentos')
+        except Exception as e:
+            print(f'{audio_path.name:<30} - ERROR: {e}')
+    
+    print(f'\n{'='*70}')
+    print(f'Procesamiento batch completado: {len(results)}/{len(audio_files)} exitosos')
+    print(f'{'='*70}')
+
+# Cargar un segmento del dataset de entrenamiento
+NPY_DIR = Path(r'<<directorio con archivo *.npy>>')
+
+try:
+    X_train = np.load(NPY_DIR / 'X_train.npy', mmap_mode='r')
+    print(f'\n{'='*70}')
+    print('VALIDACION DE CONSISTENCIA')
+    print(f'{'='*70}')
+    print(f'Shape del dataset de entrenamiento: {X_train.shape}')
+    print(f'   Esperado: (N_samples, 3, 32, T_frames)')
+    print(f'\nShape de nuestro test:')
+    if 'features' in locals() and len(features) > 0:
+        print(f'   {features[0].shape}')
+        print(f'\n Las dimensiones coinciden.' if features[0].shape[0] == 3 and features[0].shape[1] == 32 else 'Las dimensiones NO coinciden')
+    
+    # Estadisticas comparativas
+    print(f'\n Estadisticas de X_train (primer segmento):')
+    sample = X_train[0].astype(np.float32)
+    print(f'   Min:  {np.min(sample):.4f}')
+    print(f'   Max:  {np.max(sample):.4f}')
+    print(f'   Mean: {np.mean(sample):.4f}')
+    print(f'   Std:  {np.std(sample):.4f}')
+    if 'features' in locals() and len(features) > 0:
+        print(f'\n Estadisticas de nuestro test (primer segmento):')
+        print(f'   Min:  {np.min(features[0]):.4f}')
+        print(f'   Max:  {np.max(features[0]):.4f}')
+        print(f'   Mean: {np.mean(features[0]):.4f}')
+        print(f'   Std:  {np.std(features[0]):.4f}')
+    print(f'{'='*70}\n')
+
+except FileNotFoundError:
+    print('No se encontraron los archivos .npy de entrenamiento.')
+\end{lstlisting}
+
+
+\pagebreak
+
+\begin{center}
+\large\textbf{Programa \# 2}
+\end{center}
+\addcontentsline{toc}{section}{Programa \# 2}
+
+\begin{lstlisting}[language=Python, caption={Generando archivos *.npy (En Jupyter Notebooks *.ipynb).}, label={lst:npy-generation}]
+# CELDA 1:
+# -------------------------------------------------------------------------
+from pathlib import Path
+import pandas as pd
+import numpy as np
+import librosa
+from sklearn.model_selection import train_test_split
+import json
+# -------------------------------------------------------------------------
+
+# CELDA 2:
+# -------------------------------------------------------------------------
+def peak_normalize(x, eps=1e-9):
+    return x / (np.max(np.abs(x)) + eps)
+
+def load_and_clean(path):
+    '''
+    Preprocesamiento a nivel de archivo (CONTRATO DE PREPROCESAMIENTO):
+    1. Load + resample a SR=16000
+    2. Trim con TRIM_DB=30 (elimina silencios al inicio/fin)
+    3. Peak normalization sobre el audio TRIMMEADO (a nivel de archivo completo)
+    '''
+    x, _ = librosa.load(str(path), sr=SR, mono=True)
+    x, _ = librosa.effects.trim(x, top_db=TRIM_DB)
+    x = peak_normalize(x)
+    return x
+
+def segment_signal(x, sr, seg_sec, hop_sec):
+    seg_len = int(seg_sec * sr)
+    hop_len = int(hop_sec * sr)
+    if len(x) < seg_len:
+        x = np.pad(x, (0, seg_len - len(x)), mode='reflect')
+    segments = []
+    for start in range(0, max(1, len(x)-seg_len+1), hop_len):
+        seg = x[start:start+seg_len]
+        if len(seg) < seg_len:
+            seg = np.pad(seg, (0, seg_len - len(seg)), mode='reflect')
+        segments.append(seg)
+    return segments
+
+def mfcc_features(seg):
+    '''
+    Extrae MFCCs + deltas con C0 eliminado.
+    Contrato de preprocesamiento:
+    1. Se recibe 'seg' ya trimmeado, normalizado y segmentado
+    2. Extraemos 33 MFCCs (n_mfcc=33)
+    3. Eliminamos C0 -> queda (32, T)
+    4. Calculamos Delta y Delta-Delta sobre los 32 coefs restantes
+    5. Apilamos -> (3, 32, T)
+    '''
+    # Extraer 33 MFCCs para luego eliminar C0
+    mfcc = librosa.feature.mfcc(
+        y=seg, sr=SR, n_mfcc=33, n_fft=N_FFT, hop_length=HOP_LEN,
+        fmin=FMIN, fmax=FMAX
+    )
+    # Eliminar C0 (primer coeficiente) -> ahora (32, T)
+    mfcc = mfcc[1:, :]
+    
+    if ADD_DELTAS:
+        d1 = librosa.feature.delta(mfcc)
+        d2 = librosa.feature.delta(mfcc, order=2)
+        feat = np.stack([mfcc, d1, d2], axis=0)  # (3, 32, T)
+    else:
+        feat = mfcc[np.newaxis, :, :]            # (1, 32, T)
+    return feat.astype(np.float32)
+# -------------------------------------------------------------------------
+
+# CELDA 3:
+# -------------------------------------------------------------------------
+DATA_DIR = Path(r'<<directorio con archivos de audio>>')
+CSV_PATH = Path(r'<<archivo *.csv con etiquetas>>')
+
+ID_COL = 'file name'            # <-- columna de nombres
+TARGET_COL = 'queen status'     # <-- la etiqueta que se utilizara
+VALID_CLASSES = {0, 1, 2, 3}
+
+# 1) Construir diccionario: nombre_archivo.wav -> ruta_completa
+wav_paths = sorted(list(DATA_DIR.rglob('*.wav'))) + sorted(list(DATA_DIR.rglob('*.WAV')))
+name_to_path = {p.name: str(p) for p in wav_paths}  # str() para que sea serializable y facil
+
+df = pd.read_csv(CSV_PATH)
+
+assert ID_COL in df.columns, f'Falta ID_COL={ID_COL} en el CSV'
+assert TARGET_COL in df.columns, f'Falta TARGET_COL={TARGET_COL} en el CSV'
+
+# 2) Normaliza nombres (solo basename)
+df['_basename'] = df[ID_COL].astype(str).map(lambda s: Path(s).name)
+
+# 3) Convertir queen status a numerico y filtrar clases validas
+df['_y'] = pd.to_numeric(df[TARGET_COL], errors='coerce')
+labeled = df[df['_y'].isin([0,1,2,3])].copy()
+labeled['y'] = labeled['_y'].astype(np.int64)
+
+# 4) Crear columna 'path' (ruta completa al wav)
+labeled['path'] = labeled['_basename'].map(name_to_path)
+
+# 5) Verificar que no falte ninguno
+missing = labeled['path'].isna().sum()
+print('Etiquetados:', len(labeled), '| faltantes sin path:', int(missing))
+assert missing == 0, 'Hay archivos etiquetados que no se encontraron en la carpeta.'
+print('Conteo por clase:\n', labeled['y'].value_counts().sort_index())
+
+# Audio / MFCC params
+SR = 16000
+TRIM_DB = 30
+SEG_SEC = 2.0
+HOP_SEC = 1.0
+N_MFCC = 32
+N_FFT  = int(0.025 * SR)
+HOP_LEN= int(0.010 * SR)
+FMIN, FMAX = 20, SR//2
+ADD_DELTAS = True
+RANDOM_SEED = 123
+TEST_SIZE = 0.15
+VAL_SIZE  = 0.15
+
+# Direccion para guardar los archivos .npy con las caracteristicas MFCC
+OUT_DIR = Path(r'<<directorio con archivos de audio>>')
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+# -------------------------------------------------------------------------
+
+# CELDA 4:
+# -------------------------------------------------------------------------
+paths = labeled['path'].values
+ys    = labeled['y'].values
+
+# paths, ys ya definidos (por archivo, no por segmento)
+paths_train, paths_tmp, y_train, y_tmp = train_test_split(
+    paths, ys, test_size=(TEST_SIZE + VAL_SIZE), random_state=RANDOM_SEED, stratify=ys
+)
+
+# aqui tmp es (val+test); lo partimos a la mitad si VAL_SIZE==TEST_SIZE
+rel_test = TEST_SIZE / (TEST_SIZE + VAL_SIZE)
+
+paths_val, paths_test, y_val, y_test = train_test_split(
+    paths_tmp, y_tmp, test_size=rel_test, random_state=RANDOM_SEED, stratify=y_tmp
+)
+
+print('Train/Val/Test:', len(paths_train), '/', len(paths_val), '/', len(paths_test))
+# -------------------------------------------------------------------------
+
+# CELDA 5:
+# -------------------------------------------------------------------------
+def process_labeled_file_list(file_list, label_list):
+    feats = []
+    labs = []
+    file_index = []  # trazabilidad: (archivo, segmento)
+    for p, y in zip(file_list, label_list):
+        x = load_and_clean(p)
+        segs = segment_signal(x, SR, SEG_SEC, HOP_SEC)
+        for k, seg in enumerate(segs):
+            feats.append(mfcc_features(seg))
+            labs.append(y)
+            file_index.append({'file': str(p), 'segment': int(k)})
+    X = np.stack(feats, axis=0)  # (Nseg, C, n_mfcc, T)
+    y = np.array(labs, dtype=np.int64)
+    return X, y, file_index
+
+print('Extrayendo TRAIN...')
+X_train, y_train_seg, idx_train = process_labeled_file_list(paths_train, y_train)
+print('Extrayendo VAL...')
+X_val, y_val_seg, idx_val = process_labeled_file_list(paths_val, y_val)
+print('Extrayendo TEST...')
+X_test, y_test_seg, idx_test = process_labeled_file_list(paths_test, y_test)
+
+print('Shapes:')
+print('X_train:', X_train.shape, 'y:', y_train_seg.shape)
+print('X_val:', X_val.shape, 'y:', y_val_seg.shape)
+print('X_test:', X_test.shape, 'y:', y_test_seg.shape)
+# -------------------------------------------------------------------------
+
+# CELDA 6:
+# -------------------------------------------------------------------------
+X_train = X_train.astype(np.float16)
+X_val   = X_val.astype(np.float16)
+X_test  = X_test.astype(np.float16)
+
+np.save(OUT_DIR / 'X_train.npy', X_train)
+np.save(OUT_DIR / 'y_train.npy', y_train_seg)
+np.save(OUT_DIR / 'X_val.npy',   X_val)
+np.save(OUT_DIR / 'y_val.npy',   y_val_seg)
+np.save(OUT_DIR / 'X_test.npy',  X_test)
+np.save(OUT_DIR / 'y_test.npy',  y_test_seg)
+# -------------------------------------------------------------------------
+\end{lstlisting}
+
+\pagebreak
+
+\begin{center}
+\large\textbf{Programa \# 3}
+\end{center}
+\addcontentsline{toc}{section}{Programa \# 3}
+
+\begin{lstlisting}[language=Python, caption={Extracción de características.}, label={lst:cnn-dev}]
+# CELDA 1:
+# -------------------------------------------------------------------------
+from pathlib import Path
+import os, random
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras import layers, models
+from sklearn.metrics import classification_report, confusion_matrix
+
+SEED = 123
+
+os.environ['PYTHONHASHSEED'] = str(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+tf.random.set_seed(SEED)
+
+BASE = Path(r'<<Directorio con archivos *.npy>>')
+
+X_train = np.load(BASE / 'X_train.npy', mmap_mode='r')
+y_train = np.load(BASE / 'y_train.npy')
+X_val   = np.load(BASE / 'X_val.npy',   mmap_mode='r')
+y_val   = np.load(BASE / 'y_val.npy')
+X_test  = np.load(BASE / 'X_test.npy',  mmap_mode='r')
+y_test  = np.load(BASE / 'y_test.npy')
+
+print('X_train:', X_train.shape, X_train.dtype)
+print('y_train:', y_train.shape, y_train.dtype)
+print('X_val:  ', X_val.shape, X_val.dtype)
+print('X_test: ', X_test.shape, X_test.dtype)
+
+# Chequeo de clases
+u, c = np.unique(y_train, return_counts=True)
+print('Distribucion train:', dict(zip(u, c)))
+# -------------------------------------------------------------------------
+
+# CELDA 2:
+# -------------------------------------------------------------------------
+BATCH = 64
+
+def make_ds(X, y, training=False):
+    ds = tf.data.Dataset.from_tensor_slices((X, y))
+    if training:
+        ds = ds.shuffle(20000, reshuffle_each_iteration=True)
+    ds = ds.batch(BATCH)
+    ds = ds.map(lambda a,b: (tf.cast(a, tf.float32), b), num_parallel_calls=tf.data.AUTOTUNE)
+    ds = ds.prefetch(tf.data.AUTOTUNE)
+    return ds
+
+train_ds = make_ds(X_train, y_train, training=True)
+val_ds   = make_ds(X_val, y_val, training=False)
+test_ds  = make_ds(X_test, y_test, training=False)
+# -------------------------------------------------------------------------
+
+# CELDA 3:
+# -------------------------------------------------------------------------
+num_classes = 4
+counts = np.bincount(y_train, minlength=num_classes)
+total = counts.sum()
+
+# Peso inverso a frecuencia (simple y efectivo)
+class_weight = {i: float(total / (num_classes * counts[i])) for i in range(num_classes) if counts[i] > 0}
+print('counts:', counts)
+print('class_weight:', class_weight)
+# -------------------------------------------------------------------------
+
+# CELDA 4:
+# -------------------------------------------------------------------------
+num_classes = 4
+input_shape = (3, 32, 201)
+act_fn = 'sigmoid'
+
+model = models.Sequential([
+    layers.Input(shape=input_shape),
+    layers.Conv2D(16, (3,3), padding='same', activation=act_fn, data_format='channels_first'),
+    layers.BatchNormalization(axis=1),
+    layers.MaxPool2D((2,2), data_format='channels_first'),
+
+    layers.Conv2D(32, (3,3), padding='same', activation=act_fn, data_format='channels_first'),
+    layers.BatchNormalization(axis=1),
+    layers.MaxPool2D((2,2), data_format='channels_first'),
+
+    layers.Conv2D(64, (3,3), padding='same', activation=act_fn, data_format='channels_first'),
+    layers.BatchNormalization(axis=1),
+    layers.MaxPool2D((2,2), data_format='channels_first'),
+
+    layers.Conv2D(128, (3,3), padding='same', activation=act_fn, data_format='channels_first'),
+    layers.BatchNormalization(axis=1),
+    layers.GlobalAveragePooling2D(data_format='channels_first'),
+
+    layers.Dense(64, activation='relu'),
+    layers.Dropout(0.3),
+    layers.Dense(num_classes, activation='softmax')
+])
+
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(1e-3),
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+model.summary()
+# -------------------------------------------------------------------------
+
+# CELDA 5:
+# -------------------------------------------------------------------------
+callbacks = [
+    tf.keras.callbacks.EarlyStopping(
+        monitor='val_accuracy', mode='max',
+        patience=10, restore_best_weights=True
+    ),
+    tf.keras.callbacks.ReduceLROnPlateau(
+        monitor='val_accuracy', mode='max',
+        patience=3, factor=0.5
+    ),
+    tf.keras.callbacks.ModelCheckpoint(
+        filepath=str(BASE / 'cnn_mfcc_queenRec1.h5'),
+        monitor='val_accuracy', mode='max',
+        save_best_only=True
+    )
+]
+
+history = model.fit(
+    train_ds,
+    validation_data=val_ds,
+    epochs=40,
+    class_weight=class_weight,
+    callbacks=callbacks
+)
+# -------------------------------------------------------------------------
+
+# CELDA 6:
+# -------------------------------------------------------------------------
+probs = model.predict(test_ds)
+y_pred = np.argmax(probs, axis=1)
+
+print('Confusion matrix:\n', confusion_matrix(y_test, y_pred))
+print('\nClassification report:\n', classification_report(y_test, y_pred, digits=4))
+# -------------------------------------------------------------------------
+\end{lstlisting}
+
+\pagebreak
+
+\begin{center}
+\large\textbf{Programa \# 3}
+\end{center}
+\addcontentsline{toc}{section}{Programa \# 3}
+
+\begin{lstlisting}[language=Python, caption={Extracción de características.}, label={lst:cnn-app}]
+# CELDA 1:
+# -------------------------------------------------------------------------
+def peak_normalize(x, eps=1e-9):
+    m = np.max(np.abs(x))
+    return x if m < eps else (x / (m + eps))
+
+def extract_mfcc_3ch(window_audio: np.ndarray) -> np.ndarray:
+    '''
+    Input: 1D float array of length WINDOW_SEC*SR
+    Output: (3, 32, 201) float32  [channels_first]
+    '''
+    # Ajustar normalizacion de amplitud al estilo de entrenamiento (aprox.)
+    w = peak_normalize(window_audio.astype(np.float32))
+
+    mfcc = librosa.feature.mfcc(
+        y=w, sr=SR,
+        n_mfcc=N_MFCC,
+        n_fft=N_FFT,
+        hop_length=HOP_LEN,
+        fmin=FMIN, fmax=FMAX
+    )  # (32, T)
+
+    if ADD_DELTAS:
+        d1 = librosa.feature.delta(mfcc)
+        d2 = librosa.feature.delta(mfcc, order=2)
+        feat = np.stack([mfcc, d1, d2], axis=0)  # (3, 32, T)
+    else:
+        feat = mfcc[np.newaxis, :, :]            # (1, 32, T)
+
+    return feat.astype(np.float32)
+# -------------------------------------------------------------------------
+
+# CELDA 2:
+# -------------------------------------------------------------------------
+import time
+import numpy as np
+import librosa
+import matplotlib.pyplot as plt
+from pathlib import Path
+from collections import deque
+import tensorflow as tf
+
+# ----------------------------
+# Direcciones
+# ----------------------------
+MODEL_PATH = Path(r'<<Modelo (red neuronal>>')
+WAV_PATH   = Path(r'<<Archivo *.wav')
+
+assert MODEL_PATH.exists(), f'Model not found: {MODEL_PATH}'
+assert WAV_PATH.exists(),   f'WAV not found: {WAV_PATH}'
+
+# ----------------------------
+# Parametros
+# ----------------------------
+SR = 16000
+WINDOW_SEC = 2.0
+HOP_SEC = 1.0
+SMOOTH_SEC = 60.0
+
+# Parametros MFCC
+N_MFCC = 32
+N_FFT = int(0.025 * SR)      # 25 ms -> 400
+HOP_LEN = int(0.010 * SR)    # 10 ms -> 160
+FMIN, FMAX = 20, SR // 2
+ADD_DELTAS = True
+
+SIMULATE_REALTIME = True   # True = sleep 1s per hop, False = run fast
+
+# Mapeo de etiquetas
+CLASS_NAME = {
+    0: '0: reina original / funcional',
+    1: '1: no presente',
+    2: '2: presente y rechazada',
+    3: '3: presente y recien aceptada'
+}
+
+print('Config OK.')
+# -------------------------------------------------------------------------
+
+# CELDA 3:
+# -------------------------------------------------------------------------
+model = tf.keras.models.load_model(MODEL_PATH)
+print('Loaded model:', MODEL_PATH)
+# -------------------------------------------------------------------------
+
+# CELDA 4:
+# -------------------------------------------------------------------------
+# Cargar como audio monofonico a la frecuencia de muestreo (SR)
+audio, sr = librosa.load(str(WAV_PATH), sr=SR, mono=True)
+
+print('Loaded WAV:', WAV_PATH.name)
+print('sr:', sr, 'samples:', len(audio), 'duration (s):', len(audio)/sr)
+# -------------------------------------------------------------------------
+
+# CELDA 5:
+# -------------------------------------------------------------------------
+win_len = int(WINDOW_SEC * SR)
+hop_len = int(HOP_SEC * SR)
+smooth_N = int(SMOOTH_SEC / HOP_SEC)
+
+# Buffer circular para el audio
+buf = np.zeros(win_len, dtype=np.float32)
+write_idx = 0
+
+# Suavizado mediante suma acumulada (running sum)
+prob_hist = deque(maxlen=smooth_N)
+prob_sum = np.zeros((4,), dtype=np.float64)  # corriendo suma de probabilidades
+
+times, conf_inst, conf_smooth, pred_inst, pred_smooth = [], [], [], [], []
+
+t0 = time.time()
+num_hops = int(np.ceil(len(audio) / hop_len))
+
+print(f'Running {num_hops} hops | window={WINDOW_SEC}s hop={HOP_SEC}s smooth={SMOOTH_SEC}s ({smooth_N} preds)')
+
+pos = 0
+for step in range(num_hops):
+    # Tomar el siguiente fragmento (chunk) del salto (hop)
+    chunk = audio[pos:pos+hop_len]
+    pos += hop_len
+
+    # Rellenar (padding) el ultimo fragmento si es necesario
+    if len(chunk) < hop_len:
+        chunk = np.pad(chunk, (0, hop_len - len(chunk)), mode='constant')
+    chunk = chunk.astype(np.float32, copy=False)
+
+    # escribir en el buffer circular
+    end = write_idx + hop_len
+    if end <= win_len:
+        buf[write_idx:end] = chunk
+    else:
+        n1 = win_len - write_idx
+        buf[write_idx:] = chunk[:n1]
+        buf[:end - win_len] = chunk[n1:]
+    write_idx = (write_idx + hop_len) % win_len
+
+    # leer los ultimos 2s en el orden correcto (evitar exceso de roll/copy)
+    if write_idx == 0:
+        window = buf
+    else:
+        window = np.concatenate([buf[write_idx:], buf[:write_idx]])
+		
+
+    probs = model.predict(x, verbose=0)[0]       # (4,)
+    y_hat = int(np.argmax(probs))
+    c_hat = float(np.max(probs))
+
+    # actualizar el suavizado de la media movil
+    if len(prob_hist) == prob_hist.maxlen:
+        prob_sum -= prob_hist[0]
+    prob_hist.append(probs)
+    prob_sum += probs
+    probs_s = (prob_sum / len(prob_hist)).astype(np.float32)
+
+    y_s = int(np.argmax(probs_s))
+    c_s = float(np.max(probs_s))
+
+    # STATE.update({'t': float(sec), 'class': int(y_s), 'confidence': float(c_s)})
+
+    sec = step * HOP_SEC
+    times.append(sec)
+    conf_inst.append(c_hat)
+    conf_smooth.append(c_s)
+    pred_inst.append(y_hat)
+    pred_smooth.append(y_s)
+
+    if step % 5 == 0:  # imprimir cada 5 segundos para reducir spam/sobrecarga
+        print(f't={sec:6.1f}s - inst={CLASS_NAME[y_hat]:28s} conf={c_hat:0.3f} - smooth={CLASS_NAME[y_s]:28s} conf={c_s:0.3f}')
+
+    if SIMULATE_REALTIME:
+        elapsed = time.time() - t0
+        target = (step + 1) * HOP_SEC
+        sleep_time = target - elapsed
+        if sleep_time > 0:
+            time.sleep(sleep_time)
+
+print('Done.')
+# -------------------------------------------------------------------------
+\end{lstlisting}
+
+\end{document}
