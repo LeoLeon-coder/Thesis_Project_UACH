@@ -226,23 +226,23 @@
 		\end{center}
 	\end{titlepage}
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % ÍNDICE
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \tableofcontents
 \thispagestyle{empty} % No header/footer on the table of contents page
 
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % RESUMEN/ABSTRACT
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \pagebreak
 \chapter*{RESUMEN}
 \addcontentsline{toc}{chapter}{RESUMEN}
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 1. INTRODUCCIÓN
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \pagebreak
 \chapter{INTRODUCCIÓN}
 \vspace{-3em}
@@ -257,9 +257,9 @@
 
 \par Según Ruvinga\cite{ruvinga2021}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas\cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear\cite{ruvinga2021}.
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 1.1. Planteamiento del problema
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \section{Planteamiento del Problema}
 
@@ -269,17 +269,17 @@
 
 \par Una abeja reina puede ser reemplazada por la colonia mediante la crianza de una nueva reina a partir de larvas seleccionadas, siempre y cuando existan suficientes recursos y tiempo para que la nueva reina se desarrolle completamente. Este proceso puede tardar entre 16 y 24 días, dependiendo de las condiciones ambientales y la disponibilidad de alimento\cite{winston1987temperate}. Durante este período, la colonia puede volverse vulnerable a enfermedades, depredadores y otros factores estresantes que pueden afectar su supervivencia. Como una alternativa, los apicultores pueden introducir una reina comprada o criada en otro lugar para restablecer la estabilidad de la colonia. Sin embargo, la aceptación de una nueva reina por parte de las obreras no está garantizada y puede variar según el comportamiento de la colonia y las condiciones ambientales\cite{ruvinga2021}.
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 1.2. Justificación
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \section{Justificación}
 
 \noindent Contar con herramientas que permitan identificar la presencia o ausencia de la abeja reina de manera no invasiva resulta de gran utilidad para garantizar la continuidad y productividad de la colmena. Esta investigación propone un enfoque basado en el análisis acústico del panal, aprovechando técnicas de aprendizaje automático para detectar el estado de la reina. Dado que estudios recientes han demostrado que el sonido dentro de la colmena varía según la presencia o ausencia de la reina\cite{ruvinga2021, maarefremote, howard2013, ruvinga2023}, se busca validar un sistema que, a partir de grabaciones de audio, identifique estas variaciones de forma automática y eficiente.
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 1.3. Objetivos
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \section{Objetivos}
 
@@ -303,17 +303,17 @@
 
 \end{tightmulticols}
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 2. MARCO TEÓRICO
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \pagebreak
 \chapter{MARCO TEÓRICO}
 \vspace{-3em}
 
-%====================================================================================
+%-------------------------------------------------------------------------
 % 2.1. CONTEXTO: ABEJAS, POLINIZACIÓN Y MONITOREO
-%====================================================================================
+%-------------------------------------------------------------------------
 
 \section{Las Abejas Melíferas y su Importancia Ecológica y Económica}
 
@@ -353,9 +353,9 @@
 
 \end{tightmulticols}
 
-%====================================================================================
+%-------------------------------------------------------------------------
 % 2.2. MONITOREO ACÚSTICO DE COLMENAS: ESTADO DEL ARTE
-%====================================================================================
+%-------------------------------------------------------------------------
 
 \section{Monitoreo Acústico de Colmenas: Estado del Arte}
 
@@ -503,9 +503,9 @@ LSTM & 14 MFCC & 92.0\% & 92\% & 92\% \\
 
 \end{tightmulticols}
 
-%====================================================================================
+%-------------------------------------------------------------------------
 % 2.3. FUNDAMENTOS DE PROCESAMIENTO DIGITAL DE SEÑALES DE AUDIO
-%====================================================================================
+%-------------------------------------------------------------------------
 
 \section{Fundamentos de Procesamiento Digital de Señales de Audio}
 
@@ -517,8 +517,8 @@ LSTM & 14 MFCC & 92.0\% & 92\% & 92\% \\
 
 \begin{equation}
     \begin{split}
-        x[n] = x(t = nT) \; , \\
-        n = 0, 1, 2, \ldots, N-1 \; ,
+        &x[n] = x(t = nT) \; , \\[0.6ex]
+        &n = 0, 1, 2, \ldots, N-1 \; ,
     \end{split}
 \end{equation}
 
@@ -620,32 +620,32 @@ LSTM & 14 MFCC & 92.0\% & 92\% & 92\% \\
 \noindent\textbf{Ventana de Hamming}:
 \begin{equation*}
     \begin{split}
-        w[n] = 0.53836 - 0.46164 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
-        0 \leq n \leq L-1 \; .
+        &w[n] = 0.53836 - 0.46164 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\[0.6ex]
+        &0 \leq n \leq L-1 \; .
     \end{split}
 \end{equation*}
 
 \noindent Frecuentemente aproximada como:
 \begin{equation*}
     \begin{split}
-        w[n] \approx 0.54 - 0.46 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
-        0 \leq n \leq L-1 \; .
+        &w[n] \approx 0.54 - 0.46 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\[0.6ex]
+        &0 \leq n \leq L-1 \; .
     \end{split}
 \end{equation*}
 
 \noindent\textbf{Ventana de Hanning (Hann)}:
 \begin{equation*}
     \begin{split}
-        w[n] = 0.5 - 0.5 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
-        0 \leq n \leq L-1 \; .
+        &w[n] = 0.5 - 0.5 \cos\left(\frac{2\pi n}{L-1}\right) \; , \\[0.6ex]
+        &0 \leq n \leq L-1 \; .
     \end{split}
 \end{equation*}
 
 \noindent Ambas se pueden expresar en forma generalizada como:
 \begin{equation*}
     \begin{split}
-        w[n] = (1-\omega) - \omega \cos\left(\frac{2\pi n}{L-1}\right) \; , \\
-        0 \leq n \leq L-1 \; .
+        &w[n] = (1-\omega) - \omega \cos\left(\frac{2\pi n}{L-1}\right) \; , \\[0.6ex]
+        &0 \leq n \leq L-1 \; .
     \end{split}
 \end{equation*}
 donde $\omega = 0.5$ para Hanning y $\omega \approx 0.46$ para Hamming.
@@ -657,7 +657,10 @@ donde $\omega = 0.5$ para Hanning y $\omega \approx 0.46$ para Hamming.
 \noindent La FFT es un algoritmo eficiente para calcular la Transformada Discreta de Fourier (DFT). Para una trama ventaneada $x_w[n] = x[n] \cdot w[n]$:
 
 \begin{equation*}
-    X[k] = \sum_{n=0}^{N-1} x_w[n] \cdot e^{-j\frac{2\pi kn}{N}}, \quad k = 0, 1, \ldots, N-1 \; .
+    \begin{split}
+        &X[k] = \sum_{n=0}^{N-1} x_w[n] \cdot e^{-j\frac{2\pi kn}{N}} \; , \\[0.6ex]
+        &k = 0, 1, \ldots, N-1 \; .
+    \end{split}
 \end{equation*}
 
 \par La complejidad computacional de la FFT es $O(N \log N)$ comparada con $O(N^2)$ de la DFT directa, lo que la hace práctica para procesamiento en tiempo real.
@@ -669,7 +672,10 @@ donde $\omega = 0.5$ para Hanning y $\omega \approx 0.46$ para Hamming.
 
 \noindent Y cada bin $k$ corresponde a una frecuencia física de:
 \begin{equation*}
-    f_k = \frac{k \cdot f_s}{N}, \quad k = 0, 1, \ldots, \left\lfloor\frac{N}{2}\right\rfloor \; .
+    \begin{split}
+        &f_k = \frac{k \cdot f_s}{N} \; , \\[0.6ex]
+        &k = 0, 1, \ldots, \left\lfloor\frac{N}{2}\right\rfloor \; .
+    \end{split}
 \end{equation*}
 
 \noindent El rango útil de frecuencias (espectro unilateral) va de $0$ Hz hasta la frecuencia de Nyquist $f_s/2$.
@@ -684,9 +690,9 @@ proporcionando bins frecuenciales de aproximadamente 43 Hz de ancho, con el espe
 
 \pagebreak
 
-%====================================================================================
+%-------------------------------------------------------------------------
 % 2.4. COEFICIENTES CEPSTRALES EN FRECUENCIA MEL (MFCC)
-%====================================================================================
+%-------------------------------------------------------------------------
 
 \section{Coeficientes Cepstrales en Frecuencia Mel (MFCC)}
 
@@ -798,8 +804,8 @@ proporcionando bins frecuenciales de aproximadamente 43 Hz de ancho, con el espe
 \noindent Para cada trama $i$:
 \begin{equation}
     \begin{split}
-    s_i[n] = x[n + iH] \cdot w[n] \; , \\
-    n = 0, \ldots, N-1 \; ,
+    &s_i[n] = x[n + iH] \cdot w[n] \; , \\[0.6ex]
+    &n = 0, \ldots, N-1 \; ,
     \end{split}
 \end{equation}
 donde $H$ es el salto entre tramas (\textit{hop size}).
@@ -997,9 +1003,9 @@ mfcc = librosa.feature.mfcc(
 )
 \end{lstlisting}
 
-%====================================================================================
+%-------------------------------------------------------------------------
 % 2.5. APRENDIZAJE PROFUNDO PARA CLASIFICACIÓN DE AUDIO
-%====================================================================================
+%-------------------------------------------------------------------------
 
 \section{Aprendizaje Profundo para Clasificación de Audio}
 
@@ -1389,9 +1395,9 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
     \item Trade-off: Precisión vs. complejidad computacional.
 \end{enumerate}
 
-%====================================================================================
+%-------------------------------------------------------------------------
 % 2.6. SÍNTESIS Y JUSTIFICACIÓN METODOLÓGICA
-%====================================================================================
+%-------------------------------------------------------------------------
 
 \section{Síntesis y Justificación Metodológica}
 
@@ -1439,19 +1445,19 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 
 \end{tightmulticols}
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 3. METODOLOGÍA
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \pagebreak
 \chapter{METODOLOGÍA}
 \vspace{-3em}
 
-\begin{tightmulticols}
-
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 3.1. Procedimiento
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
+
+\begin{tightmulticols}
 
 \section{Procedimiento}
 
@@ -1528,34 +1534,119 @@ donde $A_{\text{max}} = \max_m \left|x_{\text{trim}}[m]\right|$ es el valor máx
 	N/f_s = 1{,}323{,}000/22{,}050 \approx 60 \text{ segundos.}
 \end{equation*}
 Cada muestra corresponde a un valor numérico (almacenado como \texttt{float32}) que representa la amplitud instantánea de la señal. Matemáticamente, esta señal discreta puede formalizarse como:
-\begin{equation}\label{eq:signal-x_n}
-	\begin{aligned}
-	    x[n] &= \{x_0, x_1, \ldots, x_{N-1}\},\\
-	    n &= 0,1,\ldots,N-1,
-	\end{aligned}
-\end{equation}
+\begin{equation*}\label{eq:signal-x_n}
+	\begin{split}
+	    &x[n] = \{x_0, x_1, \ldots, x_{N-1}\} \; , \\[0.6ex]
+	    &n = 0,1,\ldots,N-1 \; ;
+	\end{split}
+\end{equation*}
 donde $x[n]$ representa la amplitud en el instante discreto $n$ y $N$ es el número total de muestras. En consecuencia, un archivo de audio puede interpretarse como una secuencia de valores que describe cómo varía la presión del aire (sonido) a lo largo del tiempo.
 
 \par No obstante, para el entrenamiento de un modelo de aprendizaje profundo, esta representación temporal no es la más conveniente para capturar patrones espectrales relevantes en la clasificación del estado de la reina. Por ello, la señal se transforma a una representación tiempo--frecuencia mediante el cálculo de espectros por ventanas (STFT), se proyecta su energía según bandas en escala Mel y se aplica una compresión logarítmica; posteriormente, se obtiene un conjunto compacto de descriptores mediante la Transformada Discreta del Coseno (DCT), resultando en los coeficientes cepstrales en escala Mel (MFCC). Esta representación puede interpretarse como una matriz (análoga a una imagen), lo cual facilita el uso de redes neuronales convolucionales (CNN) para la tarea de clasificación.
 
-\subsection{Extracción de Características Acústicas para la Clasificación del Estado de la Reina}
+\section{Arquitectura del Modelo}
 
+\noindent Se implementó una red neuronal convolucional (CNN) para la clasificación multiclase del estado de la reina en colmenas de abejas melíferas. El modelo recibe como entrada tensores de dimensión $(3, 32, 201)$, correspondientes a:
+\begin{itemize}
+    \item 3 canales: MFCC estáticos, derivadas de primer orden ($\Delta$) y derivadas de segundo orden ($\Delta^2$).
+    \item 32 coeficientes cepstrales (excluyendo $C_0$).
+    \item 201 tramas temporales (equivalentes a segmentos de audio de 2 segundos).
+\end{itemize}
 
+\par La arquitectura implementada consta de cuatro bloques convolucionales con normalización por lotes y \textit{max-pooling}, seguidos de capas densas para la clasificación final. La tabla~\ref{tab:cnn_architecture} resume la estructura del modelo.
 
-\par Bla bla bla
+\end{tightmulticols}
 
-\par Estó porporcionó archivos que fueron exportados en formatos \texttt{.csv} y \texttt{.npy} para su posterior análisis.
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Arquitectura de la red neuronal convolucional implementada}}
+\label{tab:cnn_architecture}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Capa} & \textbf{Tipo} & \textbf{Forma de Salida} & \textbf{Parámetros} \\
+\hline
+Input & -- & $(3, 32, 201)$ & -- \\
+\hline
+Conv2D\_1 & Conv2D + Sigmoid & $(16, 32, 201)$ & 448 \\
+BatchNorm\_1 & Normalización & $(16, 32, 201)$ & 64 \\
+MaxPool\_1 & Max Pooling 2×2 & $(16, 16, 100)$ & 0 \\
+\hline
+Conv2D\_2 & Conv2D + Sigmoid & $(32, 16, 100)$ & 4,640 \\
+BatchNorm\_2 & Normalización & $(32, 16, 100)$ & 128 \\
+MaxPool\_2 & Max Pooling 2×2 & $(32, 8, 50)$ & 0 \\
+\hline
+Conv2D\_3 & Conv2D + Sigmoid & $(64, 8, 50)$ & 18,496 \\
+BatchNorm\_3 & Normalización & $(64, 8, 50)$ & 256 \\
+MaxPool\_3 & Max Pooling 2×2 & $(64, 4, 25)$ & 0 \\
+\hline
+Conv2D\_4 & Conv2D + Sigmoid & $(128, 4, 25)$ & 73,856 \\
+BatchNorm\_4 & Normalización & $(128, 4, 25)$ & 512 \\
+GlobalAvgPool & Promedio Global & $(128)$ & 0 \\
+\hline
+Dense\_1 & Fully Connected + ReLU & $(64)$ & 8,256 \\
+Dropout & Regularización (p=0.3) & $(64)$ & 0 \\
+Dense\_2 & Softmax & $(4)$ & 260 \\
+\hline
+\multicolumn{3}{|r|}{\textbf{Total de parámetros:}} & \textbf{106,916} \\
+\hline
+\end{tabular}
+\end{table}
 
-%-------------------------------------------------------------------------------------
+\pagebreak
+
+\begin{tightmulticols}
+
+\noindent El modelo fue compilado con las siguientes características:
+\begin{itemize}
+    \item \textbf{Optimizador}: Adam con tasa de aprendizaje inicial de $1 \times 10^{-3}$.
+    \item \textbf{Función de pérdida}: entropía cruzada categórica dispersa (\textit{sparse categorical crossentropy}).
+    \item \textbf{Métrica}: precisión (\textit{accuracy}).
+    \item \textbf{Regularización}: pesos de clase para compensar el desbalance en el conjunto de entrenamiento (clase 0: 1.78, clase 1: 2.01, clase 2: 1.23, clase 3: 0.47).
+\end{itemize}
+
+\section{Distribución del Conjunto de Datos}
+
+\noindent El conjunto de datos procesado resultó en un total de 75,112 segmentos de audio de 2 segundos, distribuidos de la siguiente manera:
+
+\end{tightmulticols}
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Distribución de segmentos por conjunto y clase}}
+\label{tab:data_distribution}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Conjunto} & \textbf{Clase 0} & \textbf{Clase 1} & \textbf{Clase 2} & \textbf{Clase 3} & \textbf{Total} \\
+\hline
+Entrenamiento & 7,368 & 6,535 & 10,668 & 27,980 & 52,551 \\
+Validación & 1,582 & 1,400 & 2,289 & 5,982 & 11,253 \\
+Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
+\hline
+\textbf{Total} & \textbf{10,541} & \textbf{9,348} & \textbf{15,256} & \textbf{39,967} & \textbf{75,112} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{tightmulticols}
+
+\noindent donde:
+\begin{itemize}
+    \item \textbf{Clase 0}: Reina original/funcional (\textit{queenright}).
+    \item \textbf{Clase 1}: Reina no presente (\textit{queenless}).
+    \item \textbf{Clase 2}: Reina presente pero rechazada.
+    \item \textbf{Clase 3}: Reina presente y recién aceptada.
+\end{itemize}
+
+%-------------------------------------------------------------------------
 % 3.2. Instrumentos y técnicas
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \section{Instrumentos}
 
 \noindent Para el proceso de recolección de datos, se empleó un dispositivo IoT diseñado a medida, que incluía un módulo Wi-Fi \texttt{ESP32}, un micrófono digital \texttt{INMP441}, y un sensor de temperatura y humedad \texttt{BME280}. Estos sensores se instalaron dentro de la cubierta telescópica de la colmena —por encima de los cuadros pero por debajo de la cubierta exterior—, y se protegieron con una malla metálica para evitar la interferencia de las abejas con los componentes electrónicos, especialmente el micrófono.
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 3.3. Población y muestra
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \section{Base de Datos}
 
 \noindent El conjunto de datos utilizado en esta investigación fue grabado y publicado por Anna Yang\cite{AnnaYang-Dataset}. Contiene datos de audio recolectados de colmenas de abejas melíferas europeas ubicadas en California. Las grabaciones fueron segmentadas en clips de 60 segundos, resultando en un total de 7,100 muestras recolectadas durante un período de cinco semanas, desde el 8 de junio de 2022 (14:52:28) hasta el 15 de julio de 2022 (15:28:21). Cada día contiene aproximadamente entre 23 y 24 muestras.
@@ -1575,31 +1666,119 @@ donde $x[n]$ representa la amplitud en el instante discreto $n$ y $N$ es el núm
 
 \pagebreak
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 4. RESULTADOS
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \chapter{RESULTADOS}
 \vspace{-3em}
 
-%-------------------------------------------------------------------------------------
-% 4.1. Análisis de datos
-%-------------------------------------------------------------------------------------
+\begin{tightmulticols}
 
-%-------------------------------------------------------------------------------------
-% 4.2. Presentación de resultados
-%-------------------------------------------------------------------------------------
+\section{Resultados del Entrenamiento}
+
+\noindent El modelo fue entrenado durante 40 épocas con mecanismos de parada temprana (\textit{early stopping}) y reducción adaptativa de la tasa de aprendizaje (\textit{learning rate scheduler}).
+
+\par Los mejores resultados en el conjunto de validación se obtuvieron en la época 27, alcanzando:
+\begin{itemize}
+    \item \textbf{Precisión de validación}: 87.71\%
+    \item \textbf{Pérdida de validación}: 0.6462
+    \item \textbf{Precisión de entrenamiento}: 99.21\%
+    \item \textbf{Pérdida de entrenamiento}: 0.0176
+\end{itemize}
+
+\noindent El modelo mostró una tendencia de sobreajuste moderado, evidenciada por la diferencia entre la precisión de entrenamiento (99.21\%) y validación (87.71\%). Sin embargo, la aplicación de regularización mediante \textit{dropout} y pesos de clase permitió mantener un desempeño aceptable.
+
+\section{Evaluación en el Conjunto de Prueba}
+
+\noindent El modelo final fue evaluado en el conjunto de prueba (11,308 segmentos), obteniendo una precisión global de \textbf{86.58\%}. La tabla~\ref{tab:confusion_matrix} presenta la matriz de confusión, que permite analizar el desempeño del clasificador para cada clase.
+
+\end{tightmulticols}
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Matriz de confusión del modelo en el conjunto de prueba}}
+\label{tab:confusion_matrix}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Clase Real}} & \multicolumn{4}{c|}{\textbf{Clase Predicha}} & \multirow{2}{*}{\textbf{Total}} \\
+\cline{2-5}
+ & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \\
+\hline
+\textbf{0} (Queenright) & 1,235 & 95 & 88 & 173 & 1,591 \\
+\textbf{1} (No presente) & 42 & 1,131 & 147 & 93 & 1,413 \\
+\textbf{2} (Rechazada) & 50 & 87 & 1,912 & 250 & 2,299 \\
+\textbf{3} (Aceptada) & 19 & 143 & 330 & 5,513 & 6,005 \\
+\hline
+\textbf{Total predicho} & 1,346 & 1,456 & 2,477 & 6,029 & 11,308 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{tightmulticols}
+
+\noindent La matriz de confusión revela varios patrones importantes:
+\begin{enumerate}
+    \item \textbf{Clase 0 (Queenright)}: el modelo clasificó correctamente 1,235 de 1,591 casos (77.62\%), con confusiones principalmente hacia la clase 3 (173 casos, 10.88\%).
+    \item \textbf{Clase 1 (No presente)}: alcanzó la mejor tasa de clasificación correcta con 1,131 de 1,413 casos (80.04\%), mostrando mayor dificultad para distinguirla de la clase 2 (147 confusiones).
+    \item \textbf{Clase 2 (Rechazada)}: obtuvo 1,912 clasificaciones correctas de 2,299 (83.17\%), con la mayoría de errores dirigidos hacia la clase 3 (250 casos).
+    \item \textbf{Clase 3 (Aceptada)}: mostró el mejor desempeño con 5,513 clasificaciones correctas de 6,005 (91.81\%), aunque confundió 330 casos con la clase 2.
+\end{enumerate}
+
+\noindent La tabla~\ref{tab:classification_metrics} presenta las métricas de clasificación detalladas para cada clase.
+
+\end{tightmulticols}
+
+\begin{table}[htbp]
+\centering
+\caption{\textbf{Métricas de clasificación por clase}}
+\label{tab:classification_metrics}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Clase} & \textbf{Precisión} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Soporte} \\
+\hline
+0 (Queenright) & 0.9175 & 0.7762 & 0.8410 & 1,591 \\
+1 (No presente) & 0.7768 & 0.8004 & 0.7884 & 1,413 \\
+2 (Rechazada) & 0.7719 & 0.8317 & 0.8007 & 2,299 \\
+3 (Aceptada) & 0.9144 & 0.9181 & 0.9162 & 6,005 \\
+\hline
+\textbf{Promedio macro} & 0.8452 & 0.8316 & 0.8366 & -- \\
+\textbf{Promedio ponderado} & 0.8687 & 0.8658 & 0.8662 & 11,308 \\
+\textbf{Precisión global} & \multicolumn{3}{c|}{0.8658} & 11,308 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{tightmulticols}
+
+\noindent Las métricas revelan:
+
+\begin{itemize}
+    \item \textbf{Precisión}: la clase 0 (queenright) obtuvo la mayor precisión (91.75\%), indicando que cuando el modelo predice esta clase, generalmente está en lo correcto. La clase 2 mostró la precisión más baja (77.19\%).
+    
+    \item \textbf{Recall (Sensibilidad)}: la clase 3 alcanzó el recall más alto (91.81\%), demostrando que el modelo detecta exitosamente la mayoría de los casos de reina aceptada. La clase 0 presentó el recall más bajo (77.62\%), sugiriendo que algunos casos de colmenas funcionales fueron mal clasificados.
+    
+    \item \textbf{F1-Score}: representa el equilibrio entre precisión y recall. La clase 3 obtuvo el mejor F1-score (0.9162), mientras que la clase 1 presentó el menor valor (0.7884).
+\end{itemize}
+
+\section{Análisis Temporal de Predicciones}
+
+\noindent Las figuras~\ref{fig:NN-results-05-1} y~\ref{fig:NN-results-05-2} presentan los resultados de la aplicación del modelo en grabaciones de audio continuas, mostrando la evolución temporal de la confianza del clasificador y las predicciones suavizadas mediante ventana móvil de 60 segundos.
+
+\par La figura~\ref{fig:qscot-05-1} muestra alta variabilidad en la confianza instantánea del primer modelo evaluado, con valores oscilando entre 0.3 y 1.0, lo que sugiere inestabilidad en las predicciones a corto plazo. En contraste, la figura~\ref{fig:qscot-05-2} demuestra que el segundo modelo mantiene confianzas consistentemente superiores al 95\%, con únicamente dos caídas puntuales, indicando mayor robustez y estabilidad temporal.
+
+\par Las predicciones suavizadas (figuras~\ref{fig:sqsot-05-1} y~\ref{fig:sqsot-05-2}) revelan que el segundo modelo logra transiciones más definidas entre estados, esencial para aplicaciones de monitoreo en tiempo real donde se requiere identificar cambios en el estado de la reina con alta certeza.
 
 \begin{figure}
      \centering
-     \begin{subfigure}[b]{0.42\textwidth}
+     \begin{subfigure}[b]{0.5\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Pics/QueenStatusConfidenceOverTime-05-1.png}
          \caption{Evolución temporal de la confianza del modelo según \texttt{queen status}.}
 		\label{fig:qscot-05-1}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.56\textwidth}
+     \begin{subfigure}[b]{0.5\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Pics/SmoothedQueenStatusOverTime-05-1.png}
          \caption{Clase predicha suavizada a lo largo del tiempo según \texttt{queen status}.}
@@ -1611,14 +1790,14 @@ donde $x[n]$ representa la amplitud en el instante discreto $n$ y $N$ es el núm
 
 \begin{figure}
      \centering
-     \begin{subfigure}[b]{0.42\textwidth}
+     \begin{subfigure}[b]{0.5\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Pics/QueenStatusConfidenceOverTime-05-2.png}
          \caption{Evolución temporal de la confianza del modelo según \texttt{queen status}.}
 		\label{fig:qscot-05-2}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.56\textwidth}
+     \begin{subfigure}[b]{0.5\textwidth}
          \centering
          \includegraphics[width=\textwidth]{Pics/SmoothedQueenStatusOverTime-05-2.png}
          \caption{Clase predicha suavizada a lo largo del tiempo según \texttt{queen status}.}
@@ -1628,52 +1807,159 @@ donde $x[n]$ representa la amplitud en el instante discreto $n$ y $N$ es el núm
         \label{fig:NN-results-05-2}
 \end{figure}
 
-%-------------------------------------------------------------------------------------
+\end{tightmulticols}
+
+%-------------------------------------------------------------------------
 % 5. DISCUSIÓN
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \pagebreak
 \chapter{DISCUSIÓN}
 \vspace{-3em}
 
-%-------------------------------------------------------------------------------------
+\begin{tightmulticols}
+%-------------------------------------------------------------------------
 % 5.1. Interpretación de resultados
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
+\section{Interpretación de los Resultados}
 
-%-------------------------------------------------------------------------------------
-% 5.2. Comparación con la literatura
-%-------------------------------------------------------------------------------------
+\noindent Los resultados presentados en las figuras~\ref{fig:NN-results-05-1} y~\ref{fig:NN-results-05-2} evidencian diferencias significativas en el desempeño de los dos modelos CNN implementados para la clasificación del estado de la reina en colmenas mediante análisis acústico basado en MFCCs.
 
-%-------------------------------------------------------------------------------------
+\subsection{Análisis del Primer Modelo (Figura~\ref{fig:NN-results-05-1})}
+
+\noindent El primer modelo presenta una alta variabilidad en la confianza instantánea, con valores que oscilan entre 0.3 y 1.0 a lo largo del tiempo, tal como se muestra en la figura~\ref{fig:qscot-05-1}. Esta inestabilidad sugiere dificultades para mantener predicciones consistentes en ventanas temporales consecutivas. Esto se puede atribuir a varios factores:
+
+\begin{itemize}
+    \item \textbf{Sensibilidad al ruido temporal:} la variabilidad observada indica que el modelo podría estar sobreajustándose a fluctuaciones de corto plazo en las características acústicas, en lugar de capturar patrones estructurales robustos y generalizables del comportamiento sonoro de la colmena.
+
+    \item \textbf{Limitaciones en el modelado temporal:} aunque las CNN son capaces de capturar patrones locales en representaciones espectrales, la ausencia de mecanismos explícitos de memoria (por ejemplo, capas LSTM) limita la integración de información contextual entre ventanas consecutivas.
+
+    \item \textbf{Desbalance de clases:} a pesar del uso de pesos de clase durante el entrenamiento, la inestabilidad sugiere posibles sesgos hacia clases mayoritarias o dificultades para discriminar patrones acústicos sutiles.
+\end{itemize}
+
+\noindent La curva de confianza suavizada (promedio móvil de 60 segundos) muestra una estabilización en el rango de 0.4–0.6, lo cual representa una mejora respecto a las predicciones instantáneas, aunque sigue siendo inferior a lo reportado en la literatura. En particular, Ruvinga et al. reportan una precisión de 99.31\% utilizando CNN sobre espectrogramas STFT \cite{ruvinga2023}.
+
+\noindent La clase predicha suavizada (figura~\ref{fig:sqsot-05-1}) muestra transiciones frecuentes entre clases, lo que dificulta la identificación de períodos prolongados en donde se pueda determinar con precisiónla presencia de una reina, limitando así la utilidad práctica del modelo para monitoreo en tiempo real. Además, con este audio en particular; la predicción fue errónea. Esto que sugiere que el modelo no ha logrado capturar patrones acústicos relevantes para esta grabación específica, posiblemente debido a variaciones en las condiciones de grabación o características acústicas atípicas.
+
+\subsection{Análisis del Segundo Modelo (Figura~\ref{fig:NN-results-05-2})}
+
+\noindent El segundo modelo presenta una mejora sustancial en todos los indicadores de desempeño. La confianza instantánea se mantiene consistentemente por encima del 95\% durante la mayor parte de la secuencia temporal, con únicamente dos caídas puntuales expuestas en la figura~\ref{fig:qscot-05-2}. Entonces, se pueden extraer las siguientes conclusiones:
+
+\begin{itemize}
+    \item \textbf{Estabilidad temporal:} la alta confianza sostenida indica que el modelo ha aprendido representaciones más robustas y generalizables. Esta estabilidad es esencial para aplicaciones de monitoreo en tiempo real.
+
+    \item \textbf{Transiciones bien definidas:} se observa una transición clara entre estados, lo cual coincide con una caída momentánea de confianza, consistente con un cambio en el régimen acústico.
+
+    \item \textbf{Posibles eventos de incertidumbre:}
+    \begin{itemize}
+        \item Eventos transitorios reales en la colmena.
+        \item Artefactos de grabación o ruido externo.
+        \item Limitaciones en la segmentación temporal.
+    \end{itemize}
+    La rápida recuperación de la confianza sugiere que estos eventos son aislados y que el suavizado temporal es efectivo.
+\end{itemize}
+
+\noindent La clase predicha suavizada presentada en la figura~\ref{fig:sqsot-05-2}, muestra una transición clara entre clases, lo que sugiere que el modelo ha logrado capturar patrones acústicos relevantes específicamente para esta grabación, siendo acertivo en su predicción. Sin embargo, la presencia de caídas puntuales en la confianza indica que aún existen dificultades para mantener un desempeño óptimo en cuanto a todas las condiciones de grabación.
+
+%-------------------------------------------------------------------------
+% 5.2. Comparaciones
+%-------------------------------------------------------------------------
+
+\section{Comparaciones}
+
+\subsection{Comparación entre Modelos}
+
+\noindent Comparando ambos modelos, se observa que el segundo modelo ha logrado superar las limitaciones del primero, alcanzando una mayor estabilidad y precisión en la clasificación del estado de la reina. El cambio se debe a modificaciones en la función de activación, pasando de ser ReLU a una función de activación más suave como lo es sigmoid, lo que ha permitido al modelo aprender representaciones más discriminativas y generalizables. Sin embargo, la presencia de eventos de incertidumbre en ambos modelos indica que aún existen desafíos relacionados con la variabilidad acústica y las condiciones de grabación, lo que resalta la necesidad de continuar explorando técnicas para mejorar la robustez y generalización de los modelos.
+
+\subsection{Comparación con el Estado del Arte}
+
+\noindent Los resultados del segundo modelo son comparables con los reportados por Ruvinga et al. \cite{ruvinga2021, ruvinga2023}.
+
+\begin{itemize}
+    \item \textbf{Representación de entrada:} a diferencia de los espectrogramas STFT utilizados en trabajos previos, el uso de MFCCs proporciona una representación más compacta y perceptualmente relevante.
+
+    \item \textbf{Clasificación multiclase:} este trabajo aborda un problema más complejo con cuatro clases, en contraste con enfoques binarios.
+
+    \item \textbf{Análisis temporal:} se incorpora evaluación de consistencia temporal, aspecto poco explorado en estudios previos.
+\end{itemize}
+
+\section{Limitaciones y Desafíos Identificados}
+
+\subsection{Generalización}
+
+\noindent Los datos provienen de condiciones controladas, por lo que la generalización a otros entornos requiere validación adicional. Factores como clima, raza de abejas y condiciones ambientales pueden influir en los patrones acústicos \cite{potts2016}.
+
+\subsection{Desbalance de Clases}
+
+\noindent El dataset presenta desbalance al mostrar mayor cantidad de datos para una clase con respecto a las demás, lo cual puede afectar el desempeño. La cantidad de etiquetas por clase se muestra a continuación:
+
+\begin{itemize}
+    \item \texttt{queenright/original queen} (0): 179.
+    \item \texttt{not present} (1): 158.
+    \item \texttt{present and rejected} (2): 259.
+    \item \texttt{present and newly accepted} (3): 679.
+\end{itemize}
+
+\subsection{Robustez al Ruido}
+
+\noindent El ruido ambiental puede degradar el desempeño del modelo \cite{peng2020}. Técnicas de denoising o modelos más robustos podrían ser necesarios para aplicaciones en campo.
+
+\subsection{Implicaciones Prácticas}
+
+\noindent Los resultados demuestran la viabilidad de sistemas de monitoreo acústico no invasivo.
+
+\begin{itemize}
+    \item Reducción de inspecciones invasivas.
+    \item Detección temprana de la ausencia de una reina.
+    \item Escalabilidad mediante dispositivos IoT.
+    \item Contribución a la sustentabilidad apícola \cite{khalifa2021, potts2016}.
+\end{itemize}
+
+\subsection{Direcciones Futuras}
+
+\noindent Se proponen las siguientes líneas de investigación:
+
+\begin{itemize}
+    \item Validación con múltiples datasets.
+    \item Modelos híbridos CNN-LSTM.
+    \item Transfer learning.
+    \item Detección de eventos acústicos específicos.
+    \item Implementación en hardware embebido.
+    \item Integración multimodal.
+\end{itemize}
+
+\end{tightmulticols}
+
+%-------------------------------------------------------------------------
 % 6. CONCLUSIONES Y RECOMENDACIONES
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \pagebreak
 \chapter{CONCLUSIONES Y RECOMENDACIONES}
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 6.1. Conclusiones
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \section{Conclusiones}
 
 \noindent La abjea reina es un elemento crucial para la supervivencia de la colonia, y su presencia o ausencia puede influir significativamente en el comportamiento de las abejas, siendo una posibilidad el extingir la existensia de la colmena.
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % 6.2. Recomendaciones
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % REFERENCIAS BIBLIOGRÁFICAS
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \pagebreak
 \addcontentsline{toc}{chapter}{BIBLIOGRAFÍA}
 \printbibliography
 \thispagestyle{empty}
 
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 % ANEXOS (opcional)
-%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 \pagebreak
 \setcounter{chapter}{1}
