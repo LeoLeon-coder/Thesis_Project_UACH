@@ -1,5 +1,5 @@
 \documentclass[12pt]{report}
-\usepackage[spanish]{babel}
+\usepackage[spanish, es-nodecimaldot]{babel}
 \usepackage[a4paper, total={7in, 9in}]{geometry}
 \usepackage{setspace} %Line spacing
 \onehalfspacing
@@ -214,9 +214,9 @@
 				\hline
 			\end{tabular}\vfill
 			{\large Análisis de Frecuencias Emitidas por el Panal}\\\vfill
-			{\large \textbf{Student:} Leonardo Rafael León Mora.}\\\vfill
-			{\large \textbf{Thesis director:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
-			{\large \textbf{Advisors:}}\\[3.5ex]
+			{\large \textbf{Estudiante:} Leonardo Rafael León Mora.}\\\vfill
+			{\large \textbf{Director de Tesis:} Dr. Daniel Espinobarro Velázquez.}\\\vfill
+			{\large \textbf{Revisores:}}\\[3.5ex]
 			\begin{itemize}
 				\item[\ding{226}] {\large M.C. Carlos Hugo Larrinúa Pacheco.}\\[3.5ex]
 				\item[\ding{226}] {\large M.I. Joseph Isaac Ramírez Hernández.}\\[3.5ex]
@@ -251,11 +251,11 @@
 
 \noindent Las abejas melíferas han sido ampliamente estudiadas por su destacada contribución al medio ambiente, proporcionando recursos que son vitales para animales, plantas y seres humanos. Su papel en la polinización es crucial para la biodiversidad y la producción agrícola\cite{leon2023calidad}. Además, la miel, el polen, la jalea real y la cera de abejas son productos altamente valorados por sus propiedades nutricionales y medicinales\cite{winston1987temperate}.
 
-\par Durante las temporadas de mayor producción de miel, como en primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km\cite{Beekman2000}, viajando aproximadamente 3 km de ida y vuelta entre la colmena y las fuentes de alimento, como flores, para recolectar polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación de las abejas para regresar a la colmena y abastecerla?
+\par Durante las temporadas de mayor producción de miel, como en primavera y verano, las abejas melíferas pueden recorrer distancias de hasta 6 km\cite{Beekman2000}, viajando aproximadamente 3 km de ida y vuelta entre la colmena y las fuentes de alimento, como aquellas flores de donde recolectan polen, néctar o agua. Pero, ¿por qué surge este comportamiento? ¿Cuál es la motivación de las abejas para regresar a la colmena y abastecerla?
 
-\par La comunicación dentro de la colmena es esencial para la supervivencia de la colonia. Las abejas utilizan una variedad de señales, incluyendo feromonas y sonidos, para coordinar sus actividades y mantener el orden social\cite{winston1987temperate}. La presencia de una abeja reina es fundamental para la cohesión del grupo, ya que su ausencia puede conducir a un comportamiento caótico y al eventual colapso de la colonia\cite{ruvinga2021}. Otra forma de comunicación es el \textit{waggle dance}, mediante el cual las abejas pueden informar sobre la ubicación de fuentes de alimento, tomando como referencia los puntos cardinales y trazando un vector en la dirección requerida\cite{wang2025encoding}, lo que permite notificar a las demás abejas recolectoras.
+\par La comunicación dentro de la colmena es esencial para la supervivencia de la colonia. Las abejas utilizan una variedad de señales, incluyendo feromonas, zumbidos y otros sonidos, para coordinar sus actividades y mantener el orden social\cite{winston1987temperate}. La presencia de una abeja reina es fundamental para la cohesión del grupo, ya que su ausencia puede conducir a un comportamiento caótico y al eventual colapso de la colonia\cite{ruvinga2021}. Otra forma de comunicación es el \textit{waggle dance}, mediante el cual las abejas pueden informar sobre la ubicación de fuentes de alimento, tomando como referencia los puntos cardinales y trazando un vector en la dirección requerida\cite{wang2025encoding}, lo que permite notificar a las demás abejas recolectoras, dando a conocer la dirección y distancia a las fuentes de alimento.
 
-\par Según Ruvinga\cite{ruvinga2021}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas\cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante el invierno. Este comportamiento de abastecimiento constante está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear\cite{ruvinga2021}.
+\par Según Ruvinga\cite{ruvinga2021}, ``\textit{La colonia está formada por la reina, miles de abejas obreras estériles, unos pocos cientos de zánganos, huevos, larvas y pupas}''. Las abejas trabajan a diario, realizando tareas que se dividen no solo entre machos y hembras, sino también entre abejas jóvenes y adultas\cite{johnson2010division}. Un panal puede albergar entre 30,000 y 50,000 abejas, aunque este número puede reducirse hasta 5,000 durante aquellas temporadas de menor producción (usualmente verano o invierno). Este comportamiento de abastecimiento constante de la población está estrechamente vinculado a la estructura social de la colmena y, en particular, al papel de la abeja reina, que es la única capaz de procrear\cite{ruvinga2021}.
 
 %-------------------------------------------------------------------------
 % 1.1. Planteamiento del problema
@@ -263,11 +263,11 @@
 
 \section{Planteamiento del Problema}
 
-\noindent La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena con recursos esenciales como agua, polen y néctar\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, mientras que las abejas más jóvenes se limitan a tareas dentro de la colmena\cite{johnson2010division}. La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia.
+\noindent La reina puede poner en promedio hasta 2,000 huevos al día. Las obreras se encargan de construir, defender y abastecer la colmena\cite{winston1987temperate}. Los zánganos cumplen funciones reproductivas y también se cree que ayudan a regular la temperatura del panal, ventilando la colmena con sus alas para crear corrientes de aire dentro de la colmena. Las abejas más jóvenes se limitan a tareas dentro del panal, mientras que las más adultas y en su mayoría hembras, se encargan de actividades externas\cite{johnson2010division}.
 
 \par Las colmenas están expuestas a múltiples amenazas: insectos invasores, pesticidas, condiciones climáticas e inclusive seres humanos. En sistemas apícolas tradicionales donde se utilizan cajas de madera, cada inspección física implica abrir la colmena y romper el sello de propóleo que las abejas han construido para mantener un ambiente limpio y controlado. Esta intervención frecuente no solo representa una pérdida energética para la colonia, que debe reconstruir el sello de propóleo y reabastecer el panal con respecto a las abejas que mueren en este proceso; sino que además incrementa el riesgo de aplastar accidentalmente a la reina durante la manipulación interna de la colmena, lo que puede conducir al colapso de toda la colonia si no se toma acción inmediata.
 
-\par Una abeja reina puede ser reemplazada por la colonia mediante la crianza de una nueva reina a partir de larvas seleccionadas, siempre y cuando existan suficientes recursos y tiempo para que la nueva reina se desarrolle completamente. Este proceso puede tardar entre 16 y 24 días, dependiendo de las condiciones ambientales y la disponibilidad de alimento\cite{winston1987temperate}. Durante este período, la colonia puede volverse vulnerable a enfermedades, depredadores y otros factores estresantes que pueden afectar su supervivencia. Como una alternativa, los apicultores pueden introducir una reina comprada o criada en otro lugar para restablecer la estabilidad de la colonia. Sin embargo, la aceptación de una nueva reina por parte de las obreras no está garantizada y puede variar según el comportamiento de la colonia y las condiciones ambientales\cite{ruvinga2021}.
+\par Una abeja reina puede ser reemplazada por la colonia mediante la crianza de una nueva reina a partir de larvas seleccionadas que se incuban en jalea real. Siempre y cuando existan suficientes recursos y tiempo para que la nueva reina se desarrolle completamente, el proceso puede tardar entre 16 y 24 días, dependiendo de las condiciones ambientales y la disponibilidad de alimento\cite{winston1987temperate}. Durante este período, la colonia puede volverse vulnerable a enfermedades, depredadores e inclusive la misma reina, son factores estresantes que pueden afectar la supervivencia de una nueva reina. Como una alternativa, los apicultores pueden introducir una reina comprada o criada en otro lugar en caso de que sea necesario restablecer la estabilidad de la colonia. Pero, la aceptación de una nueva reina por parte de las obreras no está garantizada y puede variar según el comportamiento de la colonia y las condiciones ambientales\cite{ruvinga2021}.
 
 %-------------------------------------------------------------------------
 % 1.2. Justificación
@@ -285,7 +285,17 @@
 
 \subsection{Objetivo General}
 
-\noindent Desarrollar un sistema de detección automática con respecto a la presencia de la abeja reina en una colmena, a partir del cual se permita la recolección de datos, el análisis de audio y la implementación de técnicas de aprendizaje automático. Se pretende obtener un modelo capaz de clasificar el estado de la reina en función de las características acústicas extraídas de grabaciones de audio. Este enfoque no invasivo busca minimizar la perturbación de la colonia durante las inspecciones recurrentes que suele hacer un apicultor, preservando así el bienestar de las abejas y la integridad del panal.
+
+\noindent Crear una red neuronal de analisis acústico basado en aprendizaje automático para detectar:
+\begin{itemize}
+    \item Ausencia de la reina.
+    \item Presencia de la reina.
+    \item Aceptación de una nueva reina.
+    \item Rechazo de una nueva reina.
+\end{itemize}
+Esto con el fin de proporcionar a los apicultores una herramienta no invasiva que permita monitorear la salud y estabilidad de sus colonias de manera eficiente y oportuna.
+
+\noindent Esto con el objetivo de que en un futuro se pueda desarrollar un dispositivo portátil y de bajo costo que pueda ser utilizado por apicultores para monitorear sus colmenas en tiempo real, utilizando técnicas de aprendizaje automático para analizar las grabaciones de audio y detectar el estado de la reina. Este dispositivo podría alertar a los apicultores sobre cambios en el estado de la reina, permitiéndoles tomar medidas preventivas para garantizar la salud y productividad de sus colonias.
 
 \subsection{Objetivos Específicos}
 
@@ -299,7 +309,13 @@
 
 \section{Hipótesis de Trabajo}
 
-\noindent Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión, si la reina está presente, ausente, rechazada o recién aceptada en la colonia.
+\noindent Dado que el comportamiento sonoro de una colmena varía según el estado de su reina, se espera que un sistema basado en el análisis de características acústicas sea capaz de detectar, con un grado aceptable de precisión si:
+\begin{enumerate}
+    \item la reina está presente en la colonia, lo que se reflejará en un patrón acústico característico.
+    \item la reina está ausente, lo que se manifestará en una disminución de ciertas frecuencias y un aumento de otras.
+    \item la colonia ha rechazado una nueva reina, lo que se evidenciará en un patrón acústico discordante y caótico.
+    \item la colonia ha aceptado una nueva reina, lo que se traducirá en un patrón acústico armonioso similar al de una colonia con reina presente.
+\end{enumerate}
 
 \end{tightmulticols}
 
@@ -382,9 +398,9 @@
 \centering
 \caption{\textbf{Señales acústicas y vibratorias en \textit{Apis mellifera}}}
 \label{tab:bee_signals}
-\begin{tabular}{|c|p{3cm}|p{2.5cm}|p{5cm}|}
+\begin{tabular}{|c|>{\centering\arraybackslash}m{3cm}|>{\centering\arraybackslash}m{2.5cm}|>{\centering\arraybackslash}m{5cm}|}
 \hline
-\textbf{Señal} & \textbf{Frecuencia} & \textbf{Duración} & \textbf{Contexto/Función} \\
+\centering\textbf{Señal} & \textbf{Frecuencia} & \textbf{Duración} & \textbf{Contexto/Función} \\
 \hline
 \textit{Queen Piping} & 340-450 Hz & 1.25 s & Producida por reina virgen recién emergida \\
 \hline
@@ -1474,11 +1490,11 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 
 \begin{tightmulticols}
 
-\noindent En este estudio se trabajó con audio monofónico (1 canal) en formato .WAV (figura~\ref{fig:AmplitudeXTime}) cuyos metadatos indican una frecuencia de muestreo de $22050$ Hz y muestras \texttt{float32} (en punto flotante de 32 bits). Para estandarizar el procesamiento y reducir el costo computacional, todas las señales se remuestrearon a $16000$ Hz durante la carga en Python.
+\noindent En este estudio se trabajó con audio monofónico (1 canal) en formato .WAV (figura~\ref{fig:AmplitudeXTime}) cuyos metadatos indican una frecuencia de muestreo de $22050$ Hz y muestras \texttt{float32} (en punto flotante de 32 bits). Para estandarizar el procesamiento y reducir el costo computacional, todas las señales se remuestrearon a $16$ kHz durante la carga en Python.
 
 \par El flujo de procesamiento se validó por etapas en cuadernos \texttt{*.ipynb} y posteriormente se automatizó para el conjunto completo: carga, normalización, segmentación, extracción de características, generación de arreglos \texttt{*.npy} para el entrenamiento, desarrollo y aplicación del modelo.
 
-\par Tras la carga y remuestreo a $16000$ Hz, se aplicó un recorte de silencios con un umbral de \texttt{top\_db = 30}. Luego, cada señal recortada se normalizó, escalando la amplitud de modo que el valor absoluto máximo fuese igual a $1.0$:
+\par Tras la carga y remuestreo a $16$ kHz, se aplicó un recorte de silencios con un umbral de \texttt{top\_db = 30}. Luego, cada señal recortada se normalizó, escalando la amplitud de modo que el valor absoluto máximo fuese igual a $1.0$:
 \begin{equation*}
 	x_{\text{norm}}[n] = \frac{x_{\text{trim}}[n]}{A_{\text{max}}}
 \end{equation*}
@@ -1486,7 +1502,17 @@ donde $A_{\text{max}} = \max_m \left|x_{\text{trim}}[m]\right|$ es el valor máx
 
 \par Finalmente, cada señal normalizada se segmentó en ventanas de $2$ segundos con un desplazamiento (hop) de $1$ segundo, como se muestra en el ejemplo de la figura~\ref{fig:Windowing} (a) y (b), lo que equivale a un solapamiento del $50\%$ entre segmentos consecutivos. Esta segmentación incrementa el número de ejemplos disponibles para el entrenamiento y, al mismo tiempo, produce entradas de duración fija para el modelo. Una vez obtenidos los segmentos de $2$ segundos, se procedió a la extracción de características espectrales mediante coeficientes cepstrales en escala Mel (MFCC).
 
-\par Para cada segmento, se calcularon MFCC utilizando una ventana de análisis de $25$ ms (\texttt{win\_length} $= 0.025 \cdot 16000 = 400$ muestras), con un tamaño de FFT de $N_{\text{FFT}} = 512$ puntos (potencia de $2$ inmediatamente superior), y un desplazamiento temporal de $10$ ms (\texttt{hop\_length} $= 0.010 \cdot 16000 = 160$ muestras), como en la figura~\ref{fig:Windowing} (c). En el dominio espectral, para la construcción del mel-spectrogram, la energía se analizó en el rango de frecuencias de $20$ Hz a $8000$ Hz (frecuencia de Nyquist para la tasa de muestreo de $16000$ Hz), utilizando $40$ filtros en escala Mel. Esta configuración permite capturar la distribución espectral con mayor resolución en bajas frecuencias, donde se esperaba encontrar patrones acústicos relevantes para la clasificación del estado de la reina.
+\par Para cada segmento, se calcularon los MFCC utilizando una ventana de análisis de $25$ ms (\texttt{win\_length} $= 400$ muestras), un desplazamiento temporal de $10$ ms (\texttt{hop\_length} $= 160$ muestras) y un tamaño de FFT de $N_{\text{FFT}} = 512$ puntos (potencia de $2$ inmediatamente superior a la longitud de la ventana), aplicando }\textit{zero-padding}.
+
+%---------------------------------------------------------
+%---------------------------------------------------------
+% Añadir referencia al Zero Padding
+%---------------------------------------------------------
+%---------------------------------------------------------
+%---------------------------------------------------------
+%---------------------------------------------------------
+
+Esta configuración proporciona una resolución espectral de aproximadamente $31.25$ Hz, adecuada para capturar las características acústicas relevantes en el rango de interés. Para la construcción del mel-espectrograma, la energía se analizó entre $20$ Hz y $8000$ Hz (frecuencia de Nyquist para $16{,}000$ Hz), utilizando $40$ filtros en escala Mel, lo que permite una mayor resolución en bajas frecuencias, donde se concentran patrones acústicos importantes para la clasificación del estado de la reina.
 
 \end{tightmulticols}
 
@@ -1769,6 +1795,8 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 
 \par Las predicciones suavizadas (figuras~\ref{fig:sqsot-05-1} y~\ref{fig:sqsot-05-2}) revelan que el segundo modelo logra transiciones más definidas entre estados, esencial para aplicaciones de monitoreo en tiempo real donde se requiere identificar cambios en el estado de la reina con alta certeza.
 
+\end{tightmulticols}
+
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.5\textwidth}
@@ -1788,6 +1816,8 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
         \label{fig:NN-results-05-1}
 \end{figure}
 
+\pagebreak
+
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.5\textwidth}
@@ -1806,8 +1836,6 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
         \caption{Resultados del segundo modelo de clasificación para el estado de la reina a lo largo del tiempo.}
         \label{fig:NN-results-05-2}
 \end{figure}
-
-\end{tightmulticols}
 
 %-------------------------------------------------------------------------
 % 5. DISCUSIÓN
@@ -1943,6 +1971,8 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 \section{Conclusiones}
 
 \noindent La abjea reina es un elemento crucial para la supervivencia de la colonia, y su presencia o ausencia puede influir significativamente en el comportamiento de las abejas, siendo una posibilidad el extingir la existensia de la colmena.
+
+La pérdida de la abeja reina puede comprometer seriamente la supervivencia de la colonia. Por ello, el monitoreo efectivo del estado de la reina es esencial para la gestión apícola. Este trabajo ha demostrado que es posible clasificar el estado de la reina utilizando análisis acústico basado en MFCCs y redes neuronales convolucionales, alcanzando una precisión global del 86.58\% en un conjunto de prueba independiente.
 
 %-------------------------------------------------------------------------
 % 6.2. Recomendaciones
