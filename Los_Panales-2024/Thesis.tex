@@ -1492,7 +1492,7 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 
 \par Posteriormente, las señales fueron segmentadas en ventanas de $2$ segundos con un solapamiento del $50\%$ (como un ejemplo gráfico, véase las figuras~\ref{fig:Windowing} (a) y (b)), generando entradas de longitud fija. Esta segmentación incrementa el número de ejemplos disponibles para el entrenamiento y, al mismo tiempo, produce entradas de duración fija para el modelo.
 
-\par Para cada segmento se calcularon MFCC utilizando una ventana de $25$ ms, un desplazamiento de $10$ ms (\texttt{hop\_length} $= 160$ muestras) y $N_{\text{FFT}}=512$ (potencia de $2$ inmediatamente superior a la longitud de la ventana: \texttt{win\_length} $= 400$ muestras), obteniendo una resolución espectral aproximada de $31.25$ Hz. Se emplearon 40 filtros en escala Mel entre $20$ Hz y $8000$ Hz, lo que permite una mayor resolución en bajas frecuencias, donde se concentran patrones acústicos importantes para la clasificación del estado de la reina.
+\par Para cada segmento se calcularon MFCC utilizando una ventana de $25$ ms, un desplazamiento de $10$ ms (\texttt{hop\_length} $= 160$ muestras) y $N_{\text{FFT}}=0.025 \times 16,000 = 400$, obteniendo una resolución espectral aproximada de $31.25$ Hz. Se emplearon 40 filtros en escala Mel entre $20$ Hz y $8000$ Hz, lo que permite una mayor resolución en bajas frecuencias, donde se concentran patrones acústicos importantes para la clasificación del estado de la reina.
 
 \end{tightmulticols}
 
@@ -1548,13 +1548,13 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 
 \par Bajo este esquema, se seleccionaron dos modelos representativos por su desempeño: \textbf{CNN\_1} y \textbf{CNN\_2}. Ambos comparten una estructura basada en bloques convolucionales con normalización por lotes (\textit{batch normalization}) y operaciones de \textit{max-pooling}, pero difieren en aspectos clave de diseño arquitectónico y en la función de activación empleada.
 
-\par Ambos modelos fueron entrenados bajo condiciones comparables, utilizando el optimizador Adam con una tasa de aprendizaje de $1 \times 10^{-3}$, la función de pérdida de entropía cruzada categórica dispersa (\textit{sparse categorical crossentropy}) y la métrica de precisión (\textit{accuracy}). Para mitigar el desbalance de clases presente en el conjunto de entrenamiento, se emplearon pesos de clase (clase 0: 1.78, clase 1: 2.01, clase 2: 1.23, clase 3: 0.47).
+\par Ambos modelos fueron entrenados bajo condiciones comparables, la función de pérdida de entropía cruzada categórica dispersa (\textit{sparse categorical crossentropy}) y la métrica de precisión (\textit{accuracy}). Para mitigar el desbalance de clases presente en el conjunto de entrenamiento, se emplearon pesos de clase (clase 0: 1.78, clase 1: 2.01, clase 2: 1.23, clase 3: 0.47).
 
 \subsection{CNN\_1: Arquitectura Base con Activación ReLU}
 
-\noindent El modelo CNN\_1 implementa una arquitectura convolucional de profundidad moderada compuesta por cuatro bloques convolucionales secuenciales. Cada bloque incluye una capa convolucional con función de activación ReLU, seguida de normalización por lotes y una operación de \textit{max-pooling}, lo que permite una extracción progresiva de características y una reducción de la dimensionalidad espacial.
+\noindent El modelo CNN\_1 implementa una arquitectura convolucional de profundidad moderada compuesta por cuatro bloques convolucionales secuenciales, utilizando el optimizador Adam con una tasa de aprendizaje de $7.5 \times 10^{-4}$. Cada bloque incluye una capa convolucional con función de activación ReLU, seguida de normalización por lotes y una operación de \textit{max-pooling}, lo que permite una extracción progresiva de características y una reducción de la dimensionalidad espacial.
 
-\par En la última etapa, incorpora una capa adicional seguida de una operación de \textit{global average pooling}, la cual permite condensar la información espacial en un vector de características de menor dimensión, reduciendo el número de parámetros y favoreciendo la generalización del modelo. Posteriormente, las representaciones extraídas son procesadas mediante capas densas para realizar la clasificación final. La estructura detallada del modelo CNN\_1 se presenta en la tabla~\ref{tab:cnn1_architecture}.
+\par En la última etapa, incorpora una capa adicional seguida de una operación de \textit{global average pooling}, la cual permite condensar la información espacial en un vector de características de menor dimensión, reduciendo el número de parámetros y favoreciendo la generalización del modelo. Posteriormente, las representaciones extraídas son procesadas mediante capas densas para realizar la clasificación final. Adicionalmente, para mitigar el sobreajuste, se aplicó regularización L2 ($kernel_regularizer=l2(1.5e-4)$) en todas las capas convolucionales y en la primera capa densa. La estructura detallada del modelo CNN\_1 se presenta en la tabla~\ref{tab:cnn1_architecture}.
 
 \par Esta arquitectura constituye una línea base que permite evaluar la capacidad de una CNN de complejidad intermedia para capturar patrones relevantes en representaciones MFCC.
 
@@ -1582,6 +1582,8 @@ Conv2D\_2 & Conv2D + ReLU & $(32, 16, 100)$ & 4,640 \\
 BatchNorm\_2 & Normalización & $(32, 16, 100)$ & 128 \\
 MaxPool\_2 & Max Pooling 2×2 & $(32, 8, 50)$ & 0 \\
 \hline
+Dropout & Dropout & $(32, 8, 50)$ & 0 \\
+\hline
 Conv2D\_3 & Conv2D + ReLU & $(64, 8, 50)$ & 18,496 \\
 BatchNorm\_3 & Normalización & $(64, 8, 50)$ & 256 \\
 MaxPool\_3 & Max Pooling 2×2 & $(64, 4, 25)$ & 0 \\
@@ -1591,10 +1593,12 @@ BatchNorm\_4 & Normalización & $(128, 4, 25)$ & 512 \\
 GlobalAvgPool & Promedio Global & $(128)$ & 0 \\
 \hline
 Dense\_1 & Fully Connected + ReLU & $(64)$ & 8,256 \\
-Dropout & Regularización (p=0.3) & $(64)$ & 0 \\
+Dropout & Regularización (p=0.35) & $(64)$ & 0 \\
 Dense\_2 & Softmax & $(4)$ & 260 \\
 \hline
-\multicolumn{3}{|r|}{\textbf{Total de parámetros:}} & \textbf{28,452} \\
+\multicolumn{3}{|r|}{\textbf{Total de parámetros:}} & \textbf{106,916} \\
+\hline
+\multicolumn{4}{|l|}{\footnotesize{$^*$Regularización L2 ($\lambda = 1.5\times10^{-4}$) aplicada en Conv2D\_1–4 y Dense\_1.}} \\
 \hline
 \end{tabular}
 \end{table}
@@ -1641,11 +1645,11 @@ Dense\_2 & Softmax & $(4)$ & 260 \\
 
 \begin{tightmulticols}
 
-\subsection{CNN\_2: Arquitectura Profunda con Activación Sigmoide}
+\subsection{CNN\_2: Arquitectura con Activación Sigmoide}
 
-\noindent La arquitectura CNN\_2 introduce modificaciones tanto en la profundidad de la red como en la función de activación empleada, reemplazando ReLU por la función sigmoide en las capas convolucionales.
+\noindent La arquitectura CNN\_2 introduce modificaciones en la función de activación empleada, reemplazando ReLU por la función sigmoide en las capas convolucionales, el valor relacionado con el \texttt{Dropout} y la ausencia de regularización L2.
 
-\par Al igual que CNN\_1, el modelo está compuesto por bloques convolucionales que incluyen una capa convolucional, seguida de normalización por lotes y operaciones de \textit{max-pooling}. Sin embargo, CNN\_2 presenta una mayor capacidad de representación al mantener una estructura más profunda y al integrar una etapa final de \textit{global average pooling}, lo que permite una agregación más robusta de las características espaciales antes de la clasificación.
+\par Al igual que CNN\_1, el modelo está compuesto por bloques convolucionales que incluyen una capa convolucional, seguida de normalización por lotes y operaciones de \textit{max-pooling}. CNN\_2 integra una etapa final de \textit{global average pooling}, lo que permite una agregación más robusta de las características espaciales antes de la clasificación, utilizando el optimizador Adam con una tasa de aprendizaje de $1 \times 10^{-3}$.
 
 \par El desempeño de CNN\_2 se evaluó mediante métricas de clasificación, como se muestra en la tabla~\ref{tab:cnn2_metrics}, donde alcanza una precisión global (\textit{accuracy}) de $86.58\%$ (F1-score ponderado de $0.8662$), mostrando una mejora tanto en el desempeño global como en la distribución del desempeño entre clases en comparación con CNN\_1.
 
@@ -1794,7 +1798,7 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 
 \section{Resultados del Entrenamiento}
 
-\noindent El entrenamiento para CNN\_1 y CNN\_2 se realizó durante 40 épocas con \textit{early stopping} y ajuste dinámico de la tasa de aprendizaje.
+\noindent El entrenamiento para CNN\_1 y CNN\_2 se realizó tomando un valor máximo de 40 épocas, con \textit{early stopping} (EarlyStopping-'patience=10') y ajuste dinámico de la tasa de aprendizaje.
 
 \par El mejor desempeño en validación se obtuvo para el modelo CNN\_2 en la época 27:
 
@@ -1807,9 +1811,7 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 
 \section{Evaluación en el Conjunto de Prueba}
 
-\noindent El mejor desempeño lo alcanzó CNN\_2, con una precisión global de \textbf{86.58\%} sobre 11,308 segmentos.
-
-\par La matriz de confusión que se muestra en la tabla~\ref{tab:confusion_matrix}, expone que CNN\_2 presenta mayor desempeño en la clase 3 y menor en la clase 0.
+\noindent CNN\_2 destaca entre los dos modelos con una precisión global de \textbf{86.58\%} sobre 11,308 segmentos. En  este sentido, la matriz de confusión que se muestra en la tabla~\ref{tab:confusion_matrix} expone que CNN\_2 presenta mayor desempeño en la clase 3 y menor en la clase 1.
 
 \end{tightmulticols}
 
@@ -1833,11 +1835,7 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 \end{tabular}
 \end{table}
 
-\begin{tightmulticols}
-
 \par Las métricas de la tabla~\ref{tab:classification_metrics} reflejan un comportamiento equilibrado, con variaciones entre precisión y recall según la clase.
-
-\end{tightmulticols}
 
 \begin{table}[htbp]
 \centering
@@ -1853,7 +1851,8 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 3 (Aceptada) & 0.9144 & 0.9181 & 0.9162 & 6,005 \\
 \hline
 \textbf{Promedio macro} & 0.8452 & 0.8316 & 0.8366 & -- \\
-\textbf{Promedio ponderado} & 0.8687 & 0.8658 & 0.8662 & 11,308 \\
+\textbf{Promedio ponderado} & 0.8687 & 0.8658 & 0.8662 & -- \\
+\hline
 \textbf{Precisión global} & \multicolumn{3}{c|}{0.8658} & 11,308 \\
 \hline
 \end{tabular}
@@ -1863,11 +1862,7 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 
 \section{Análisis Temporal de Predicciones}
 
-\noindent Las figuras~\ref{fig:NN-results-05-1} y~\ref{fig:NN-results-05-2} presentan los resultados de la aplicación del modelo en grabaciones de audio continuas, mostrando la evolución temporal de las predicciones.
-
-\par En la figura~\ref{fig:qscot-05-1} se observa que CNN\_1 presenta mayor variabilidad en la confianza, con valores oscilando entre 0.3 y 1.0, lo que sugiere inestabilidad en las predicciones a corto plazo. En contraste, la figura~\ref{fig:qscot-05-2} expone que CNN\_2 mantiene valores más estables y elevados (superiores al 95\%), con únicamente dos caídas puntuales, indicando mayor robustez y estabilidad temporal.
-
-\par En las predicciones suavizadas (figuras~\ref{fig:sqsot-05-1} y~\ref{fig:sqsot-05-2}) se observa que CNN\_1 presenta mayor variabilidad en la confianza, mientras que CNN\_2 mantiene valores más estables y elevados. Las predicciones suavizadas evidencian diferencias en la claridad de las transiciones entre estados.
+\noindent Las figuras~\ref{fig:NN-results-05-1} y~\ref{fig:NN-results-05-2} presentan la evolución temporal de las predicciones sobre grabaciones continuas. CNN\_1 (figura~\ref{fig:qscot-05-1}) muestra mayor variabilidad en la confianza, con valores entre 0.3 y 1.0, mientras que CNN\_2 (figura~\ref{fig:qscot-05-2}) mantiene niveles superiores al 95\% con únicamente dos caídas puntuales, reflejando mayor estabilidad temporal. Esta diferencia se evidencia también en las predicciones suavizadas (figuras~\ref{fig:sqsot-05-1} y~\ref{fig:sqsot-05-2}), donde CNN\_2 presenta transiciones entre estados más claras y definidas.
 
 \end{tightmulticols}
 
