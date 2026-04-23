@@ -208,7 +208,7 @@
 				\begin{minipage}{17cm}
 					\centering
 					\begin{doublespace}
-						\textbf{\LARGE Detección de la Abeja Reina en una Colmena por Medio del Aprendizaje Profundo}\\[3.5ex]
+						\textbf{\LARGE MONITOREO DE COLMENAS PARA ABEJAS MELÍFERAS: Implementación de un Micrófono en el Dispositivo de Monitoreo}\\[3.5ex]
 					\end{doublespace}
 				\end{minipage}\\[3.5ex]
 				\hline
@@ -229,8 +229,20 @@
 %-------------------------------------------------------------------------
 % ÍNDICE
 %-------------------------------------------------------------------------
+\begingroup
+\pagebreak
+\pagestyle{empty}
 \tableofcontents
-\thispagestyle{empty} % No header/footer on the table of contents page
+
+\pagebreak
+\thispagestyle{empty}
+\listoffigures
+
+\pagebreak
+\thispagestyle{empty}
+\listoftables
+\endgroup
+\clearpage
 
 
 %-------------------------------------------------------------------------
@@ -239,6 +251,8 @@
 \pagebreak
 \chapter*{RESUMEN}
 \addcontentsline{toc}{chapter}{RESUMEN}
+
+En el presente trabajo de investigación se pretendió desarrollar un sistema de monitoreo acústico no invasivo para detectar el estado de la abeja reina en una colmena, utilizando técnicas de aprendizaje profundo. Se entrenaron modelos de redes neuronales convolucionales (CNN) para clasificar grabaciones de audio en cuatro categorías: ausencia de la reina, presencia de la reina, aceptación de una nueva reina y rechazo de una nueva reina. Los resultados obtenidos demostraron una precisión global del 86.58\% en un conjunto de prueba independiente, evidenciando la viabilidad del enfoque propuesto. No obstante, se identificaron limitaciones relacionadas con el desbalance de clases y la robustez ante ruido ambiental, lo que sugiere áreas de mejora para futuras investigaciones. Entre las aplicaciones potenciales de este sistema se encuentran la reducción de inspecciones invasivas a la colmena, la detección temprana de problemas relacionados con la reina y la escalabilidad mediante dispositivos IoT de bajo costo. Adicionalmente se propone un desarrollo en conjunto con el análisis de otros parámetros como bien lo pueden ser la temperatura y la humedad, para mejorar la precisión y confiabilidad del sistema de monitoreo. Este estudio representa un paso importante hacia la implementación de tecnologías de monitoreo remoto en apicultura, contribuyendo a la conservación de las abejas y la sostenibilidad de la producción agrícola.
 
 %-------------------------------------------------------------------------
 % 1. INTRODUCCIÓN
@@ -747,7 +761,7 @@ proporcionando bins frecuenciales de aproximadamente 43 Hz de ancho, con el espe
     \item Para frecuencias altas: la percepción del tono sigue una relación logarítmica.
 \end{itemize}
 
-\noindent La Figura \ref{fig:mel_scale} ilustra esta relación no lineal entre la Frecuencia Física y la Escala Mel.
+\noindent La Figura \ref{fig:mel_scale} ilustra la relación no lineal entre la Frecuencia Física y la Escala Mel. Nótese la transición de comportamiento lineal a logarítmico alrededor de 1 kHz.
 
 \subsection{Proceso de Extracción de MFCC}
 
@@ -760,7 +774,7 @@ proporcionando bins frecuenciales de aproximadamente 43 Hz de ancho, con el espe
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{Pics/relation-fs-y-m.png}
-    \caption{Relación entre frecuencia física (Hz) y escala Mel. Nótese la transición de comportamiento lineal a logarítmico alrededor de 1 kHz.}
+    \caption{Relación entre frecuencia física (Hz) y escala Mel.}
     \label{fig:mel_scale}
 \end{figure}
 
@@ -955,9 +969,11 @@ donde $H$ es el salto entre tramas (\textit{hop size}).
 
 \noindent Ruvinga et al. \cite{ruvinga2021, ruvinga2023} evaluaron 4 configuraciones:
 
+\end{tightmulticols}
+
 \begin{table}[htbp]
 \centering
-\caption{Configuraciones de MFCC evaluadas por Ruvinga et al.}
+\caption{\textbf{Configuraciones de MFCC evaluadas por Ruvinga et al.}}
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Dataset} & \textbf{MFCC 1-13} & \textbf{MFCC 2-13} & \textbf{Log-Energía} \\
@@ -977,37 +993,9 @@ Dataset 4 & & \checkmark & \\
     \item Dataset 4 (12 características, sin $c_0$ ni log-energía) dio peores resultados.
 \end{itemize}
 
-\noindent Esto sugiere que tanto la información de energía global como la estructura armónica completa son relevantes para discriminar estados de colmena.
-
-\subsection{Implementación Práctica}
-
-\noindent Librerías ampliamente usadas para MFCC:
-\begin{itemize}
-    \item \textbf{Python}: \texttt{librosa.feature.mfcc()}, \texttt{python\_speech\_features}.
-    \item \textbf{MATLAB}: \texttt{mfcc()} en Audio Toolbox.
-    \item \textbf{C++}: Bibliotecas como \texttt{Essentia}, \texttt{Aquila}.
-\end{itemize}
-
-\noindent Parámetros típicos para audio de colmenas basados en tu trabajo:
-
-\end{tightmulticols}
-
-\begin{lstlisting}[language=Python]
-import librosa
-
-mfcc = librosa.feature.mfcc(
-    y=audio_signal,
-    sr=22050,              # Frecuencia de muestreo
-    n_mfcc=13,             # Numero de coeficientes
-    n_fft=2048,            # Tamano de FFT
-    hop_length=512,        # Salto entre tramas
-    n_mels=40,             # Numero de filtros Mel
-    fmin=0,                # Frecuencia minima
-    fmax=8000              # Frecuencia maxima
-)
-\end{lstlisting}
-
 \begin{tightmulticols}
+
+\noindent Esto sugiere que tanto la información de energía global como la estructura armónica completa son relevantes para discriminar estados de colmena.
 
 %-------------------------------------------------------------------------
 % 2.5. APRENDIZAJE PROFUNDO PARA CLASIFICACIÓN DE AUDIO
@@ -1472,7 +1460,7 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{Graph_2022-06-05--19-39-14_2__segment2.png}
-	\caption{\footnotesize{Forma de onda del archivo de audio \texttt{2022-06-05--19-39-14\_2\_\_segment2.wav}.}}
+	\caption{Forma de onda del archivo de audio \texttt{2022-06-05--19-39-14\_2\_\_segment2.wav}.}
 	\label{fig:AmplitudeXTime}
 \end{figure}
 
@@ -1499,7 +1487,7 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{Pics/Ejemplo-Windowing.png}
-	\caption{\footnotesize{Ejemplo de segmentación de una señal de audio y ventanas MFCC.}}
+	\caption{Ejemplo de segmentación de una señal de audio y ventanas MFCC.}
 	\label{fig:Windowing}
 \end{figure}
 
@@ -1514,7 +1502,7 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{Pics/Ejemplo-Windowing-zoom.png}
-	\caption{\footnotesize{ZOOM: Primeras 10 ventanas MFCC (25 ms con Hop 10 ms) - 60\% Overlap.}}
+	\caption{ZOOM: Primeras 10 ventanas MFCC (25 ms con Hop 10 ms) - 60\% Overlap.}
 	\label{fig:WindowingZoom}
 \end{figure}
 
@@ -1527,7 +1515,7 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{Pics/MFCCs-Dv-Dv2.png}
-	\caption{\footnotesize{Ejemplo de estas tres capas de características para un segmento de $2$ segundos.}}
+	\caption{Ejemplo de estas tres capas de características para un segmento de $2$ segundos.}
 	\label{fig:MFCCs-Dv-Dv2}
 \end{figure}
 
@@ -1536,8 +1524,9 @@ MLP & 14 MFCC & No lineal, sin memoria & 90.1\% & - \\
 \begin{tightmulticols}
 
 \section{Modelos Involucrados}
+\label{sec:ModelosInvolucrados}
 
-\noindent Se implementaron múltiples arquitecturas de redes neuronales convolucionales (CNN) bajo un esquema base común, con el objetivo de analizar el impacto de distintas decisiones de diseño sobre el desempeño en la tarea de clasificación del estado de la reina. En particular, se evaluaron variaciones en la profundidad de la red, el mecanismo de reducción espacial y la función de activación.
+\noindent Se implementaron múltiples arquitecturas de redes neuronales convolucionales (CNN) bajo un esquema base común, con el objetivo de analizar el impacto de distintas decisiones de diseño sobre el desempeño en la tarea de clasificación del estado de la reina. En particular, se evaluaron variaciones en la función de activación y en las estrategias de regularización empleadas durante el entrenamiento.
 
 \par Los modelos reciben como entrada tensores de dimensión $(3, 32, 201)$, correspondientes a representaciones espectro-temporales derivadas de los coeficientes cepstrales en escala Mel (MFCC):
 \begin{itemize}
@@ -1605,7 +1594,7 @@ Dense\_2 & Softmax & $(4)$ & 260 \\
 
 \begin{table}[H]
 \centering
-\caption{Métricas de desempeño del modelo CNN\_1}
+\caption{\textbf{Métricas de desempeño del modelo CNN\_1}}
 \label{tab:cnn1_metrics}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -1658,7 +1647,7 @@ Dense\_2 & Softmax & $(4)$ & 260 \\
 \end{tightmulticols}
 \begin{table}[htbp]
 \centering
-\caption{\textbf{Arquitectura de la red neuronal convolucional implementada}}
+\caption{\textbf{Arquitectura de la red neuronal convolucional implementada en CNN\_2}}
 \label{tab:cnn2_architecture}
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -1693,7 +1682,7 @@ Dense\_2 & Softmax & $(4)$ & 260 \\
 
 \begin{table}[H]
 \centering
-\caption{Métricas de desempeño del modelo CNN\_2}
+\caption{\textbf{Métricas de desempeño del modelo CNN\_2}}
 \label{tab:cnn2_metrics}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -1807,7 +1796,7 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
     \item \textbf{Pérdida de validación}: 0.6462 .
 \end{itemize}
 
-\noindent CNN\_2 mostró una tendencia de sobreajuste moderado, evidenciada por la diferencia entre la precisión de entrenamiento (99.21\%) y validación (87.71\%). Sin embargo, la aplicación de regularización mediante \textit{dropout} y pesos de clase permitió mantener un desempeño aceptable.
+\noindent CNN\_2 mostró una tendencia de sobreajuste moderado, evidenciada por la diferencia entre la precisión de entrenamiento (99.21\%) y validación (87.71\%). Sin embargo, la aplicación de pesos de clase y dropout provocaron una mejora con respecto al desarrollo del conjunto de prueba.
 
 \section{Evaluación en el Conjunto de Prueba}
 
@@ -1878,19 +1867,21 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 %-------------------------------------------------------------------------
 % 5.1. Interpretación de resultados
 %-------------------------------------------------------------------------
+
 \section{Interpretación de los Resultados}
 
-\noindent El uso de arquitecturas basadas en CNN sobre representaciones MFCC demostró ser efectivo para la clasificación del estado de la reina, alcanzando niveles de precisión comparables con trabajos previos, aunque bajo un planteamiento más complejo.
+\noindent El uso de arquitecturas basadas en CNN sobre representaciones MFCC demostró ser efectivo para la clasificación del estado de la reina, alcanzando niveles de precisión comparables con trabajos previos, aunque bajo un planteamiento más complejo al considerar cuatro clases en lugar de una clasificación binaria.
 
-\par El análisis temporal permitió identificar diferencias relevantes que no son capturadas por métricas globales.
+\par El análisis temporal permite identificar diferencias relevantes entre modelos que no son capturadas por las métricas globales, complementando así la evaluación del desempeño.
 
 \subsection{Comportamiento de CNN\_1}
 
-\noindent Al observar la figura~\ref{fig:qscot-05-1}, se evidenció que CNN\_1 presenta alta variabilidad en la confianza, lo que sugiere sensibilidad a fluctuaciones locales del audio. Las predicciones suavizadas según la figura~\ref{fig:sqsot-05-1}, muestran transiciones frecuentes, lo que dificulta la identificación de períodos prolongados en donde se pueda determinar con precisión la presencia de una reina, limitando así la utilidad práctica de CNN\_1 para un monitoreo en tiempo real.
+\noindent Al observar la figura~\ref{fig:qscot-05-1}, CNN\_1 presenta alta variabilidad en la confianza, lo que sugiere sensibilidad a fluctuaciones locales del audio. Las predicciones suavizadas (figura~\ref{fig:sqsot-05-1}) muestran transiciones frecuentes entre clases, dificultando así la identificación de períodos prolongados en
+los que se pueda determinar con precisión el estado de la reina, limitando su utilidad práctica para un monitoreo continuo en tiempo real.
 
 \subsection{Comportamiento de CNN\_2}
 
-\noindent Con base en la figura~\ref{fig:qscot-05-2}, se observó que CNN\_2 presenta mayor estabilidad temporal, con confianza sostenida y transiciones más claras. Las predicciones suavizadas que se muestran en la figura~\ref{fig:sqsot-05-2} presentan un comportamiento estable al momento de identificar la clase. Sin embargo, se observan caídas puntuales que indican eventos de incertidumbre o limitaciones del modelo.
+\noindent Con base en la figura~\ref{fig:qscot-05-2}, CNN\_2 presenta mayor estabilidad temporal, mostrando una confianza sostenida y transiciones más claras entre los estados. Las predicciones suavizadas (figura~\ref{fig:sqsot-05-2}) reflejan un comportamiento más consistente al momento de identificar la clase dominante. No obstante, se observan caídas puntuales en la confianza que indican eventos de incertidumbre o segmentos acústicamente ambiguos, lo que evidencia limitaciones residuales del modelo frente a variabilidad no representada en el entrenamiento.
 
 %-------------------------------------------------------------------------
 % 5.2. Comparaciones
@@ -1898,69 +1889,74 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 
 \section{Análisis Comparativo}
 
-\noindent Dado que ambos modelos fueron desarrollados bajo un mismo esquema base, las diferencias observadas pueden atribuirse principalmente a la profundidad de la red y al mecanismo de reducción espacial.
+\noindent Dado que ambos modelos fueron desarrollados bajo un mismo esquema base (descrito en la sección~\ref{sec:ModelosInvolucrados}), las diferencias en desempeño observadas pueden atribuirse principalmente al cambio en la función de activación y a las estrategias de regularización empleadas durante el entrenamiento.
 
-\par CNN\_2 logra una representación más robusta, reflejada tanto en métricas globales como en estabilidad temporal. No obstante, los errores observados indican que el problema aún presenta desafíos asociados a la variabilidad acústica.
+\par CNN\_2 alcanzó una precisión global de $86.58\%$ (F1-score ponderado de $0.8662$), frente al $83.33\%$ (F1-score ponderado de $0.8356$) de CNN\_1. Esta mejora se refleja tanto en las métricas globales como en la estabilidad temporal observada en las figuras~\ref{fig:NN-results-05-1} y~\ref{fig:NN-results-05-2}. En particular, CNN\_2 muestra un desempeño más equilibrado entre clases, con ganancias notables en las clases minoritarias (0 y 1), donde CNN\_1 presentaba mayor confusión.
+
+\par Para mitigar el desbalance de clases presente en el conjunto de entrenamiento, para ambos modelos se implementaron pesos de clase, calculados de forma inversamente proporcional a la frecuencia de cada categoría (clase~0:~1.78, clase~1:~2.01, clase~2:~1.23, clase~3:~0.47). Esta estrategia permitió que las clases minoritarias tuvieran mayor influencia durante el entrenamiento, contribuyendo a la distribución más equilibrada del desempeño observada en CNN\_2.
+
+\par No obstante, los errores residuales en ambos modelos indican que el problema aún presenta desafíos asociados a la variabilidad acústica intrínseca de las grabaciones, aspecto que no puede resolverse únicamente mediante ajustes arquitectónicos o de entrenamiento.
 
 \section{Comparación con el Estado del Arte}
 
-\noindent Al analizar los resultados de ambos modelos se observa que CNN\_2 ha logrado superar las limitaciones de CNN\_1, alcanzando una mayor estabilidad y precisión en la clasificación del estado de la reina. Esta mejora no solo se debe al cambio en la función de activación, sino también a modificaciones en la arquitectura, incluyendo una mayor profundidad y la incorporación de una capa de \textit{global average pooling}. En conjunto, estas decisiones permiten al modelo aprender representaciones más robustas y generalizables. Sin embargo, la presencia de eventos de incertidumbre en ambos modelos indica que aún existen desafíos relacionados con la variabilidad acústica y las condiciones de grabación, lo que resalta la necesidad de continuar explorando técnicas para mejorar la robustez y generalización de un modelo para la identificación del estado de la reina.
+\noindent Los resultados obtenidos a partir de CNN\_2, inferiores en términos de precisión global con respecto a los reportados por Ruvinga et al.~\cite{ruvinga2021, ruvinga2023}; resultan relevantes considerando las diferencias sustanciales en el planteamiento del problema y en la representación de entrada utilizada.
 
-\par En conjunto, los resultados indican que CNN\_2 presenta un mejor desempeño global y una distribución más equilibrada entre clases en comparación con CNN\_1. La mayor profundidad de la red y el uso de \textit{global average pooling} contribuyen a una mejor representación de las características. No obstante, el análisis temporal revela que esta mejora no es completamente consistente en todos los escenarios, ya que el modelo aún presenta errores en ciertas secuencias, lo que evidencia limitaciones en su capacidad de generalización. Esto sugiere que, aunque CNN\_2 es una mejora respecto a CNN\_1, aún existen oportunidades para optimizar la arquitectura y el proceso de entrenamiento con el fin de lograr un desempeño más robusto y consistente en la clasificación del estado de la reina a lo largo del tiempo.
-
-\subsection{Comparación con el Estado del Arte}
-
-\noindent Los resultados que se obtuvieron a partir de CNN\_2, aunque inferiores en términos de precisión global a los reportados por Ruvinga et al. \cite{ruvinga2021, ruvinga2023}, resultan relevantes considerando las diferencias en el planteamiento del problema y en la representación de entrada. Una de las diferencias más significativas es el uso de MFCCs en lugar de espectrogramas STFT, lo que proporciona una representación más compacta y perceptualmente relevante del audio. Además, este trabajo aborda un problema de clasificación multiclase con cuatro categorías, en contraste con los enfoques binarios comúnmente utilizados en la literatura.
-
-\begin{itemize}
-    \item \textbf{Representación de entrada:} a diferencia de los espectrogramas STFT utilizados en trabajos previos, el uso de MFCCs proporciona una representación más compacta y perceptualmente relevante.
-    \item \textbf{Clasificación multiclase:} este trabajo aborda un problema más complejo con cuatro clases, en contraste con enfoques binarios.
-    \item \textbf{Análisis temporal:} se incorpora evaluación de consistencia temporal, aspecto poco explorado en estudios previos.
-\end{itemize}
+\par En primer lugar, este trabajo emplea MFCCs en lugar de espectrogramas STFT, lo que proporciona una representación más compacta y perceptualmente relevante del contenido acústico. En segundo lugar, se aborda un problema de clasificación multiclase con cuatro categorías, en contraste con los enfoques binarios comúnmente utilizados en la literatura, lo que incrementa inherentemente la dificultad de la tarea. Finalmente, se incorpora una evaluación de consistencia temporal mediante análisis de predicciones a lo largo del tiempo, aspecto poco explorado en estudios previos y que aporta una perspectiva más cercana a las condiciones de uso real en campo.
 
 \section{Limitaciones y Desafíos Identificados}
 
 \subsection{Generalización}
 
-\noindent Los datos provienen de condiciones controladas, por lo que la generalización a otros entornos requiere validación adicional. Factores como clima, raza de abejas y condiciones ambientales pueden influir en los patrones acústicos \cite{potts2016}.
+\noindent Los datos, aunque provenientes de múltiples colmenas; se presentan bajo condiciones controladas, por lo que la generalización a otros entornos requiere validación adicional. Factores como el clima, la raza de las abejas y las condiciones ambientales pueden influir de manera significativa en los patrones acústicos registrados~\cite{potts2016}.
 
 \subsection{Desbalance de Clases}
 
-\noindent El dataset presenta desbalance al mostrar mayor cantidad de datos para una clase con respecto a las demás, lo cual puede afectar el desempeño. La cantidad de etiquetas por clase se muestra a continuación:
+\noindent El conjunto de datos presenta un marcado desbalance entre categorías. A nivel de grabaciones originales de 60 segundos, la distribución por clase es la siguiente:
 
 \begin{itemize}
-    \item \texttt{queenright/original queen} (0): 179.
-    \item \texttt{not present} (1): 158.
-    \item \texttt{present and rejected} (2): 259.
-    \item \texttt{present and newly accepted} (3): 679.
+    \item \texttt{queenright} / reina original (0): 179 grabaciones.
+    \item \texttt{queenless} / no presente (1): 158 grabaciones.
+    \item Presente y rechazada (2): 259 grabaciones.
+    \item Presente y recién aceptada (3): 679 grabaciones.
 \end{itemize}
+
+\noindent Trabajando así con un total de 1,275 grabaciones, donde la clase~3 representa más del 50\% del total. Este desbalance se amplifica al segmentar las grabaciones en ventanas de 2 segundos, lo que resulta en una mayor cantidad de segmentos para la clase~3 en comparación con las otras categorías. Así pues, el conjunto de entrenamiento quedó distribuido de la siguiente manera:
+
+\begin{itemize}
+    \item Clase 0: 7{,}368 segmentos.
+    \item Clase 1: 6{,}535 segmentos.
+    \item Clase 2: 10{,}668 segmentos.
+    \item Clase 3: 27{,}980 segmentos.
+\end{itemize}
+
+\noindent Esta desproporción, en particular la predominancia de la clase~3, puede sesgar las predicciones hacia las categorías más frecuentes. El uso de pesos de clase durante el entrenamiento mitigó parcialmente este efecto, aunque no lo elimina por completo, como se refleja en las métricas por clase reportadas en las tablas~\ref{tab:cnn1_metrics} y~\ref{tab:cnn2_metrics}.
 
 \subsection{Robustez al Ruido}
 
-\noindent El ruido ambiental puede degradar el desempeño del modelo \cite{peng2020}. Técnicas de denoising o modelos más robustos podrían ser necesarios para aplicaciones en campo.
+\noindent El ruido ambiental puede degradar el desempeño de cualquier modelo~\cite{peng2020}. Técnicas de denoising o el uso de arquitecturas más robustas podrían ser necesarios para garantizar un desempeño adecuado en condiciones de campo no controladas.
 
 \subsection{Implicaciones Prácticas}
 
-\noindent Los resultados demuestran la viabilidad de sistemas de monitoreo acústico no invasivo.
+\noindent A pesar de las limitaciones señaladas, los resultados demuestran la viabilidad de sistemas de monitoreo acústico no invasivo para la clasificación del estado de la reina. Entre las aplicaciones potenciales destacan:
 
 \begin{itemize}
-    \item Reducción de inspecciones invasivas.
-    \item Detección temprana de la ausencia de una reina.
-    \item Escalabilidad mediante dispositivos IoT.
-    \item Contribución a la sustentabilidad apícola \cite{khalifa2021, potts2016}.
+    \item Reducción de inspecciones invasivas a la colmena.
+    \item Detección temprana de la ausencia o rechazo de una reina.
+    \item Escalabilidad mediante dispositivos IoT de bajo costo.
+    \item Contribución a la sustentabilidad apícola~\cite{khalifa2021, potts2016}.
 \end{itemize}
 
 \subsection{Direcciones Futuras}
 
-\noindent Se proponen las siguientes líneas de investigación:
+\noindent Con base en los resultados y limitaciones identificadas, se proponen las siguientes líneas de investigación para trabajos posteriores:
 
 \begin{itemize}
-    \item Validación con múltiples datasets.
-    \item Modelos híbridos CNN-LSTM.
-    \item Transfer learning.
-    \item Detección de eventos acústicos específicos.
-    \item Implementación en hardware embebido.
-    \item Integración multimodal.
+    \item \textbf{Validación con múltiples conjuntos de datos}, provenientes de distintas colmenas, ubicaciones geográficas y razas de abejas, con el fin de evaluar la capacidad de generalización de los modelos.
+    \item \textbf{Modelos híbridos CNN-LSTM}, que combinen la extracción de características espectro-temporales con el modelado de dependencias a largo plazo, potencialmente mejorando la estabilidad temporal de las predicciones.
+    \item \textbf{Transfer learning}, aprovechando modelos preentrenados en tareas de clasificación de audio para reducir la dependencia de grandes volúmenes de datos etiquetados.
+    \item \textbf{Detección de eventos acústicos específicos}, como zumbidos de enjambre o patrones asociados a la piping de la reina, como complemento a la clasificación de estado.
+    \item \textbf{Implementación en hardware embebido}, evaluando la viabilidad de ejecutar los modelos directamente en dispositivos IoT con recursos computacionales limitados.
+    \item \textbf{Integración multimodal}, incorporando variables ambientales como temperatura y humedad junto con las señales acústicas para enriquecer la representación del estado de la colmena.
 \end{itemize}
 
 \end{tightmulticols}
@@ -1985,7 +1981,7 @@ Prueba & 1,591 & 1,413 & 2,299 & 6,005 & 11,308 \\
 
 \par En este trabajo se demostró que es posible abordar la clasificación del estado de la reina mediante técnicas de aprendizaje profundo, alcanzando una precisión global del $86.58\%$ sobre un conjunto de prueba independiente. Este resultado respalda la viabilidad del enfoque propuesto y su potencial aplicación en sistemas reales.
 
-\par Asimismo, el diseño experimental permitió analizar el impacto de distintas decisiones arquitectónicas, incluyendo la función de activación, la profundidad de la red y el uso de \textit{global average pooling}. Los resultados evidencian que estas decisiones no solo afectan la capacidad de discriminación entre clases, sino también la estabilidad temporal de las predicciones, un factor crítico en aplicaciones de monitoreo continuo.
+\par Asimismo, el diseño experimental permitió analizar el impacto de distintas decisiones de diseño, incluyendo la función de activación y las estrategias de regularización empleadas durante el entrenamiento. Los resultados evidencian que estas decisiones no solo afectan la capacidad de discriminación entre clases, sino también la estabilidad temporal de las predicciones, un factor crítico en aplicaciones de monitoreo continuo.
 
 \par En conjunto, los hallazgos de este estudio amplían el entendimiento sobre el uso de modelos de aprendizaje profundo en bioacústica, particularmente en el monitoreo de colmenas. No obstante, también se identifican áreas de mejora, como la robustez ante ruido, la generalización a diferentes condiciones ambientales y la incorporación de modelos que capturen dependencias temporales más complejas.
 

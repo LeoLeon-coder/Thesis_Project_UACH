@@ -1,0 +1,10 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Relación entre frecuencia física (Hz) y escala Mel.}}{18}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Proceso de extracción de MFCC en 7 etapas.}}{19}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Arquitectura de una célula LSTM mostrando las tres compuertas y los estados de celda.}}{24}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Forma de onda del archivo de audio \texttt {2022-06-05--19-39-14\_2\_\_segment2.wav}.}}{29}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Ejemplo de segmentación de una señal de audio y ventanas MFCC.}}{30}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces ZOOM: Primeras 10 ventanas MFCC (25 ms con Hop 10 ms) - 60\% Overlap.}}{31}{figure.caption.31}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Ejemplo de estas tres capas de características para un segmento de $2$ segundos.}}{32}{figure.caption.32}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Resultados de CNN\_1 al clasificar el estado de la reina.}}{35}{figure.caption.35}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Resultados de CNN\_2 al clasificar el estado de la reina.}}{37}{figure.caption.38}%
